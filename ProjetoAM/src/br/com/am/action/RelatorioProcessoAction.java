@@ -16,7 +16,7 @@ import br.com.am.model.Tarefa;
 
 /**
  * Class Action RelatorioProcesso
- * @author Ricardo e Rodrigo Joubert
+ * @author Ricardo
  * @since 23/09/2012
  */
 public class RelatorioProcessoAction extends GenericAction{
@@ -28,7 +28,6 @@ public class RelatorioProcessoAction extends GenericAction{
 	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
 	private Integer codigoProcesso;
 	private Integer codigoTarefa;
-	private Double somaHonorario;
 	
 	/**
 	 * Action que direcina para as páginas das funcionlidades de emissão de relátorios.
@@ -45,7 +44,7 @@ public class RelatorioProcessoAction extends GenericAction{
 		if(PaginaEnum.EMITIR_RELATORIO_AUDIENCIA.getDescricao().equals(getPaginaDirecionar())){
 			return PaginaEnum.EMITIR_RELATORIO_AUDIENCIA.getDescricao();
 		} else if(PaginaEnum.EMITIR_RELATORIO_HONORARIO.getDescricao().equals(getPaginaDirecionar())){
-			carregarTarefas();
+			tarefas = carregarTarefas();
 			return PaginaEnum.EMITIR_RELATORIO_HONORARIO.getDescricao();
 		}else {
 			return String.valueOf(PaginaEnum.ERRO.getDescricao());
@@ -55,7 +54,7 @@ public class RelatorioProcessoAction extends GenericAction{
 	
 	/**
 	 * Método para realizar pesquisa de honorários
-	 * @author Ricardo e Rodrigo Joubert
+	 * @author Ricardo
 	 * @since 23/02/2012
 	 * @return String
 	 */
@@ -64,15 +63,13 @@ public class RelatorioProcessoAction extends GenericAction{
 			@Result(location="/erro.jsp", name="erro")
 	})
 	public String pesquisarHonorarios(){
-		carregarTarefas();
-		carregarHonorarios();
-		somarHonorarios();
+		honorarios = carregarHonorarios();
 		return PaginaEnum.EMITIR_RELATORIO_HONORARIO.getDescricao();
 	}
 	
 	/**
 	 * Método para realizar pesquisa de audiências
-	 * @author Ricardo e Rodrigo Joubert
+	 * @author Ricardo
 	 * @since 23/02/2012
 	 * @return String
 	 */
@@ -81,7 +78,7 @@ public class RelatorioProcessoAction extends GenericAction{
 			@Result(location="/erro.jsp", name="erro")
 	})
 	public String pesquisarAudiencias(){
-		carregarAudicencias();
+		audiencias = carregarAudicencias();
 		return PaginaEnum.EMITIR_RELATORIO_AUDIENCIA.getDescricao();
 	}
 	
@@ -117,48 +114,42 @@ public class RelatorioProcessoAction extends GenericAction{
 	
 	/**
 	 * Método para carregar honárarios
-	 * @author Ricardo e Rodrigo Joubert
+	 * @author Ricardo
 	 * @since 26/09/2012
 	 * @return List<RelatorioHonorario>
 	 */
-	private void carregarHonorarios(){
-		honorarios = HonorarioBO.consultarRelatorioHonorario(codigoProcesso, codigoTarefa);
+	private List<RelatorioHonorario> carregarHonorarios(){
+//		RelatorioHonorario relatorioHonorario = null;
+//		List<RelatorioHonorario> list = new ArrayList<RelatorioHonorario>();
+//		for(int i=1;i<=10;i++){
+//			relatorioHonorario = new RelatorioHonorario();
+//			relatorioHonorario.setDataHonorario(new Date(System.currentTimeMillis()));
+//			relatorioHonorario.setNomeAdvogado("Advogado " + i);
+//			relatorioHonorario.setValorTarefa(100.00);
+//			list.add(relatorioHonorario);
+//		}
+//		return list;
+		return HonorarioBO.consultarRelatorioHonorario(codigoProcesso, codigoTarefa);
 	}
 	
 	/**
 	 * Método para carregar audiencias
-	 * @author Ricardo e Rodrigo Joubert
+	 * @author Ricardo
 	 * @since 26/09/2012
+	 * @return List<RelatorioAudiencia>
 	 */
-	private void carregarAudicencias(){
-		audiencias = AudienciaBO.consultarRelatorioAudiencia(codigoProcesso);
+	private List<RelatorioAudiencia> carregarAudicencias(){
+		return AudienciaBO.consultarRelatorioAudiencia(codigoProcesso);
 	}
 	
 	/**
 	 * Método para carregar tarefas
-	 * @author Ricardo e Rodrigo Joubert
+	 * @author Ricardo
 	 * @since 26/09/2012
+	 * @return List<Tarefa>
 	 */
-	private void carregarTarefas(){
-		tarefas =  HonorarioBO.consultarTarefas();
-	}
-	
-	/**
-	 * Método para somar o tipo de honorario selecionado
-	 * @author Ricardo e Rodrigo Joubert
-	 * @since 26/09/2012
-	 */
-	private void somarHonorarios(){
-		
-		somaHonorario = 0d;
-		
-		if(honorarios != null && !honorarios.isEmpty()) {
-			
-			for (RelatorioHonorario honorario : honorarios) {
-				somaHonorario = somaHonorario + honorario.getValorTarefa();
-			}
-		}
-		
+	private List<Tarefa> carregarTarefas(){
+		return HonorarioBO.consultarTarefas();
 	}
 
 	public List<RelatorioHonorario> getHonorarios() {
@@ -192,16 +183,6 @@ public class RelatorioProcessoAction extends GenericAction{
 	public void setCodigoTarefa(Integer codigoTarefa) {
 		this.codigoTarefa = codigoTarefa;
 	}
-	
-	public Double getSomaHonorario() {
-		return somaHonorario;
-	}
-
-
-	public void setSomaHonorario(Double somaHonorario) {
-		this.somaHonorario = somaHonorario;
-	}
-
 
 	public List<RelatorioAudiencia> getAudiencias() {
 		return audiencias;

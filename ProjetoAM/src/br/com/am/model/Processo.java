@@ -16,7 +16,7 @@ public class Processo implements Serializable{
 
 	private static final long serialVersionUID = 6619774559878938692L;
 	
-	private int numeroProcesso;
+	private Integer numeroProcesso;
 	private Forum forum = new Forum();
 	private Cliente cliente = new Cliente();
 	private TipoCausa causa = new TipoCausa();
@@ -24,8 +24,8 @@ public class Processo implements Serializable{
 	private String processo;
 	private Date dataAbertura;
 	private Date dataFechamento;
-	private int diaVencimento;
-	private int resultado;
+	private Integer diaVencimento;
+	private Integer resultado;
 	private String observacao;
 	
 	/**
@@ -47,8 +47,8 @@ public class Processo implements Serializable{
 	 * @param resultado
 	 * @param observacao
 	 */
-	public Processo(int numeroProcesso, Forum forum, Cliente cliente,TipoCausa causa, TipoCobranca cobranca, String processo,
-			Date dataAbertura, Date dataFechamento, int diaVencimento,int resultado, String observacao) {
+	public Processo(Integer numeroProcesso, Forum forum, Cliente cliente,TipoCausa causa, TipoCobranca cobranca, String processo,
+			Date dataAbertura, Date dataFechamento, Integer diaVencimento,Integer resultado, String observacao) {
 		
 		this.numeroProcesso = numeroProcesso;
 		this.forum = forum;
@@ -66,14 +66,14 @@ public class Processo implements Serializable{
 	/**
 	 * @return the numeroProcesso
 	 */
-	public int getNumeroProcesso() {
+	public Integer getNumeroProcesso() {
 		return numeroProcesso;
 	}
 
 	/**
 	 * @param numeroProcesso the numeroProcesso to set
 	 */
-	public void setNumeroProcesso(int numeroProcesso) {
+	public void setNumeroProcesso(Integer numeroProcesso) {
 		this.numeroProcesso = numeroProcesso;
 	}
 
@@ -181,28 +181,28 @@ public class Processo implements Serializable{
 	/**
 	 * @return the diaVencimento
 	 */
-	public int getDiaVencimento() {
+	public Integer getDiaVencimento() {
 		return diaVencimento;
 	}
 
 	/**
 	 * @param diaVencimento the diaVencimento to set
 	 */
-	public void setDiaVencimento(int diaVencimento) {
+	public void setDiaVencimento(Integer diaVencimento) {
 		this.diaVencimento = diaVencimento;
 	}
 
 	/**
 	 * @return the resultado
 	 */
-	public int getResultado() {
+	public Integer getResultado() {
 		return resultado;
 	}
 
 	/**
 	 * @param resultado the resultado to set
 	 */
-	public void setResultado(int resultado) {
+	public void setResultado(Integer resultado) {
 		this.resultado = resultado;
 	}
 

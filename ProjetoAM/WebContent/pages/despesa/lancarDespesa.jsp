@@ -5,8 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<jsp:include page="../../util/css.jsp" />
-<jsp:include page="../../util/js.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Lançamento de Despesas</title>
 </head>
@@ -16,6 +14,7 @@
 			action="cadastrarDespesa" 
 			method="post" 
 			theme="simple">
+		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend>Lançar Despesas</legend>
 			<div class="grid-8-12">
@@ -73,12 +72,12 @@
 										   type="radio" 
 										   name="codigoLancamento" 
 										   value="${codigoLancamento}"
-										   onclick="javascript: localizar();"/>
+										   onclick="javascript: localizar(this);"/>
 								</td>
 								<td class="par"><s:property value="tipoDespesa.despesa"/></td>
 								<td class="par"><s:property value="valorDespesa"/></td>
 								<td class="par"><s:date name="dataDespesa" format="dd/MM/yyyy"/></td>
-								<td class="par"><label title="<s:property value="observacao"/>"/></td>
+								<td class="par"><s:property value="observacao"/></td>
 							</tr>			
 						</s:iterator>
 					</tbody>
@@ -95,8 +94,7 @@
 								  list="tiposDespesas"
 								  listKey="codigoDespesa"
 								  listValue="despesa"
-								  name="despesa.tipoDespesa.codigoDespesa"
-								  required="true"/>
+								  name="despesa.tipoDespesa.codigoDespesa"/>
 						
 					</div>
 					<div class="grid-3-12">
@@ -129,7 +127,7 @@
 						  action="excluirDespesa"
 						  value="Excluir"/>
 				<s:submit id="submit_Voltar"
-						  action="home"
+						  action="forwardHome"
 						  value="Voltar"/>
 			</div>
 		</fieldset>

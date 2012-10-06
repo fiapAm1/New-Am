@@ -5,157 +5,120 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<jsp:include page="../../util/css.jsp" />
-<jsp:include page="../../util/js.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Registro de Pagamentos</title>
 </head>
 <body>
 	<s:form id="form_RegistrarPagamento" 
-		  cssclass="formee"
-		  action="registrarPagamento" 
-		  method="post" 
-		  theme="simple">
+		  	cssClass="formee"
+		  	action="registrarPagamento" 
+		  	method="post" 
+		  	theme="simple">
+		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend>Registro de Pagamento por Processo</legend>
 			<div class="grid-8-12">
 				<div class="grid-3-12">
-					<s:label value="Código do processo:" for="textfield_Codigo" />
+					<s:label value="Número do processo:" for="textfield_Codigo" />
 				</div>
 				<div class="grid-4-12">
-					<s:textfield id="textfield_Codigo" name="" />
+					<s:textfield id="textfield_Codigo" name="titulo.processo.numeroProcesso" />
 				</div>
 				<div class="grid-3-12">
 				<s:submit id="submit_Pesquisar"
 						  value="Pesquisar"
-						  action=""/>
+						  action="pesquisarTitulosProcesso"/>
 				</div>
 			</div>
-			<div class="grid-12-12 lawyer-table">
-				<table id="table_Processos">
-					<caption>Processos Filtados</caption>
+			<div class="grid-12-12">
+				<table id="table_Processos"
+					   class="lawyer-table">
+					<caption>Processo Filtrado</caption>
 					<thead>
 						<tr>
-							<th style="width: 1% ;"></th>
-							<th style="width: 10%; text-align: left;">Código</th>
-							<th style="width: 70% ;">Processo</th>
-							<th style="text-align: left;">Data do Processo</th>
+							<th width="15%" class="par">Número do Processo</th>
+							<th width="25%" class="par">Processo</th>
+							<th width="15%" class="par">Tipo de Cobrança</th>
+							<th width="15%" class="par">Tax. Júros Atraso</th>
+							<th width="15%" class="par">Dia de Vencimento</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<input type="radio" />
-							</td>
-							<td>
-								<span>1</span>
-							</td>
-							<td>
-								<span>Processo 1</span>
-							</td>
-							<td>
-								<span>11/05/2012</span>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="radio" />
-							</td>
-							<td>
-								<span>2</span>
-							</td>
-							<td>
-								<span>Processo 2</span>
-							</td>
-							<td>
-								<span>12/05/2012</span>
-							</td>
-						</tr>
+						<s:iterator id="iterator_Processo"
+									value="processos">
+							<tr>
+								<td class="par"><s:property value="numeroProcesso"/></td>
+								<td class="par"><s:property value="processo"/></td>
+								<td class="par"><s:property value="cobranca.periodoCobranca"/></td>
+								<td class="par"><s:property value="cobranca.taxaJuros"/></td>
+								<td class="par"><s:property value="diaVencimento"/></td>
+							</tr>			
+						</s:iterator>
 					</tbody>
 				</table>
 			</div>
-			<div class="grid-4-12">
-				<div class="grid-6-12">
-					<label for="input_Vencimento">Vencimento do Pagamento:</label>
-				</div>
-				<div class="grid-6-12">
-					<input id="input_Vencimento" type="text" />
-				</div>
-				<div class="grid-6-12">
-					<label for="input_Vencimento">Valor do Documento:</label>
-				</div>
-				<div class="grid-6-12">
-					<input id="input_Valor" type="text" />
-				</div>
-			</div>
-			<div class="grid-4-12">
-				<div class="grid-6-12">
-					<label for="input_Taxa">Taxa de Administração:</label>
-				</div>
-				<div class="grid-6-12">
-					<input id="input_Taxa" type="text" />
-				</div>
-				<div class="grid-6-12">
-					<label for="input_Valor">Valor Pago:</label>
-				</div>
-				<div class="grid-6-12">
-					<input id="input_Valor" type="text" />
-				</div>
-			</div>
-			<div class="grid-12-12 lawyer-table">
-				<table id="table_Processos">
-					<caption>Pagamentos deste processo</caption>
+			<div class="grid-12-12">
+				<table id="table_Tituloss"
+					   class="lawyer-table">
+					<caption>Títulos a Pagar do Processo</caption>
 					<thead>
 						<tr>
-							<th style="width: 1%;"></th>
-							<th style="width: 5%;">Código</th>
-							<th style="width: 20%;">Vencimento do Pagamento</th>
-							<th style="width: 30%;">Valor do Documento</th>
-							<th style="width: 30%;">Valor Pago</th>
-							<th style="width: 13%;">Taxa de Administração</th>
+							<th width="15%" class="par">Número do Título</th>
+							<th width="15%" class="par">Número da Agência</th>
+							<th width="15%" class="par">Data do Documento</th>
+							<th width="15%" class="par">Data do Vencimento</th>
+							<th width="15%" class="par">Valor do Documento(R$)</th>
+							<th width="2%"></th>
 						</tr>
 					</thead>
 					<tbody>
+						<s:iterator id="iterator_Titulos"
+									value="titulos"
+									var="titulo">
+							<tr>
+								<td class="par"><s:property value="numeroTitulo"/></td>
+								<td class="par"><s:property value="agenciaCedente"/></td>
+								<td class="par"><s:date name="dataDocumento" format="dd/MM/yyyy"/></td>
+								<td class="par"><s:date name="dataVencimento" format="dd/MM/yyyy"/></td>
+								<td class="par"><s:property value="valorDocumento"/></td>
+								<td>
+									<s:url var="url_PagarTitulo" 
+			   							   value="registrarPagamento">
+										<s:param name="titulo"
+												 value="titulo"/>
+									</s:url>
+		
+									<s:a href="%{url_PagarTitulo}">
+										<img src="../img/formee/form-ic-info.png" 
+							 				 alt="Efeturar Pagamento do Título" 
+							 				 title="Efeturar Pagamento do Título"/>
+									</s:a>
+								 </td>
+							</tr>			
+						</s:iterator>
+					</tbody>
+				</table>
+			</div>
+			<div class="grid-12-12">
+				<table id="table_TitulosPagos"
+					   class="lawyer-table">
+					<caption>Títulos Pagos do Processo</caption>
+					<thead>
 						<tr>
-							<td>
-								<input type="radio" />
-							</td>
-							<td>
-								<span>1</span>
-							</td>
-							<td>
-								<span>11/06/2012</span>
-							</td>
-							<td>
-								<span>R$ 10.000,00</span>
-							</td>
-							<td>
-								<span>R$ 2.500,00</span>
-							</td>
-							<td>
-								<span>6%</span>
-							</td>
+							<th width="15%" class="par">Número Título</th>
+							<th width="15%" class="par">Data Pagamento</th>
+							<th width="15%;" class="par">Valor Pago</th>
 						</tr>
-						<tr>
-							<td>
-								<input type="radio" />
-							</td>
-							<td>
-								<span>2</span>
-							</td>
-							<td>
-								<span>11/07/2012</span>
-							</td>
-							<td>
-								<span>R$ 11.000,00</span>
-							</td>
-							<td>
-								<span>R$ 1.500,00</span>
-							</td>
-							<td>
-								<span>7%</span>
-							</td>
-						</tr>
+					</thead>
+					<tbody>
+						<s:iterator id="iterator_Titulos"
+									value="titulosPagos">
+							<tr>
+								<td class="par"><s:property value="titulo.numeroTitulo"/></td>
+								<td class="par"><s:date name="dataPagamento" format="dd/MM/yyyy"/></td>
+								<td class="par"><s:property value="valorPago"/></td>
+							</tr>			
+						</s:iterator>
 					</tbody>
 				</table>
 			</div>
@@ -163,18 +126,9 @@
 				<hr></hr>
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
-				<input id="input_Registrar" 
-					   type="button" 
-					   value="Registrar" 
-					   onclick="javascript: void(0);"/>
-				<input id="input_Cancelar" 
-					   type="button" 
-					   value="Cancelar" 
-					   onclick="javascript: void(0);"/>
-				<input id="input_Voltar" 
-					   type="button" 
-					   value="Voltar" 
-					   onclick="javascript: void(0);"/>
+				<s:submit id="submit_Voltar"
+						  value="Voltar"
+						  action="forwardHome"/>
 			</div>
 		</fieldset>
 	</s:form>
