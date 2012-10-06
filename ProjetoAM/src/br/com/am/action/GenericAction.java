@@ -37,6 +37,7 @@ public class GenericAction extends ActionSupport implements SessionAware{
 			@Result(location="/pages/home.jsp", name="home")
 	})
 	public String direcionar(){
+		limparMensagem();
 		return PaginaEnum.HOME.getDescricao();
 	}
 	
@@ -48,6 +49,16 @@ public class GenericAction extends ActionSupport implements SessionAware{
 	protected void limparMensagem(){
 		mensagem = "";
 		resultado = "";
+	}
+	
+	/**
+	 * Método para limpar objetos da sessão
+	 * @param args
+	 */
+	protected void limparSessao(String... args){
+		for (String string : args) {
+			session.put(string, null);
+		}
 	}
 
 	@Override

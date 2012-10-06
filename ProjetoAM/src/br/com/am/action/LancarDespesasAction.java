@@ -65,6 +65,7 @@ public class LancarDespesasAction extends GenericAction{
 			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String cadastrarDespesa(){
+		limparMensagem();
 		try {
 			numeroProcesso = (Integer) session.get("numeroProcesso");
 			if(validarCampos()){
@@ -80,9 +81,12 @@ public class LancarDespesasAction extends GenericAction{
 			setResultado("erro");
 			e.printStackTrace();
 		}
+		carregarDespesas();
 		session.put("mensagem", getMensagem());
 		session.put("resultado", getResultado());
-		pesquisarProcessosAux();
+		if(numeroProcesso != null){
+			pesquisarProcessosAux();
+		}
 		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
@@ -96,6 +100,7 @@ public class LancarDespesasAction extends GenericAction{
 			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String alterarDespesa(){
+		limparMensagem();
 		try {
 			despesa.getTipoDespesa().setCodigoDespesa((Integer)session.get("codigoTipoDespesa")); 
 			despesa.setCodigoLancamento((Integer)session.get("codigoLancamento"));
@@ -103,6 +108,7 @@ public class LancarDespesasAction extends GenericAction{
 				if(validarCampos()){
 					DespesaBO.atualizarDespesa(despesa);
 					
+					limparSessao("codigoLancamento", "codigoTipoDespesa");
 					limparCampos();
 					
 					setMensagem("Despesa alterada com sucesso!");
@@ -118,9 +124,12 @@ public class LancarDespesasAction extends GenericAction{
 			e.printStackTrace();
 			return PaginaEnum.ERRO.getDescricao();
 		}
+		carregarDespesas();
 		session.put("mensagem", getMensagem());
 		session.put("resultado", getResultado());
-		pesquisarProcessosAux();
+		if(numeroProcesso != null){
+			pesquisarProcessosAux();
+		}
 		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
@@ -134,11 +143,13 @@ public class LancarDespesasAction extends GenericAction{
 			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String excluirDespesa(){
+		limparMensagem();
 		try {
 			despesa.setCodigoLancamento((Integer)session.get("codigoLancamento"));
 			if(despesa.getCodigoLancamento() != null){
 				DespesaBO.deletarDespesa(despesa.getCodigoLancamento());
 				
+				limparSessao("codigoLancamento", "codigoTipoDespesa");
 				limparCampos();
 				
 				setMensagem("Despesa excluída com sucesso!");
@@ -152,9 +163,12 @@ public class LancarDespesasAction extends GenericAction{
 			setResultado("erro");
 			e.printStackTrace();
 		}
+		carregarDespesas();
 		session.put("mensagem", getMensagem());
 		session.put("resultado", getResultado());
-		pesquisarProcessosAux();
+		if(numeroProcesso != null){
+			pesquisarProcessosAux();
+		}
 		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
@@ -185,6 +199,7 @@ public class LancarDespesasAction extends GenericAction{
 			setResultado("erro");
 			e.printStackTrace();
 		}
+		carregarDespesas();
 		session.put("mensagem", getMensagem());
 		session.put("resultado", getResultado());
 		return PaginaEnum.LANCAR_DESPESA.getDescricao();
@@ -204,7 +219,6 @@ public class LancarDespesasAction extends GenericAction{
 			despesas = new ArrayList<Despesa>();
 			despesas = DespesaBO.consultarDespesasPorProcesso(numeroProcesso);
 			valorTotalDespesas = DespesaBO.somarDespesaPorProcesso(numeroProcesso);
-			tiposDespesas = DespesaBO.consultarTiposDespesas();
 			session.put("numeroProcesso", numeroProcesso);
 			session.put("despesas", despesas);
 		}
@@ -252,8 +266,7 @@ public class LancarDespesasAction extends GenericAction{
 		jSonTipoDespesa = "";
 		jSonValorDespesa = null;
 		jSonObservacaoDespesa = null;
-		session.put("mensagem", "");
-		session.put("resultado", "");
+		limparSessao("mensagem", "resultado");
 	}
 	
 	/**
@@ -279,6 +292,10 @@ public class LancarDespesasAction extends GenericAction{
 //			return false;
 //		}
 		return true;
+	}
+	
+	private void carregarDespesas(){
+		tiposDespesas = DespesaBO.consultarTiposDespesas();
 	}
 	
 	public Despesa getDespesa() {

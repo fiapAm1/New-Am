@@ -119,21 +119,21 @@ public class CadastrarProcessoAction extends GenericAction{
 		return String.valueOf(PaginaEnum.EXIBIR_PROCESSO.getDescricao());
 	}
 	
-	/**
-	 * Action para listar processo
-	 * @author Ricardo
-	 * @return String
-	 * @since 18/09/2012
-	 */
-	@Action(value="listarProcesso", results={
-			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
-			@Result(location="/erro.jsp", name="erro")
-	})
-	public String listarProcesso(){
-		carregarListas();
-		processos = carregarProcessos();
-		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
-	}
+//	/**
+//	 * Action para listar processo
+//	 * @author Ricardo
+//	 * @return String
+//	 * @since 18/09/2012
+//	 */
+//	@Action(value="listarProcesso", results={
+//			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
+//			@Result(location="/erro.jsp", name="erro")
+//	})
+//	public String listarProcesso(){
+//		carregarListas();
+//		processos = carregarProcessos();
+//		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
+//	}
 	
 	/**
 	 * Action para adicionar advogados ao processo
