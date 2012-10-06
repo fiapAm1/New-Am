@@ -68,7 +68,8 @@ public class ClienteDAO implements ClienteDAOInterface {
 		Connection conn = ConnectionFactory.getConnectionOracle();
 		
 		//Comunicação
-		String sql = "SELECT CD_PESSOA_CLIENTE, NM_RAZAO_SOCIAL, NR_CNPJ, NR_INSC_ESTADUAL, DS_EMAIL, DS_PASSWORD FROM AM_CLIENTE WHERE CD_PESSOA_CLIENTE = ?";
+		String sql = "SELECT CD_PESSOA_CLIENTE, pe.NM_PESSOA AS NOME, NM_RAZAO_SOCIAL, NR_CNPJ, NR_INSC_ESTADUAL, DS_EMAIL, DS_PASSWORD " +
+				"FROM AM_CLIENTE cli LEFT JOIN AM_PESSOA pe ON pe.CD_PESSOA = cli.CD_PESSOA_CLIENTE WHERE CD_PESSOA_CLIENTE = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Cliente cliente = null;
@@ -85,6 +86,7 @@ public class ClienteDAO implements ClienteDAOInterface {
 				
 				cliente = new Cliente();
 				cliente.setCodigoPessoa(rs.getInt("CD_PESSOA_CLIENTE"));
+				cliente.setNomePessoa(rs.getString("NOME"));
 				cliente.setCnpj(rs.getLong("NR_CNPJ"));
 				cliente.setRazaoSocial(rs.getString("NM_RAZAO_SOCIAL"));
 				cliente.setEmail(rs.getString("DS_EMAIL"));
