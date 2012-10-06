@@ -15,6 +15,7 @@
 			action="cadastrarProcesso"
 			method="post"
 			theme="simple">
+		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend class="grid-12-12">Cadastro de Processos</legend>
 			<div class="grid-6-12">

@@ -16,7 +16,11 @@
 			action="listarProcesso"
 			method="post"
 			theme="simple">
+<<<<<<< HEAD
 		<jsp:include page="../../util/includes/menu.jsp" />	
+=======
+		<jsp:include page="../../util/includes/menu.jsp" />
+>>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 		<fieldset>
 			<legend>Pesquisa de Processo</legend>
 			<div class="grid-12-12">

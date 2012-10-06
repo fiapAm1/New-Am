@@ -14,7 +14,7 @@ public interface DespesaDAOInterface {
 	
 	public void lancarDespesa(Despesa despesa);
 	
-	public double somarDespesaPorProcesso (int codigoProcesso);
+	public Double somarDespesaPorProcesso (int codigoProcesso);
 	
 	public void atualizarDespesa (Despesa despesa);
 	

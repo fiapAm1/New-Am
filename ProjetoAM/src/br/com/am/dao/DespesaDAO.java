@@ -188,7 +188,7 @@ public class DespesaDAO implements DespesaDAOInterface{
 			
 			ps.setInt(1, despesa.getTipoDespesa().getCodigoDespesa());
 			ps.setInt(2, despesa.getProcesso().getNumeroProcesso());
-			ps.setDate(3, new java.sql.Date(despesa.getDataDespesa().getTime()));
+			ps.setDate(3, new java.sql.Date(System.currentTimeMillis()));
 			ps.setDouble(4, despesa.getValorDespesa());
 			ps.setString(5, despesa.getObservacao());
 			
@@ -203,7 +203,7 @@ public class DespesaDAO implements DespesaDAOInterface{
 	}
 
 	@Override
-	public double somarDespesaPorProcesso (int codigoProcesso) {
+	public Double somarDespesaPorProcesso (int codigoProcesso) {
 				
 				//Conexão
 				Connection conn = ConnectionFactory.getConnectionOracle();

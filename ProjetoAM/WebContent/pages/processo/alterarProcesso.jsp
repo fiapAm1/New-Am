@@ -15,6 +15,7 @@
 			action="alterarProcesso"
 			method="post"
 			theme="simple">
+		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend class="grid-12-12">Alterar Processo</legend>
 			<div class="grid-6-12">
