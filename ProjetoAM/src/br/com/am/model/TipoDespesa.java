@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class TipoDespesa implements Serializable {
 	
 	private static final long serialVersionUID = -4343325866387980100L;
-	private int codigoDespesa;
+	private Integer codigoDespesa;
 	private String despesa;
 	
 	/**
@@ -24,7 +24,7 @@ public class TipoDespesa implements Serializable {
 	 * @param codigoDespesa
 	 * @param despesa
 	 */
-	public TipoDespesa(int codigoDespesa, String despesa) {
+	public TipoDespesa(Integer codigoDespesa, String despesa) {
 		this.codigoDespesa = codigoDespesa;
 		this.despesa = despesa;
 	}
@@ -32,14 +32,14 @@ public class TipoDespesa implements Serializable {
 	/**
 	 * @return the codigoDespesa
 	 */
-	public int getCodigoDespesa() {
+	public Integer getCodigoDespesa() {
 		return codigoDespesa;
 	}
 
 	/**
 	 * @param codigoDespesa the codigoDespesa to set
 	 */
-	public void setCodigoDespesa(int codigoDespesa) {
+	public void setCodigoDespesa(Integer codigoDespesa) {
 		this.codigoDespesa = codigoDespesa;
 	}
 

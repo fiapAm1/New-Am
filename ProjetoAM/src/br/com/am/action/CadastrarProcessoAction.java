@@ -15,12 +15,11 @@ import br.com.am.model.Forum;
 import br.com.am.model.Processo;
 import br.com.am.model.TipoCausa;
 import br.com.am.model.TipoCobranca;
-//import org.apache.cxf.binding.corba.wsdl.Array;
 
 
 /**
- * Class Action Processo
- * @author Ricardo e Rodrigo Joubert
+ * Class Action CadastrarProcesso
+ * @author Ricardo
  * @since 18/09/2012
  */
 public class CadastrarProcessoAction extends GenericAction{
@@ -121,6 +120,22 @@ public class CadastrarProcessoAction extends GenericAction{
 	}
 	
 	/**
+	 * Action para listar processo
+	 * @author Ricardo
+	 * @return String
+	 * @since 18/09/2012
+	 */
+	@Action(value="listarProcesso", results={
+			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
+			@Result(location="/erro.jsp", name="erro")
+	})
+	public String listarProcesso(){
+		carregarListas();
+		processos = carregarProcessos();
+		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
+	}
+	
+	/**
 	 * Action para adicionar advogados ao processo
 	 * @author Ricardo
 	 * @return String
@@ -131,6 +146,15 @@ public class CadastrarProcessoAction extends GenericAction{
 		//TODO implementar
 		System.out.println("Advogado Adicionado!");
 		return null;
+	}
+	
+	/**
+	 * Método para guardar valores na session
+	 * @author Ricardo
+	 * @since 23/09/2012
+	 */
+	private void guardarValoresSession(){
+		//TODO guarda objetos na sessão.
 	}
 	
 	/**

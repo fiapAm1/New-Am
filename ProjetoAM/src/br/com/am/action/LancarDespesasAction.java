@@ -62,24 +62,28 @@ public class LancarDespesasAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="cadastrarDespesa", results={
-			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String cadastrarDespesa(){
 		try {
 			numeroProcesso = (Integer) session.get("numeroProcesso");
-			despesa.getProcesso().setNumeroProcesso(numeroProcesso);
-			DespesaBO.lancarDespesa(despesa);
-			
-			pesquisarProcessoDespesas();
-			
-			limparCampos();
-			return PaginaEnum.LANCAR_DESPESA.getDescricao();
+			if(validarCampos()){
+				despesa.getProcesso().setNumeroProcesso(numeroProcesso);
+				DespesaBO.lancarDespesa(despesa);
+				
+				limparCampos();
+				setMensagem("Despesa lançada com sucesso!");
+				setResultado("sucesso");
+			}
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
+			setResultado("erro");
 			e.printStackTrace();
-			return PaginaEnum.ERRO.getDescricao();
 		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		pesquisarProcessosAux();
+		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
 	/**
@@ -89,23 +93,35 @@ public class LancarDespesasAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="alterarDespesa", results={
-			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String alterarDespesa(){
 		try {
+			despesa.getTipoDespesa().setCodigoDespesa((Integer)session.get("codigoTipoDespesa")); 
 			despesa.setCodigoLancamento((Integer)session.get("codigoLancamento"));
-			DespesaBO.atualizarDespesa(despesa);
-			
-			pesquisarProcessoDespesas();
-			
-			limparCampos();
-			return PaginaEnum.LANCAR_DESPESA.getDescricao();
+			if(despesa.getCodigoLancamento() != null){
+				if(validarCampos()){
+					DespesaBO.atualizarDespesa(despesa);
+					
+					limparCampos();
+					
+					setMensagem("Despesa alterada com sucesso!");
+					setResultado("sucesso");
+				}
+			} else {
+				setMensagem("Selecione uma despesa!");
+				setResultado("erro");
+			}
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
+			setResultado("erro");
 			e.printStackTrace();
 			return PaginaEnum.ERRO.getDescricao();
 		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		pesquisarProcessosAux();
+		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
 	/**
@@ -115,23 +131,31 @@ public class LancarDespesasAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="excluirDespesa", results={
-			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String excluirDespesa(){
 		try {
 			despesa.setCodigoLancamento((Integer)session.get("codigoLancamento"));
-			DespesaBO.deletarDespesa(despesa.getCodigoLancamento());
-			
-			pesquisarProcessoDespesas();
-			
-			limparCampos();
-			return PaginaEnum.LANCAR_DESPESA.getDescricao();
+			if(despesa.getCodigoLancamento() != null){
+				DespesaBO.deletarDespesa(despesa.getCodigoLancamento());
+				
+				limparCampos();
+				
+				setMensagem("Despesa excluída com sucesso!");
+				setResultado("sucesso");
+			} else {
+				setMensagem("Selecione uma despesa!");
+				setResultado("erro");
+			}
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
+			setResultado("erro");
 			e.printStackTrace();
-			return PaginaEnum.ERRO.getDescricao();
 		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		pesquisarProcessosAux();
+		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
 	/**
@@ -141,27 +165,48 @@ public class LancarDespesasAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="pesquisarProcessoDespesas", results={
-			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/despesa/lancarDespesa.jsp", name="lancar")
 	})
 	public String pesquisarProcessoDespesas(){
 		try {
-			Processo processo = DespesaBO.consultarProcesso(numeroProcesso);
-			if(processo != null && processo.getNumeroProcesso() >0){
-				processos = new ArrayList<Processo>();
-				processos.add(processo);
-				despesas = new ArrayList<Despesa>();
-				despesas = DespesaBO.consultarDespesasPorProcesso(numeroProcesso);
-				valorTotalDespesas = DespesaBO.somarDespesaPorProcesso(numeroProcesso);
-				tiposDespesas = DespesaBO.consultarTiposDespesas();
-				session.put("numeroProcesso", numeroProcesso);
-				session.put("despesas", despesas);
+			if(numeroProcesso != null){
+				pesquisarProcessosAux();
+				limparMensagem();
+				if(processos.size() <=0){
+					setMensagem("Nenhum processo encontrado!");
+					setResultado("info");
+				}
+			} else {
+				setMensagem("Informe o número do processo!");
+				setResultado("erro");
 			}
-			return PaginaEnum.LANCAR_DESPESA.getDescricao();
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
+			setResultado("erro");
 			e.printStackTrace();
-			return PaginaEnum.ERRO.getDescricao();
+		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		return PaginaEnum.LANCAR_DESPESA.getDescricao();
+	}
+	
+	/**
+	 * Método auxiliar de pesquisa de processos
+	 * @JDGR²
+	 * @since 05/10/2012
+	 * @param processo
+	 */
+	private void pesquisarProcessosAux(){
+		Processo processo = DespesaBO.consultarProcesso(numeroProcesso);
+		if(processo != null){
+			processos = new ArrayList<Processo>();
+			processos.add(processo);
+			despesas = new ArrayList<Despesa>();
+			despesas = DespesaBO.consultarDespesasPorProcesso(numeroProcesso);
+			valorTotalDespesas = DespesaBO.somarDespesaPorProcesso(numeroProcesso);
+			tiposDespesas = DespesaBO.consultarTiposDespesas();
+			session.put("numeroProcesso", numeroProcesso);
+			session.put("despesas", despesas);
 		}
 	}
 	
@@ -184,6 +229,7 @@ public class LancarDespesasAction extends GenericAction{
 		for(Despesa d: despesas){
 			if(d.getCodigoLancamento() == codigoLancamento){
 				despesa = d;
+				session.put("codigoTipoDespesa", d.getTipoDespesa().getCodigoDespesa());
 				session.put("codigoLancamento", codigoLancamento);
 				break;
 			}
@@ -206,16 +252,32 @@ public class LancarDespesasAction extends GenericAction{
 		jSonTipoDespesa = "";
 		jSonValorDespesa = null;
 		jSonObservacaoDespesa = null;
+		session.put("mensagem", "");
+		session.put("resultado", "");
 	}
 	
 	/**
 	 * Método para validar campos obrigatórios.
 	 * @author JDGR²
 	 * @since 30/09/2012
-	 * @return
+	 * @return boolean
 	 */
 	private boolean validarCampos(){
-		//TODO implementar
+		if(numeroProcesso == null || numeroProcesso.intValue() <= 0){
+			setMensagem("Informe o número do processo!");
+			setResultado("erro");
+			return false;
+		} else if((despesa.getTipoDespesa().getCodigoDespesa() == null 
+					|| despesa.getTipoDespesa().getCodigoDespesa().intValue() <= 0 )) {
+			setMensagem("Informe o tipo de despesa!");
+			setResultado("erro");
+			return false;
+		}
+//		} else if(despesa.getValorDespesa() == null){
+//			setMensagem("Informe o valor da despesa!");
+//			setResultado("erro");
+//			return false;
+//		}
 		return true;
 	}
 	

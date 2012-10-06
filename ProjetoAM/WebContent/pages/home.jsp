@@ -6,75 +6,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>HOME - EM CONSTRUÇÃO</title>
+<title>HOME - ADVOCACIA</title>
 </head>
 <body>
-<s:form method="post">
-	<div>
-		<s:url var="url_CadastroProcesso" 
-			   value="forwardCadastrarProcesso">
-			<s:param name="paginaDirecionar">cadastrar</s:param>
-		</s:url>
-		
-		<s:a href="%{url_CadastroProcesso}">
-			Cadastrar Processo
-		</s:a>
-	</div>
-	<br></br>
-	<div>
-		<s:url var="url_ListarProcesso" 
-			   value="forwardCadastrarProcesso">
-			<s:param name="paginaDirecionar">listar</s:param>
-		</s:url>
-		
-		<s:a href="%{url_ListarProcesso}">
-			Listar Processos
-		</s:a>
-	</div>
-	<br></br>
-	<div>
-		<s:url var="url_RelatorioHonorario" 
-			   value="forwardRelatorio">
-			<s:param name="paginaDirecionar">emitirHonorario</s:param>
-		</s:url>
-		
-		<s:a href="%{url_RelatorioHonorario}">
-			Relatorio Honorario
-		</s:a>
-	</div>
-	<br></br>
-	<div>
-		<s:url var="url_RelatorioAudiencia" 
-			   value="forwardRelatorio">
-			<s:param name="paginaDirecionar">emitirAudiencia</s:param>
-		</s:url>
-		
-		<s:a href="%{url_RelatorioAudiencia}">
-			Relatorio Audiencia
-		</s:a>
-	</div>
-	<br></br>
-	<div>
-		<s:url var="url_RegistrarPagamento" 
-			   value="forwardRegistrarPagamento">
-			<s:param name="paginaDirecionar">registrarPagamento</s:param>
-		</s:url>
-		
-		<s:a href="%{url_RegistrarPagamento}">
-			Registrar Pagamento
-		</s:a>
-	</div>
-	<br></br>
-	<div>
-		<s:url var="url_LancarDespesas" 
-			   value="forwardLancarDespesa">
-			<s:param name="paginaDirecionar">lancar</s:param>
-		</s:url>
-		
-		<s:a href="%{url_LancarDespesas}">
-			Lançar Despesas
-		</s:a>
-	</div>
+<s:form id="form_Home"
+		method="post"
+		theme="simple"
+		cssClass="formee">
+	<jsp:include page="../util/includes/menu.jsp" flush="true"/>
 </s:form>
 </body>
 </html>

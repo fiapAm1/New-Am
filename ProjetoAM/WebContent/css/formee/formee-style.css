@@ -110,10 +110,10 @@ form .formee-txt:focus, .formee input[type="text"]:focus, .formee input[type="pa
 	border-color:#d0f1a6;
 }
 
-.formee-msg-success strong, .formee-msg-success a{color:#62b548;}
-.formee-msg-info strong, .formee-msg-info a {color:#11689e;}
+.formee-msg-success strong, .formee-msg-success a{color:#62b548; font-weight: bold; font-size: 11px;}
+.formee-msg-info strong, .formee-msg-info a {color:#11689e; font-weight: bold; font-size: 11px;}
 .formee-msg-warning strong, .formee-msg-warning a {color:#957210;}
-.formee-msg-error strong, .formee-msg-error a {color:#b01717;}
+.formee-msg-error strong, .formee-msg-error a {color:#b01717; font-weight: bold; font-size: 11px;}
 
 /* form validation */
 .formee-error {

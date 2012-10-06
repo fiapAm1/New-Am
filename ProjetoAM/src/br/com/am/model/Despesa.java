@@ -16,7 +16,7 @@ public class Despesa implements Serializable{
 
 	private static final long serialVersionUID = 1963584501144760391L;
 	
-	private int codigoLancamento;
+	private Integer codigoLancamento;
 	private TipoDespesa tipoDespesa = new TipoDespesa();
 	private Processo processo = new Processo();
 	private Date dataDespesa;
@@ -49,14 +49,14 @@ public class Despesa implements Serializable{
 	/**
 	 * @return the codigoLancamento
 	 */
-	public int getCodigoLancamento() {
+	public Integer getCodigoLancamento() {
 		return codigoLancamento;
 	}
 
 	/**
 	 * @param codigoLancamento the codigoLancamento to set
 	 */
-	public void setCodigoLancamento(int codigoLancamento) {
+	public void setCodigoLancamento(Integer codigoLancamento) {
 		this.codigoLancamento = codigoLancamento;
 	}
 
@@ -103,20 +103,6 @@ public class Despesa implements Serializable{
 	}
 
 	/**
-	 * @return the valorDespesa
-	 */
-	public double getValorDespesa() {
-		return valorDespesa;
-	}
-
-	/**
-	 * @param valorDespesa the valorDespesa to set
-	 */
-	public void setValorDespesa(double valorDespesa) {
-		this.valorDespesa = valorDespesa;
-	}
-
-	/**
 	 * @return the observacao
 	 */
 	public String getObservacao() {
@@ -129,5 +115,12 @@ public class Despesa implements Serializable{
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
+
+	public double getValorDespesa() {
+		return valorDespesa;
+	}
+
+	public void setValorDespesa(double valorDespesa) {
+		this.valorDespesa = valorDespesa;
+	}
 }

@@ -25,6 +25,7 @@ public class GenericAction extends ActionSupport implements SessionAware{
 	
 	private String paginaDirecionar;
 	private String mensagem;
+	private String resultado;
 	
 	/**
 	 * Action que direciona para página home.
@@ -32,12 +33,21 @@ public class GenericAction extends ActionSupport implements SessionAware{
 	 * @return String
 	 * @since 25/09/2012
 	 */
-	@Action(value="home", results={
-			@Result(location="/pages/home.jsp", name="home"),
-			@Result(location="/erro.jsp", name="erro")
+	@Action(value="forwardHome", results={
+			@Result(location="/pages/home.jsp", name="home")
 	})
 	public String direcionar(){
 		return PaginaEnum.HOME.getDescricao();
+	}
+	
+	/**
+	 * Método para limpar variáveis de mensagem.
+	 * @author JDGR²
+	 * @since 05/10/2012
+	 */
+	protected void limparMensagem(){
+		mensagem = "";
+		resultado = "";
 	}
 
 	@Override
@@ -63,5 +73,13 @@ public class GenericAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> getSession() {
 		return session;
+	}
+
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
 	}
 }
