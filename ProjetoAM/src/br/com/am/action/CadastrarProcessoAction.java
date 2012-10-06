@@ -118,6 +118,7 @@ public class CadastrarProcessoAction extends GenericAction{
 		processo = carregarProcesso();
 		return String.valueOf(PaginaEnum.EXIBIR_PROCESSO.getDescricao());
 	}
+
 	
 	/**
 	 * Action para adicionar advogados ao processo
