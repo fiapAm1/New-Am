@@ -203,7 +203,7 @@ public class DespesaDAO implements DespesaDAOInterface{
 	}
 
 	@Override
-	public double somarDespesaPorProcesso (int codigoProcesso) {
+	public Double somarDespesaPorProcesso (int codigoProcesso) {
 				
 				//Conexão
 				Connection conn = ConnectionFactory.getConnectionOracle();

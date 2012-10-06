@@ -67,7 +67,7 @@ public class DespesaBO extends GenericBO{
 	 * @param despesa
 	 */
 	
-	public static double somarDespesaPorProcesso (int codigoProcesso) {
+	public static Double somarDespesaPorProcesso (int codigoProcesso) {
 		DespesaDAOInterface despesaDAO = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getDespesaDAO();
 		return despesaDAO.somarDespesaPorProcesso(codigoProcesso);
 	}
