@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import org.apache.cxf.binding.corba.wsdl.Array;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.am.action.enuns.PaginaEnum;
-import br.com.am.bo.ProcessoBO;
 import br.com.am.model.Advogado;
 import br.com.am.model.AdvogadoProcesso;
 import br.com.am.model.Cliente;
@@ -17,11 +15,12 @@ import br.com.am.model.Forum;
 import br.com.am.model.Processo;
 import br.com.am.model.TipoCausa;
 import br.com.am.model.TipoCobranca;
+//import org.apache.cxf.binding.corba.wsdl.Array;
 
 
 /**
- * Class Action CadastrarProcesso
- * @author Ricardo
+ * Class Action Processo
+ * @author Ricardo e Rodrigo Joubert
  * @since 18/09/2012
  */
 public class CadastrarProcessoAction extends GenericAction{
@@ -122,22 +121,6 @@ public class CadastrarProcessoAction extends GenericAction{
 	}
 	
 	/**
-	 * Action para listar processo
-	 * @author Ricardo
-	 * @return String
-	 * @since 18/09/2012
-	 */
-	@Action(value="listarProcesso", results={
-			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
-			@Result(location="/erro.jsp", name="erro")
-	})
-	public String listarProcesso(){
-		carregarListas();
-		processos = carregarProcessos();
-		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
-	}
-	
-	/**
 	 * Action para adicionar advogados ao processo
 	 * @author Ricardo
 	 * @return String
@@ -148,15 +131,6 @@ public class CadastrarProcessoAction extends GenericAction{
 		//TODO implementar
 		System.out.println("Advogado Adicionado!");
 		return null;
-	}
-	
-	/**
-	 * Método para guardar valores na session
-	 * @author Ricardo
-	 * @since 23/09/2012
-	 */
-	private void guardarValoresSession(){
-		//TODO guarda objetos na sessão.
 	}
 	
 	/**

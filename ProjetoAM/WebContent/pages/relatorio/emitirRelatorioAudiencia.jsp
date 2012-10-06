@@ -14,7 +14,7 @@
 	<s:form id="form_EmitirRelatorio" 
 				action="emitirAudiencia" 
 				method="post" 
-				class="formee"
+				cssClass="formee"
 				theme="simple">
 		<fieldset>
 			<legend>Pesquisar Audiências por Processo</legend>
@@ -23,7 +23,7 @@
 					<s:label value="Código do Processo" for="textfield_Codigo" />
 				</div>
 				<div class="grid-7-12">
-					<s:text id="textfield_Codigo" name="codigoProcesso" />
+					<s:textfield id="textfield_Codigo" name="codigoProcesso" />
 				</div>
 			</div>
 			<div class="grid-6-12" style="text-align: left;">

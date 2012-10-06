@@ -20,13 +20,12 @@
 			<legend>Pesquisa de Processo</legend>
 			<div class="grid-12-12">
 				<fieldset>
-					<legend>Filtros</legend>
 					<div class="grid-4-12">
-						<s:label value="Cliente:"
-								 for="textfield_Cliente"/>
-						<s:textfield id="textfield_Cliente"											 
-									 name="processo.cliente.nomePessoa"/>
+						<s:label value="Número do processo:" for="textfield_num_processo"/>
+						<s:textfield id="textfield_num_processo" name="processo.numeroProcesso"/>
 					</div>
+				</fieldset>
+				<fieldset>	
 					<div class="grid-4-12">
 						<s:label value="Selecione um Tipo de Causa:"
 								 for="select_TipoCausa"/>
@@ -39,51 +38,10 @@
 								  name="processo.causa.codigoCausa"/>
 					</div>
 					<div class="grid-4-12">
-						<s:label value="Advogado:"
-						 		 for="textfield_Advogado"/>
-						 <s:textfield id="textfield_Advogado"											 
+						<s:label value="Cliente:"
+						 		 for="textfield_cliente"/>
+						 <s:textfield id="textfield_cliente"											 
 									 name="advogadoProcesso.advogado.nomePessoa"/>
-					</div>
-					<div class="grid-12-12">
-						<fieldset>
-							<legend>Prazos</legend>
-							<div class="grid-4-12">
-								<div class="grid-6-12">
-									<s:label value="Data de Abertura:"
-									 	 	 for="textfield_DataAbertura"/>
-									<s:textfield id="textfield_DataAbertura"											 
-												 maxlength="10"
-												 name="processo.dataAbertura"/>
-								</div>
-								<div class="grid-6-12">
-									<s:label value="Data de Fechamento:"
-										 	 for="textfield_DataFechamento"/>
-									<s:textfield id="textfield_DataFechamento"
-											 	 maxlength="10"
-											 	 name="processo.dataFechamento"/>
-								</div>
-							</div>
-							<div class="grid-4-12">
-								<s:label value="Selecione um Tipo de Cobrança:"
-								 		 for="select_TipoCobranca"/>
-								<s:select id="select_TipoCobranca"
-								  		  headerKey="0"
-								  		  headerValue="Selecione"
-								  		  list="tiposCobrancas"
-								  		  listKey="codigoCobranca"
-								  		  listValue="periodoCobranca"
-								  		  name="processo.cobranca.codigoCobranca"/>
-							</div>
-							<div class="grid-4-12">
-								<s:label value="Selecione Dia de Vencimento:"
-								 		 for="select_DiaVencimento"/>
-								<s:select id="select_DiaVencimento"
-								  		  headerKey="0"
-								  		  headerValue="Selecione"
-								  		  list="dias"
-								  		  name="processo.diaVencimento"/>
-							</div>
-						</fieldset>
 					</div>
 				</fieldset>
 			</div>
