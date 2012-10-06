@@ -1,5 +1,6 @@
 package br.com.am.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -17,7 +18,7 @@ public class ListarProcessoAction extends GenericAction{
 	private String nomeCliente;
 	private int numeroCausa;
 	
-	private List<Processo> processos;
+	private List<Processo> processos = new ArrayList<Processo>();
 	
 	
 	/**
@@ -41,9 +42,13 @@ public class ListarProcessoAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	private void carregarProcessos(){
-		Processo processo = ProcessoBO.consultarProcesso(numeroProcesso);
 		
-		processos.add(processo);
+		System.out.println(numeroProcesso + " here");
+		
+		if(numeroProcesso > 0) {
+			Processo processo = ProcessoBO.consultarProcesso(numeroProcesso);
+			processos.add(processo);
+		}	
 	}
 	
 	public List<Processo> getProcessos() {

@@ -22,26 +22,7 @@
 				<fieldset>
 					<div class="grid-4-12">
 						<s:label value="Número do processo:" for="textfield_num_processo"/>
-						<s:textfield id="textfield_num_processo" name="processo.numeroProcesso"/>
-					</div>
-				</fieldset>
-				<fieldset>	
-					<div class="grid-4-12">
-						<s:label value="Selecione um Tipo de Causa:"
-								 for="select_TipoCausa"/>
-						<s:select id="select_TipoCausa"
-								  headerKey="0"
-								  headerValue="Selecione"
-								  list="tiposCausas"
-								  listKey="codigoCausa"
-								  listValue="causa"
-								  name="processo.causa.codigoCausa"/>
-					</div>
-					<div class="grid-4-12">
-						<s:label value="Cliente:"
-						 		 for="textfield_cliente"/>
-						 <s:textfield id="textfield_cliente"											 
-									 name="advogadoProcesso.advogado.nomePessoa"/>
+						<s:textfield id="textfield_num_processo" name="numeroProcesso"/>
 					</div>
 				</fieldset>
 			</div>
