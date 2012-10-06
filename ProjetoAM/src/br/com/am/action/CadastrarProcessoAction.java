@@ -118,6 +118,9 @@ public class CadastrarProcessoAction extends GenericAction{
 		processo = carregarProcesso();
 		return String.valueOf(PaginaEnum.EXIBIR_PROCESSO.getDescricao());
 	}
+<<<<<<< HEAD
+
+=======
 	
 //	/**
 //	 * Action para listar processo
@@ -134,6 +137,7 @@ public class CadastrarProcessoAction extends GenericAction{
 //		processos = carregarProcessos();
 //		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
 //	}
+>>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 	
 	/**
 	 * Action para adicionar advogados ao processo
