@@ -52,21 +52,23 @@ public class RegistrarPagamentoAction extends GenericAction{
 	 * @return String
 	 */
 	@Action(value="registrarPagamento", results={
-			@Result(location="/pages/pagamento/registrarPagamento.jsp", name="registrarPagamento"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/pagamento/registrarPagamento.jsp", name="registrarPagamento")
 	})
 	public String registrarPagamento(){
+		limparMensagem();
 		try {
+			titulo.getProcesso().setNumeroProcesso((Integer)session.get("numeroProcesso"));
 			TituloBO.registrarTituloPago(titulo);
-			
+			setMensagem("Pagamento efetuado com sucesso!");
+			setResultado("sucesso");
 			pesquisarProcessos();
-			
-			return PaginaEnum.REGISTRAR_PAGAMENTO.getDescricao();
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
 			e.printStackTrace();
-			return PaginaEnum.ERRO.getDescricao();
 		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		return PaginaEnum.REGISTRAR_PAGAMENTO.getDescricao();
 	}
 	
 	/**
@@ -76,23 +78,44 @@ public class RegistrarPagamentoAction extends GenericAction{
 	 * @return String
 	 */
 	@Action(value="pesquisarTitulosProcesso", results={
-			@Result(location="/pages/pagamento/registrarPagamento.jsp", name="registrarPagamento"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/pagamento/registrarPagamento.jsp", name="registrarPagamento")
 	})
 	public String pesquisarProcessos(){
 		try {
-			Processo processo = TituloBO.consultarProcesso(titulo.getProcesso().getNumeroProcesso());
-			if(processo != null){
-				processos.add(processo);
-				titulos = TituloBO.consultarTitulos(processo.getNumeroProcesso());
-				titulosPagos = TituloBO.consultarTitulosPagosPorProcesso(processo.getNumeroProcesso());
+			if(validarCampos()){
+				Processo processo = TituloBO.consultarProcesso(titulo.getProcesso().getNumeroProcesso());
+				if(processo != null){
+					processos.add(processo);
+					titulos = TituloBO.consultarTitulos(processo.getNumeroProcesso());
+					titulosPagos = TituloBO.consultarTitulosPagosPorProcesso(processo.getNumeroProcesso());
+					session.put("numeroProcesso", processo.getNumeroProcesso());
+				} else {
+					setMensagem("Nenhum processo encontrado!");
+					setResultado("info");
+				}
 			}
-			return PaginaEnum.REGISTRAR_PAGAMENTO.getDescricao();
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
 			e.printStackTrace();
-			return PaginaEnum.ERRO.getDescricao();
 		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		return PaginaEnum.REGISTRAR_PAGAMENTO.getDescricao();
+	}
+	
+	/**
+	 * Método para validar campos obrigatórios.
+	 * @author JDGR²
+	 * @since 30/09/2012
+	 * @return boolean
+	 */
+	private boolean validarCampos(){
+		if(titulo.getProcesso().getNumeroProcesso() == null){
+			setMensagem("Informe o número do processo!");
+			setResultado("erro");
+			return false;
+		} 
+		return true;
 	}
 	
 	public List<Processo> getProcessos() {
