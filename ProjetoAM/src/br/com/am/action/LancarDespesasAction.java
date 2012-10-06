@@ -235,8 +235,7 @@ public class LancarDespesasAction extends GenericAction{
 					"despesaLocalizada", "processos, " +
 					"valorTotalDespesas, numeroProcesso, despesas, " +
 					"tiposDespesas, despesa, codigoLancamento"
-			}),
-			@Result(location="/erro.jsp", name="erro")
+			})
 	})
 	public String localizarDespesa(){
 		despesas = (List<Despesa>) session.get("despesas");

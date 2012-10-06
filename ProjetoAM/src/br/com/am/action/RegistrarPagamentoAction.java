@@ -25,7 +25,7 @@ public class RegistrarPagamentoAction extends GenericAction{
 	private List<Titulo> titulos = new ArrayList<Titulo>();
 	private List<TituloPago> titulosPagos = new ArrayList<TituloPago>();
 	
-	private Titulo titulo;
+	private Titulo titulo = new Titulo();
 	
 	/**
 	 * Action que direciona para página de registro de pagamento.
@@ -51,13 +51,13 @@ public class RegistrarPagamentoAction extends GenericAction{
 	 * @since 27/09/2012
 	 * @return String
 	 */
-	@Action(value="registrarPagamento", results={
+	@Action(value="realizarPagamento", results={
 			@Result(location="/pages/pagamento/registrarPagamento.jsp", name="registrarPagamento")
 	})
 	public String registrarPagamento(){
 		limparMensagem();
 		try {
-			titulo.getProcesso().setNumeroProcesso((Integer)session.get("numeroProcesso"));
+			localizarTitulo();
 			TituloBO.registrarTituloPago(titulo);
 			setMensagem("Pagamento efetuado com sucesso!");
 			setResultado("sucesso");
@@ -86,9 +86,10 @@ public class RegistrarPagamentoAction extends GenericAction{
 				Processo processo = TituloBO.consultarProcesso(titulo.getProcesso().getNumeroProcesso());
 				if(processo != null){
 					processos.add(processo);
-					titulos = TituloBO.consultarTitulos(processo.getNumeroProcesso());
+					titulos = TituloBO.consultarTitulosPendentes(processo.getNumeroProcesso());
 					titulosPagos = TituloBO.consultarTitulosPagosPorProcesso(processo.getNumeroProcesso());
 					session.put("numeroProcesso", processo.getNumeroProcesso());
+					session.put("titulos", titulos);
 				} else {
 					setMensagem("Nenhum processo encontrado!");
 					setResultado("info");
@@ -118,6 +119,17 @@ public class RegistrarPagamentoAction extends GenericAction{
 		return true;
 	}
 	
+	private void localizarTitulo(){
+		titulos = (List<Titulo>)session.get("titulos");
+		for (Titulo titulo : titulos) {
+			if(titulo.getNumeroTitulo() == this.titulo.getNumeroTitulo()){
+				this.titulo = titulo;
+				this.titulo.getProcesso().setNumeroProcesso((Integer)session.get("numeroProcesso"));
+				break;
+			}
+		}
+	}
+
 	public List<Processo> getProcessos() {
 		return processos;
 	}

@@ -1,7 +1,7 @@
 <script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="../js/formee/formee.js"></script>
 
-<script type="text/javascript" src="../js/json/despesaLocalizada.js"></script>
+<script type="text/javascript" src="../js/json/acoesDinamicas.js"></script>
 
 <script type="text/javascript" src="../js/jquery-ui/jquery-ui-1.8.24.custom.min.js"></script>
 

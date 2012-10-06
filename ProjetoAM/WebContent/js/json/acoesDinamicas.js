@@ -1,4 +1,4 @@
-function localizar(radio){
+function localizarDespesa(radio){
 	var registro = radio.value;
 	jQuery.getJSON('localizarDespesa',{'codigoLancamento': registro}, function(json){
 		jQuery('#select_TipoDespesa').attr('value', json.jSonTipoDespesa);
@@ -6,5 +6,4 @@ function localizar(radio){
 		jQuery('#textfield_Valor').attr('value', json.jSonValorDespesa);
 		jQuery('#textarea_Observacao').attr('value', json.jSonObservacaoDespesa);
 	});
-
 }
