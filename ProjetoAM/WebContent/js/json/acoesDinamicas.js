@@ -10,7 +10,9 @@ function localizarDespesa(radio){
 
 function adicionarAdvogado(){
 	var registro = jQuery("#select_Advogado").val();
-	jQuery.getJSON('adicionarAdvogado', {'advogadoProcesso.advogado.codigoPessoa': registro}, function(json) {
+	var data = jQuery("#textfield_DataInclusao").val();
+	jQuery.getJSON('adicionarAdvogado', {'advogadoProcesso.advogado.codigoPessoa': registro, 
+		'advogadoProcesso.dataInicioStr': data}, function(json) {
 		var advogados = list.advogadosVinculados;
 		for(var i in advogados){
 			var novaLinha = table.tBodies[0].insertRow(i);

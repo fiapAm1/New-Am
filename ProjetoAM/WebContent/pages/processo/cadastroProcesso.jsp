@@ -64,7 +64,7 @@
 										 for="textfield_DataAbertura"/>
 								<s:textfield id="textfield_DataAbertura"											 
 											 maxlength="10"
-											 name="processo.dataAbertura"
+											 name="processo.dataAberturaStr"
 											 required="true"/>
 							</div>
 							<div class="grid-6-12">
@@ -72,7 +72,7 @@
 										 for="textfield_DataFechamento"/>
 								<s:textfield id="textfield_DataFechamento"
 											 maxlength="10"
-											 name="processo.dataFechamento"/>
+											 name="processo.dataFechamentoStr"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Selecione um Tipo de Cobrança:"
@@ -129,7 +129,7 @@
 						
 						<s:textfield id="textfield_DataInclusao"
 									 maxlength="10"
-									 name="advogadoProcesso.dataInclusao"/>
+									 name="advogadoProcesso.dataInclusaoStr"/>
 					</div>
 					<div class="grid-6-12"
 						 style="top: 9% !important">
@@ -188,7 +188,7 @@
 														 value="advogado.codigoPessoa"/>
 											</s:url>
 											<s:a href="%{url_RemoverAdvogado}">
-												<img src="../img/form-ic-error.png" 
+												<img src="../img/formee/form-ic-error.png" 
 									 				 alt="Remover Advogado" 
 									 				 title="Remover Advogado"/>
 											</s:a>

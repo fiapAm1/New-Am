@@ -3,6 +3,8 @@ package br.com.am.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.com.am.util.UtilDate;
+
 /**
  * 
  * @author Ricardo
@@ -33,5 +35,8 @@ public class AdvogadoProcesso implements Serializable{
 	}
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
+	}
+	public void setDataInicioStr(String dataInicio){
+		setDataInicio(UtilDate.convertStringToDate(dataInicio));
 	}
 }

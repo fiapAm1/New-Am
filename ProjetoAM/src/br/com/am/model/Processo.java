@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import br.com.am.bo.ProcessoBO;
+import br.com.am.util.UtilDate;
 
 /**
  * 
@@ -219,5 +220,12 @@ public class Processo implements Serializable{
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
+	
+	public void setDataAberturaStr(String dataAbertura) {
+		setDataAbertura(UtilDate.convertStringToDate(dataAbertura));
+	}
+	
+	public void setDataFechamentoStr(String dataFechamento) {
+		setDataAbertura(UtilDate.convertStringToDate(dataFechamento));
+	}
 }

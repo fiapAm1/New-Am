@@ -195,7 +195,7 @@
 														 value="advogado.codigoPessoa"/>
 											</s:url>
 											<s:a href="%{url_RemoverAdvogado}">
-												<img src="../img/form-ic-error.png" 
+												<img src="../img/formee/form-ic-error.png" 
 									 				 alt="Remover Advogado" 
 									 				 title="Remover Advogado"/>
 											</s:a>
