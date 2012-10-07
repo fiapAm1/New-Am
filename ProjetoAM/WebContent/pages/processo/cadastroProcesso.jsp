@@ -121,21 +121,23 @@
 						  		  list="advogados"
 								  listKey="codigoPessoa"
 								  listValue="nomePessoa"
-								  name="advogadoProcesso.advogado.codigoPessoa"
-								  required="true"/>
+								  name="advogadoProcesso.advogado.codigoPessoa"/>
 					</div>
 					<div class="grid-5-12 clear">
 						<s:label value="Data de Inclusão:"
 								 for="textfield_DataInclusao"/>
+						
 						<s:textfield id="textfield_DataInclusao"
 									 maxlength="10"
 									 name="advogadoProcesso.dataInclusao"/>
 					</div>
 					<div class="grid-6-12"
-						 style="top: 4% !important">
+						 style="top: 9% !important">
 						<s:submit id="submit_Adicionar"
-								  action="adicionarAdvogado"
-								  value="Adicionar advogado ao processo"
+								  type="button"
+								  cssClass="formee-button"
+								  onclick="javascript: adicionarAdvogado();"
+								  value="Adicionar advogado"
 								  align="left"/>
 					</div>	
 					<div class="grid-12-12"

@@ -32,7 +32,7 @@ public class ForumDAO implements ForumDAOInterface{
 		Connection conn = ConnectionFactory.getConnectionOracle();
 		
 		//COMUNICAÇÃO
-		String sql = "SELECT CD_PESSOA_FORUM, DS_FORUM FROM AM_FORUM";
+		String sql = "SELECT FORUM.CD_PESSOA_FORUM, FORUM.DS_FORUM, PESSOA.NM_PESSOA FROM AM_FORUM FORUM LEFT JOIN AM_PESSOA PESSOA ON FORUM.CD_PESSOA_FORUM = PESSOA.CD_PESSOA";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Forum forum = null;
@@ -45,6 +45,7 @@ public class ForumDAO implements ForumDAOInterface{
 			while(rs.next()) {
 				forum = new Forum();
 				forum.setCodigoPessoa(rs.getInt("CD_PESSOA_FORUM"));
+				forum.setNomePessoa(rs.getString("NM_PESSOA"));
 				forum.setDescricaoForum(rs.getString("DS_FORUM"));
 				
 				foruns.add(forum);

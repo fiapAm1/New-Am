@@ -233,7 +233,7 @@ public class LancarDespesasAction extends GenericAction{
 	@Action(value="localizarDespesa", results={
 			@Result(name="lancar", type="json", params={
 					"despesaLocalizada", "processos, " +
-					"valorTotalDespesas, numeroProcesso, despesas, " +
+					"valorTotalDespesas, numeroProcesso, despesas," + 
 					"tiposDespesas, despesa, codigoLancamento"
 			})
 	})

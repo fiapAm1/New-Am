@@ -8,6 +8,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.am.action.enuns.PaginaEnum;
+import br.com.am.bo.ProcessoBO;
 import br.com.am.model.Advogado;
 import br.com.am.model.AdvogadoProcesso;
 import br.com.am.model.Cliente;
@@ -118,38 +119,34 @@ public class CadastrarProcessoAction extends GenericAction{
 		processo = carregarProcesso();
 		return String.valueOf(PaginaEnum.EXIBIR_PROCESSO.getDescricao());
 	}
-<<<<<<< HEAD
-
-=======
-	
-//	/**
-//	 * Action para listar processo
-//	 * @author Ricardo
-//	 * @return String
-//	 * @since 18/09/2012
-//	 */
-//	@Action(value="listarProcesso", results={
-//			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
-//			@Result(location="/erro.jsp", name="erro")
-//	})
-//	public String listarProcesso(){
-//		carregarListas();
-//		processos = carregarProcessos();
-//		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
-//	}
->>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 	
 	/**
 	 * Action para adicionar advogados ao processo
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return String
 	 * @since 18/09/2012
 	 */
-	@Action(value="adicionarAdvogado")
+	@Action(value="adicionarAdvogado", results={
+			@Result(name="cadastrar", type="json", params={
+					"advogadosVinculados", "advogados, clientes,"+ 
+					"foruns, dias, processos, tiposCausas, "+ 
+					"tiposCobrancas, advogadoProcesso, processo"
+			})
+	})
 	public String adicionarAdvogados(){
-		//TODO implementar
-		System.out.println("Advogado Adicionado!");
-		return null;
+		try {
+			advogadoProcesso.setAdvogado(ProcessoBO.consultarAdvogado(advogadoProcesso.getAdvogado().getCodigoPessoa()));
+			advogadosVinculados.add(advogadoProcesso);
+			advogadoProcesso = new AdvogadoProcesso();
+			setMensagem("Advogado vinculado com sucesso!");
+			setResultado("sucesso");
+		} catch (Exception e) {
+			setMensagem(e.getMessage());
+			setResultado("erro");
+		}
+		session.put("mensagem", getMensagem());
+		session.put("resultado", getResultado());
+		return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
 	}
 	
 	/**
@@ -163,7 +160,7 @@ public class CadastrarProcessoAction extends GenericAction{
 	
 	/**
 	 * Método para carregar listas
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @since 26/09/2012
 	 */
 	private void carregarListas(){
@@ -178,117 +175,91 @@ public class CadastrarProcessoAction extends GenericAction{
 	
 	/**
 	 * Método para carregar adovogados
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return List<Advogado>
 	 * @since 18/09/2012
 	 */
 	private List<Advogado> carregarAdvogados(){
-		return new ArrayList<Advogado>();//ProcessoBO.consultarAdvogados();
+		return ProcessoBO.consultarAdvogados();
 	}
 	
 	/**
 	 * Método para carregar adovogados vinculados ao processo
-	 * @author Ricardo
-	 * @return List<Advogado>
+	 * @author JDGR²
+	 * @return List<AdvogadoProcesso>
 	 * @since 18/09/2012
 	 */
 	private List<AdvogadoProcesso> carregarAdvogadosVinculados(){
-		//TODO implementar
-		AdvogadoProcesso a = null;
-		List<AdvogadoProcesso> listA = new ArrayList<AdvogadoProcesso>();
-		for(int i=1; i<=10; i++){
-			a = new AdvogadoProcesso();
-			a.getAdvogado().setCodigoPessoa(i);
-			a.getAdvogado().setNomePessoa("Teste " + i);
-			a.setDataInicio(new Date(System.currentTimeMillis()));
-			listA.add(a);
+		List<AdvogadoProcesso> list = new ArrayList<AdvogadoProcesso>();
+		if(processo.getNumeroProcesso() != null && processo.getNumeroProcesso().intValue() >0){
+			 list = ProcessoBO.carregarAdvogadosVinculados(processo.getNumeroProcesso().intValue());
 		}
-		return new ArrayList<AdvogadoProcesso>();//listA;
+		return list;
 	}
 	
 	/**
 	 * Método para carregar clientes
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return List<Cliente>
 	 * @since 18/09/2012
 	 */
 	private List<Cliente> carregarClientes(){
-		return new ArrayList<Cliente>(); //ProcessoBO.consultarClientes();
+		return ProcessoBO.consultarClientes();
 	}
 	
 	/**
 	 * Método para carregar foruns
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return List<Forum>
 	 * @since 18/09/2012
 	 */
 	private List<Forum> carregarForuns(){
-		return new ArrayList<Forum>(); //ProcessoBO.consultarForuns();
+		return ProcessoBO.consultarForuns();
 	}
 	
 	/**
 	 * Método para carregar tipos de causas
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return List<TipoCausa>
 	 * @since 18/09/2012
 	 */
 	private List<TipoCausa> carregarTiposCausas(){
-		return new ArrayList<TipoCausa>();//ProcessoBO.consultarTiposCausas();
+		return ProcessoBO.consultarTiposCausas();
 	}
 	
 	/**
 	 * Método para carregar tipos de cobranças
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return List<TipoCobranca>
 	 * @since 18/09/2012
 	 */
 	private List<TipoCobranca> carregarTiposCobrancas(){
-		return new ArrayList<TipoCobranca>();//ProcessoBO.consultarTiposCobrancas();
+		return ProcessoBO.consultarTiposCobrancas();
 	}
 	
 	/**
 	 * Método para carregar processo selecionado
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return Processo
 	 * @since 18/09/2012
 	 */
 	private Processo carregarProcesso(){
-		return new Processo();//ProcessoBO.consultarProcesso(processo.getNumeroProcesso());
+		return ProcessoBO.consultarProcesso(processo.getNumeroProcesso());
 	}
 	
 	/**
 	 * Método para carregar processos
-	 * @author Ricardo
-	 * @return List<Forum>
+	 * @author JDGR²
+	 * @return List<Processo>
 	 * @since 18/09/2012
 	 */
 	private List<Processo> carregarProcessos(){
-//		Processo p = new Processo();
-//		List<Processo> ps = new ArrayList<Processo>();
-//		for(int i=1;i<=10;i++){
-//			p = new Processo();
-//			p.setNumeroProcesso(1000+i);
-//			p.setProcesso("Processo " + (1000+i));
-//			Cliente c = new Cliente();
-//			c.setCodigoPessoa(i);
-//			c.setNomePessoa("Pessoa " + i);
-//			p.setCliente(c);
-//			TipoCausa tc = new TipoCausa();
-//			tc.setCodigoCausa(i);
-//			tc.setCausa("Causa " + i);
-//			p.setCausa(tc);
-//			p.setDataAbertura(new Date(System.currentTimeMillis()));
-//			p.setDataFechamento(new Date(System.currentTimeMillis()));
-//			p.setResultado((int)(2*Math.random()));
-//			ps.add(p);
-//		}
-//		return ps;
-		return new ArrayList<Processo>();//ProcessoBO.consultarProcessosEmAndamento();
+		return ProcessoBO.consultarProcessosEmAndamento();
 	}
 	
 	/**
 	 * Método para carregar dias de pagamento
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return List<Integer>
 	 * @since 18/09/2012
 	 */

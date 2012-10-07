@@ -6,6 +6,7 @@ package br.com.am.dao.interfaces;
 import java.util.List;
 
 import br.com.am.model.Advogado;
+import br.com.am.model.AdvogadoProcesso;
 
 /**
  * @author Rodrigo Joubert<br>
@@ -26,6 +27,14 @@ public interface AdvogadoDAOInterface {
 	 * @param codigoAdvogado
 	 * @return Advogado
 	 */
-	public Advogado consultarAdvogado(int codigoAdvogado);	
+	public Advogado consultarAdvogado(int codigoAdvogado);
+	
+	/**
+	 * Busca advogados vinculados ao processo.
+	 * @author JDGR²
+	 * @param numeroProcesso
+	 * @return List<Advogado>
+	 */
+	public List<AdvogadoProcesso> carregarAdvogadosVinculados(Integer numeroProcesso);
 
 }
