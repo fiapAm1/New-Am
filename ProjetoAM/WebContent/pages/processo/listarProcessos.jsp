@@ -16,7 +16,7 @@
 			action="listarProcesso"
 			method="post"
 			theme="simple">
-		<jsp:include page="../../util/includes/menu.jsp" />	
+		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend>Pesquisa de Processo</legend>
 			<div class="grid-12-12">
@@ -88,7 +88,7 @@
 												 value="numeroProcesso"/>
 									</s:url>
 									<s:a href="%{url_ExibirProcesso}">
-										<img src="../img/form-ic-info.png" 
+										<img src="../img/formee/form-ic-info.png" 
 							 				 alt="Exibir este processo" 
 							 				 title="Exibir este processo"/>
 									</s:a>
@@ -102,7 +102,7 @@
 										<s:param name="paginaDirecionar">alterar</s:param>
 									</s:url>
 									<s:a href="%{url_AtualizarProcesso}">
-										<img src="../img/form-ic-success.png" 
+										<img src="../img/formee/form-ic-success.png" 
 							 				 alt="Atualizar este processo" 
 							 				 title="Atualizar este processo"/>
 									</s:a>

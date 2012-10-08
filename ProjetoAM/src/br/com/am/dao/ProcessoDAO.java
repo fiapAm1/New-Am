@@ -144,7 +144,7 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 
 	@Override
 	public Integer cadastrarProcesso(Processo processo) {
-		
+
 		Connection conn = ConnectionFactory.getConnectionOracle();
 		
 		StringBuffer query = new StringBuffer();
@@ -201,7 +201,6 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 	@Override
 	public List<Processo> consultarProcessos(String nomeCliente, int codigoCausa) {
 		
-		//Conexão
 		Connection conn = ConnectionFactory.getConnectionOracle();
 		
 		//Comunicação
@@ -383,5 +382,4 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 		
 		return processos;
 	}
-
 }

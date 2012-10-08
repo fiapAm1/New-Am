@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import br.com.am.bo.ProcessoBO;
+import br.com.am.util.UtilDate;
 
 /**
  * 
@@ -22,8 +23,8 @@ public class Processo implements Serializable{
 	private TipoCausa causa = new TipoCausa();
 	private TipoCobranca cobranca = new TipoCobranca();
 	private String processo;
-	private Date dataAbertura;
-	private Date dataFechamento;
+	private String dataAberturaStr;
+	private String dataFechamentoStr;
 	private Integer diaVencimento;
 	private Integer resultado;
 	private String observacao;
@@ -33,35 +34,6 @@ public class Processo implements Serializable{
 	 * 
 	 */
 	public Processo () {}
-
-	/**
-	 * @param numeroProcesso
-	 * @param forum
-	 * @param cliente
-	 * @param causa
-	 * @param cobranca
-	 * @param processo
-	 * @param dataAbertura
-	 * @param dataFechamento
-	 * @param dataVencimento
-	 * @param resultado
-	 * @param observacao
-	 */
-	public Processo(Integer numeroProcesso, Forum forum, Cliente cliente,TipoCausa causa, TipoCobranca cobranca, String processo,
-			Date dataAbertura, Date dataFechamento, Integer diaVencimento,Integer resultado, String observacao) {
-		
-		this.numeroProcesso = numeroProcesso;
-		this.forum = forum;
-		this.cliente = cliente;
-		this.causa = causa;
-		this.cobranca = cobranca;
-		this.processo = processo;
-		this.dataAbertura = dataAbertura;
-		this.dataFechamento = dataFechamento;
-		this.diaVencimento = diaVencimento;
-		this.resultado = resultado;
-		this.observacao = observacao;
-	}
 
 	/**
 	 * @return the numeroProcesso
@@ -151,34 +123,6 @@ public class Processo implements Serializable{
 	}
 
 	/**
-	 * @return the dataAbertura
-	 */
-	public Date getDataAbertura() {
-		return dataAbertura;
-	}
-
-	/**
-	 * @param dataAbertura the dataAbertura to set
-	 */
-	public void setDataAbertura(Date dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-
-	/**
-	 * @return the dataFechamento
-	 */
-	public Date getDataFechamento() {
-		return dataFechamento;
-	}
-
-	/**
-	 * @param dataFechamento the dataFechamento to set
-	 */
-	public void setDataFechamento(Date dataFechamento) {
-		this.dataFechamento = dataFechamento;
-	}
-
-	/**
 	 * @return the diaVencimento
 	 */
 	public Integer getDiaVencimento() {
@@ -220,4 +164,19 @@ public class Processo implements Serializable{
 		this.observacao = observacao;
 	}
 
+	public String getDataAberturaStr() {
+		return dataAberturaStr;
+	}
+
+	public void setDataAberturaStr(String dataAberturaStr) {
+		this.dataAberturaStr = dataAberturaStr;
+	}
+
+	public String getDataFechamentoStr() {
+		return dataFechamentoStr;
+	}
+
+	public void setDataFechamentoStr(String dataFechamentoStr) {
+		this.dataFechamentoStr = dataFechamentoStr;
+	}
 }

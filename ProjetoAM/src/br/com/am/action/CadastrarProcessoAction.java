@@ -41,6 +41,9 @@ public class CadastrarProcessoAction extends GenericAction{
 	private String jSonMensagem;
 	private String jSonResultado;
 	
+	private String jSonMensagem;
+	private String jSonResultado;
+	
 	/**
 	 * Action que direciona para as páginas da funcionalidade de cadastro de processo.
 	 * @author Ricardo
@@ -176,7 +179,7 @@ public class CadastrarProcessoAction extends GenericAction{
 		jSonResultado = getResultado();
 		session.put("advogadosVinculados", advogadosVinculados);
 		return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
-	}	
+	}
 	
 	/**
 	 * Action para adicionar advogados ao processo

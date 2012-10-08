@@ -72,7 +72,7 @@
 										   type="radio" 
 										   name="codigoLancamento" 
 										   value="${codigoLancamento}"
-										   onclick="javascript: localizar(this);"/>
+										   onclick="javascript: localizarDespesa(this);"/>
 								</td>
 								<td class="par"><s:property value="tipoDespesa.despesa"/></td>
 								<td class="par"><s:property value="valorDespesa"/></td>

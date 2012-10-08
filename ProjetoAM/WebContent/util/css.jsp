@@ -8,5 +8,4 @@
 
 <link rel="stylesheet" href="../css/jquery-ui/ui-lightness/jquery-ui-1.8.24.custom.css" type="text/css" media="screen">
 
-<link rel="stylesheet" href="../css/jquery.click-calendario-1.0.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" />

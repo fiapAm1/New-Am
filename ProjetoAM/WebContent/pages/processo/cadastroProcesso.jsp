@@ -5,13 +5,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<jsp:include page="../../util/css.jsp" />
-<jsp:include page="../../util/js.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Cadastro de Processos</title>
 </head>
 <body>
-	<s:form cssClass="formee"
+	<s:form id="form_CadastrarProcesso"
+			cssClass="formee"
 			action="cadastrarProcesso"
 			method="post"
 			theme="simple">
@@ -21,7 +20,7 @@
 			<div class="grid-6-12">
 				<fieldset>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Cliente:"
+						<s:label value="Cliente:"
 								 for="select_Cliente"/>
 						<s:select id="select_Cliente"
 								  headerKey="0"
@@ -29,11 +28,10 @@
 								  list="clientes"
 								  listKey="codigoPessoa"
 								  listValue="nomePessoa"
-								  name="processo.cliente.codigoPessoa"
-								  required="true"/>
+								  name="processo.cliente.codigoPessoa"/>
 					</div>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Tipo de Causa:"
+						<s:label value="Tipo de Causa:"
 								 for="select_TipoCausa"/>
 						<s:select id="select_TipoCausa"
 								  headerKey="0"
@@ -41,11 +39,10 @@
 								  list="tiposCausas"
 								  listKey="codigoCausa"
 								  listValue="causa"
-								  name="processo.causa.codigoCausa"
-								  required="true"/>
+								  name="processo.causa.codigoCausa"/>
 					</div>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Forum:"
+						<s:label value="Forum:"
 								 for="select_Forum"/>
 						<s:select id="select_Forum"
 								  headerKey="0"
@@ -53,8 +50,7 @@
 								  list="foruns"
 								  listKey="codigoPessoa"
 								  listValue="nomePessoa"
-								  name="processo.forum.codigoPessoa"
-								  required="true"/>
+								  name="processo.forum.codigoPessoa"/>
 					</div>
 					<div class="grid-11-12">
 						<fieldset>
@@ -64,18 +60,17 @@
 										 for="textfield_DataAbertura"/>
 								<s:textfield id="textfield_DataAbertura"											 
 											 maxlength="10"
-											 name="processo.dataAbertura"
-											 required="true"/>
+											 name="processo.dataAberturaStr"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Data de Fechamento:"
 										 for="textfield_DataFechamento"/>
 								<s:textfield id="textfield_DataFechamento"
 											 maxlength="10"
-											 name="processo.dataFechamento"/>
+											 name="processo.dataFechamentoStr"/>
 							</div>
 							<div class="grid-6-12">
-								<s:label value="Selecione um Tipo de Cobrança:"
+								<s:label value="Tipo de Cobrança:"
 								 		 for="select_TipoCobranca"/>
 								<s:select id="select_TipoCobranca"
 								  		  headerKey="0"
@@ -87,7 +82,7 @@
 								  		  required="true"/>
 							</div>
 							<div class="grid-6-12">
-								<s:label value="Selecione Dia de Vencimento:"
+								<s:label value="Dia de Vencimento:"
 								 		 for="select_DiaVencimento"/>
 								<s:select id="select_DiaVencimento"
 								  		  headerKey="0"
@@ -121,26 +116,27 @@
 						  		  list="advogados"
 								  listKey="codigoPessoa"
 								  listValue="nomePessoa"
-								  name="advogadoProcesso.advogado.codigoPessoa"
-								  required="true"/>
+								  name="advogadoProcesso.advogado.codigoPessoa"/>
 					</div>
 					<div class="grid-5-12 clear">
 						<s:label value="Data de Inclusão:"
 								 for="textfield_DataInclusao"/>
 						<s:textfield id="textfield_DataInclusao"
-									 maxlength="10"
-									 name="advogadoProcesso.dataInclusao"/>
+									 maxlength="10"/>
 					</div>
 					<div class="grid-6-12"
 						 style="top: 4% !important">
-						<s:submit id="submit_Adicionar"
-								  action="adicionarAdvogado"
-								  value="Adicionar advogado ao processo"
-								  align="left"/>
+						<input id="button_Adicionar"
+							   class="formee-button"
+							   onclick="javascript: adicionarAdvogado();"
+							   value="Vincular Advogado"
+							   align="left"
+							   type="button"/>
 					</div>	
 					<div class="grid-12-12"
 						 style="overflow-y: scroll; height: 245px !important">
-						<table class="lawyer-table">
+						<table id="table_AdvogadosVinculados"
+							   class="lawyer-table">
 							<caption>
 								<strong>Advogados Vinculados ao Processo</strong>
 							</caption>
@@ -180,16 +176,14 @@
 										<td align="center" 
 											width="20%"
 											class="impar">
-											<s:url id="url_RemoverAdvogado"
-												   action="removerAdvogado">
-												<s:param name="advogadoProcesso.advogado.codigoPessoa" 
-														 value="advogado.codigoPessoa"/>
-											</s:url>
-											<s:a href="%{url_RemoverAdvogado}">
-												<img src="../img/form-ic-error.png" 
+											<s:hidden id="hidden_Remover"
+		 		   									  name="codigoPessoa"
+		           									  value="%{advogado.codigoPessoa}"/>
+		           							<img src="../css/img/formee/form-ic-error.png" 
 									 				 alt="Remover Advogado" 
-									 				 title="Remover Advogado"/>
-											</s:a>
+									 				 title="Remover Advogado"
+									 				 style="cursor: pointer"
+									 				 onclick="javascript: removerAdvogado(document.getElementById('hidden_Remover').getAttribute('value'))"/>
 										</td>
 									</tr>
 								</s:iterator>
@@ -221,6 +215,7 @@
 				<s:submit id="submit_Confirmar"
 						  value="Confirmar"/>
 				<s:submit id="submit_Voltar"
+						  action="forwardHome"
 						  value="Voltar"/>
 			</div> 			
 		</fieldset>

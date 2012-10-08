@@ -11,7 +11,7 @@
 <body>
 	<s:form id="form_RegistrarPagamento" 
 		  	cssClass="formee"
-		  	action="registrarPagamento" 
+		  	action="realizarPagamento" 
 		  	method="post" 
 		  	theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
@@ -73,8 +73,7 @@
 					</thead>
 					<tbody>
 						<s:iterator id="iterator_Titulos"
-									value="titulos"
-									var="titulo">
+									value="titulos">
 							<tr>
 								<td class="par"><s:property value="numeroTitulo"/></td>
 								<td class="par"><s:property value="agenciaCedente"/></td>
@@ -83,13 +82,13 @@
 								<td class="par"><s:property value="valorDocumento"/></td>
 								<td>
 									<s:url var="url_PagarTitulo" 
-			   							   value="registrarPagamento">
-										<s:param name="titulo"
-												 value="titulo"/>
+			   							   value="realizarPagamento">
+										<s:param name="titulo.numeroTitulo"
+												 value="numeroTitulo"/>
 									</s:url>
 		
 									<s:a href="%{url_PagarTitulo}">
-										<img src="../img/formee/form-ic-info.png" 
+										<img src="../css/img/formee/form-ic-success.png" 
 							 				 alt="Efeturar Pagamento do Título" 
 							 				 title="Efeturar Pagamento do Título"/>
 									</s:a>
