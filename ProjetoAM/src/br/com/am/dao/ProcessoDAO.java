@@ -1,9 +1,12 @@
 package br.com.am.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import br.com.am.model.Forum;
 import br.com.am.model.Processo;
 import br.com.am.model.TipoCausa;
 import br.com.am.model.TipoCobranca;
+import br.com.am.util.UtilDate;
 
 
 public class ProcessoDAO implements ProcessoDAOInterface{
@@ -57,16 +61,24 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 				processo.setCobranca(cobranca);
 				
 				processo.setProcesso(rs.getString("DS_PROCESSO"));
-				processo.setDataAbertura(rs.getDate("DT_ABERTURA"));
-				processo.setDataFechamento(rs.getDate("DT_FECHAMENTO"));
+				processo.setDataAberturaStr(UtilDate.convertDateToString(rs.getDate("DT_ABERTURA")));
+				if(rs.getDate("DT_FECHAMENTO") != null){
+					processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				}
 				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
-				processo.setResultado(rs.getInt("CD_RESULTADO"));
-				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				if(rs.getDate("CD_RESULTADO") != null){
+					processo.setResultado(rs.getInt("CD_RESULTADO"));
+				}
+				if(rs.getString("DS_OBSERVACAO") != null){
+					processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				}
 				
 				processos.add(processo);
 				
 			}
 		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
 			ConnectionFactory.close(conn, ps, rs);
@@ -113,8 +125,8 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 				processo.setCobranca(cobranca);
 				
 				processo.setProcesso(rs.getString("DS_PROCESSO"));
-				processo.setDataAbertura(rs.getDate("DT_ABERTURA"));
-				processo.setDataFechamento(rs.getDate("DT_FECHAMENTO"));
+				processo.setDataAberturaStr(UtilDate.convertDateToString(rs.getDate("DT_ABERTURA")));
+				processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
 				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
 				processo.setResultado(rs.getInt("CD_RESULTADO"));
 				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
@@ -130,37 +142,58 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 	}
 
 	@Override
-	public void cadastrarProcesso(Processo processo) {
+	public Integer cadastrarProcesso(Processo processo) {
 		
-		//Conexão
 		Connection conn = ConnectionFactory.getConnectionOracle();
 		
-		//Comunicação
-		String sql = "INSERT INTO AM_PROCESSO (CD_PESSOA_FORUM, CD_PESSOA_CLIENTE, CD_CAUSA, CD_COBRANCA, DS_PROCESSO, " + 
-					 "DT_ABERTURA, DD_DIA_VENCIMENTO, DS_OBSERVACAO) VALUES (?,?,?,?,?,?,?,?)";	
-		PreparedStatement ps = null;
+		StringBuffer query = new StringBuffer();
+		query.append("BEGIN ");
+		query.append("INSERT INTO AM_PROCESSO ");
+		query.append("(CD_PESSOA_FORUM, CD_PESSOA_CLIENTE, CD_CAUSA, "); 
+		query.append(" CD_COBRANCA, DS_PROCESSO, DT_ABERTURA, "); 
+        query.append(" DT_FECHAMENTO, DD_DIA_VENCIMENTO, CD_RESULTADO, ");
+        query.append(" DS_OBSERVACAO) ");
+        query.append("VALUES (?,?,?,?,?,?,?,?,?,?) "); 
+        query.append("RETURNING NR_PROCESSO INTO ?; "); 
+        query.append("END;");
+        CallableStatement ctmt = null;
+        Integer codigoProcesso = 0;
 		
 		try{
+			ctmt = conn.prepareCall(query.toString());
 			
-			ps = conn.prepareStatement(sql);
+			ctmt.setInt(1, processo.getForum().getCodigoPessoa());
+			ctmt.setInt(2, processo.getCliente().getCodigoPessoa());
+			ctmt.setInt(3, processo.getCausa().getCodigoCausa());
+			ctmt.setInt(4, processo.getCobranca().getCodigoCobranca());
+			ctmt.setString(5, processo.getProcesso());
+			ctmt.setDate(6, new Date(UtilDate.convertStringToDate(processo.getDataAberturaStr()).getTime()));
+			if(!"".equals(processo.getDataFechamentoStr()) && processo.getDataFechamentoStr() != null){
+				ctmt.setDate(7, new Date(UtilDate.convertStringToDate(processo.getDataFechamentoStr()).getTime()));
+			} else {
+				ctmt.setNull(7, Types.DATE);
+			}
+			ctmt.setInt(8, processo.getDiaVencimento());
+			if(processo.getResultado() != null){
+				ctmt.setInt(9, processo.getResultado().intValue());
+			} else {
+				ctmt.setNull(9, Types.INTEGER);
+			}
+			if(processo.getObservacao() != null){
+				ctmt.setString(10, processo.getObservacao().toString());
+			} else {
+				ctmt.setNull(10, Types.VARCHAR);
+			}
+			ctmt.registerOutParameter(11, Types.INTEGER);
 			
-			ps.setInt(1, processo.getForum().getCodigoPessoa());
-			ps.setInt(2, processo.getCliente().getCodigoPessoa());
-			ps.setInt(3, processo.getCausa().getCodigoCausa());
-			ps.setInt(4, processo.getCobranca().getCodigoCobranca());
-			ps.setString(5, processo.getProcesso());
-			ps.setDate(6, new java.sql.Date(processo.getDataAbertura().getTime()));
-			ps.setInt(7, processo.getDiaVencimento());
-			ps.setString(8, processo.getObservacao());
+			ctmt.executeUpdate();
 			
-			ps.execute();
-			
+			codigoProcesso = ctmt.getInt(11);
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
-			ConnectionFactory.close(conn, ps);
+			ConnectionFactory.close(conn, ctmt);
 		}
-		
-		
+		return codigoProcesso;
 	}
 }

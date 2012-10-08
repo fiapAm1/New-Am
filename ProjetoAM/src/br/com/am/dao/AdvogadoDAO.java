@@ -1,6 +1,7 @@
 package br.com.am.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -138,5 +139,33 @@ public class AdvogadoDAO implements AdvogadoDAOInterface{
 			ConnectionFactory.close(conn, psmt, rs);
 		}
 		return list;
+	}
+
+	@Override
+	public void cadastrarAdvogadosVinculados(AdvogadoProcesso advogadoProcesso, Integer codigoProcesso) {
+		
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		StringBuffer query = new StringBuffer();
+		query.append("INSERT INTO ");
+		query.append("		AM_ADVOGADO_PROCESSO ");
+		query.append("		(NR_PROCESSO, CD_PESSOA_ADV, DT_INICIO_PARTICIPACAO) ");
+		query.append("VALUES(?,?,?)");		
+		
+		PreparedStatement psmt = null;
+		
+		try {
+			psmt = conn.prepareStatement(query.toString());
+			psmt.setInt(1, codigoProcesso.intValue());
+			psmt.setInt(2, advogadoProcesso.getAdvogado().getCodigoPessoa());
+			psmt.setDate(3, new Date(advogadoProcesso.getDataInicio().getTime()));
+			
+			psmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, psmt);
+		}
 	}
 }

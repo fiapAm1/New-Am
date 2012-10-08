@@ -36,5 +36,13 @@ public interface AdvogadoDAOInterface {
 	 * @return List<Advogado>
 	 */
 	public List<AdvogadoProcesso> carregarAdvogadosVinculados(Integer numeroProcesso);
+	
+	/**
+	 * Cadastrar advogados vinculados a um processo.
+	 * @author JDGR²
+	 * @param advogadoProcesso
+	 * @param numeroProcesso
+	 */
+	public void cadastrarAdvogadosVinculados(AdvogadoProcesso advogadoProcesso, Integer numeroProcesso);
 
 }

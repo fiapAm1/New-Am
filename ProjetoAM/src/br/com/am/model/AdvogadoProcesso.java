@@ -39,4 +39,10 @@ public class AdvogadoProcesso implements Serializable{
 	public void setDataInicioStr(String dataInicio){
 		setDataInicio(UtilDate.convertStringToDate(dataInicio));
 	}
+	public String getDataInicioStr(){
+		if(getDataInicio() != null){
+			return UtilDate.convertDateToString(getDataInicio()).toString();
+		}
+		return "";
+	}
 }

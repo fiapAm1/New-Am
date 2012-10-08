@@ -88,7 +88,7 @@
 									</s:url>
 		
 									<s:a href="%{url_PagarTitulo}">
-										<img src="../img/formee/form-ic-success.png" 
+										<img src="../css/img/formee/form-ic-success.png" 
 							 				 alt="Efeturar Pagamento do Título" 
 							 				 title="Efeturar Pagamento do Título"/>
 									</s:a>

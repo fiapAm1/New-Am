@@ -1,3 +1,52 @@
+function construirTabelaAdvogadoProcesso(list){
+	var tabela = "";
+	for(var i in list){
+		tabela += "<tr>" +
+						"<td align=\"left\"	width=\"50%\" class=\"par\">" +
+							list[i].advogado.nomePessoa +
+						"</td>" +
+						"<td align=\"left\"	width=\"30%\" class=\"par\">" +
+							list[i].dataInicioStr +
+						"</td>" +
+						"<td align=\"left\"	width=\"20%\" class=\"impar\">" +
+							"<img src=\"../css/img/formee/form-ic-error.png\" "+ 
+					 			 "alt=\"Remover Advogado\""+ 
+					 			 "title=\"Remover Advogado\"" +
+					 			 "style=\"cursor: pointer\"" +
+					 			 "onclick=\"javascript: removerAdvogado("+list[i].advogado.codigoPessoa+")\"/>"+
+						"</td>" +
+					"</tr>";
+	} 
+	return tabela;
+}
+
+function adicionarAdvogado(){
+	var registro = jQuery("#select_Advogado").val();
+	var data = jQuery("#textfield_DataInclusao").val();
+	jQuery.getJSON('adicionarAdvogado', {'advogadoProcesso.advogado.codigoPessoa': registro, 
+		'advogadoProcesso.dataInicioStr': data}, function(json) {
+		var list = json.advogadosVinculados;
+		var table = jQuery("#table_AdvogadosVinculados > tbody:first");
+		table.html("");
+		table.append(construirTabelaAdvogadoProcesso(list));
+		jQuery("#select_Advogado").val(0);
+		jQuery("#textfield_DataInclusao").val("");
+		atribuirMensagemDinamica(json.jSonMensagem, json.jSonResultado);
+		ativarMensagem();
+	});
+}
+
+function removerAdvogado(valor){
+	jQuery.getJSON('removerAdvogado', {'advogadoProcesso.advogado.codigoPessoa': valor}, function(json) {
+		var list = json.advogadosVinculados;
+		var table = jQuery("#table_AdvogadosVinculados > tbody:first");
+		table.html("");
+		table.append(construirTabelaAdvogadoProcesso(list));
+		atribuirMensagemDinamica(json.jSonMensagem, json.jSonResultado);
+		ativarMensagem();
+	});
+}
+
 function localizarDespesa(radio){
 	var registro = radio.value;
 	jQuery.getJSON('localizarDespesa',{'codigoLancamento': registro}, function(json){
@@ -6,24 +55,4 @@ function localizarDespesa(radio){
 		jQuery('#textfield_Valor').attr('value', json.jSonValorDespesa);
 		jQuery('#textarea_Observacao').attr('value', json.jSonObservacaoDespesa);
 	});
-}
-
-function adicionarAdvogado(){
-	var registro = jQuery("#select_Advogado").val();
-	var data = jQuery("#textfield_DataInclusao").val();
-	jQuery.getJSON('adicionarAdvogado', {'advogadoProcesso.advogado.codigoPessoa': registro, 
-		'advogadoProcesso.dataInicioStr': data}, function(json) {
-		var advogados = list.advogadosVinculados;
-		for(var i in advogados){
-			var novaLinha = table.tBodies[0].insertRow(i);
-			
-			var celula0 = novaLinha.insertCell(0);
-			celula0.appendChild(i);
-			var celula1 = novaLinha.insertCell(1);
-			celula1.appendChild(i);
-			var celula2 = novaLinha.insertCell(2);
-			celula2.appendChild(i);
-		}
-	});
-	return false;
 }

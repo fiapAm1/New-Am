@@ -1,7 +1,6 @@
 package br.com.am.action;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -16,7 +15,7 @@ import br.com.am.model.Forum;
 import br.com.am.model.Processo;
 import br.com.am.model.TipoCausa;
 import br.com.am.model.TipoCobranca;
-
+import br.com.am.util.UtilDate;
 
 /**
  * Class Action CadastrarProcesso
@@ -38,6 +37,9 @@ public class CadastrarProcessoAction extends GenericAction{
 	
 	private AdvogadoProcesso advogadoProcesso = new AdvogadoProcesso();
 	private Processo processo = new Processo();
+	
+	private String jSonMensagem;
+	private String jSonResultado;
 	
 	/**
 	 * Action que direciona para as páginas da funcionalidade de cadastro de processo.
@@ -75,14 +77,32 @@ public class CadastrarProcessoAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="cadastrarProcesso", results={
-			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/processo/cadastroProcesso.jsp", name="cadastrar"),
+			@Result(location="/pages/processo/listarProcessos.jsp", name="listar")
 	})
 	public String cadastrarProcesso(){
-		//TODO implementar
-		System.out.println("Cadastrar");
-		carregarListas();
+		try {
+			advogadosVinculados = (List<AdvogadoProcesso>)session.get("advogadosVinculados"); 
+			if(validarProcesso()){
+				Integer codigoProcesso = ProcessoBO.cadastrarProcesso(processo);
+				
+				for(AdvogadoProcesso ap : advogadosVinculados){
+					ProcessoBO.cadastrarAdvogadosVinculados(ap, codigoProcesso);
+				}
+				
+				setMensagem("Processo cadastrado com sucesso!");
+				setResultado("sucesso");
+			} else {
+				carregarListas();
+				return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
+			}
+		} catch (Exception e) {
+			setMensagem(e.getMessage());
+			setResultado("erro");
+			e.printStackTrace();
+		}
 		processos = carregarProcessos();
+		session.put("advogadosVinculados", new ArrayList<AdvogadoProcesso>());
 		return PaginaEnum.LISTAR_PROCESSO.getDescricao();
 	}
 	
@@ -121,6 +141,48 @@ public class CadastrarProcessoAction extends GenericAction{
 	}
 	
 	/**
+	 * Action para remover advogados do processo
+	 * @author JDGR²
+	 * @return String
+	 * @since 07/09/2012
+	 */
+	@Action(value="removerAdvogado", results={
+			@Result(name="cadastrar", type="json", params={
+					"response", "advogados, clientes,"+ 
+					"foruns, dias, processos, tiposCausas, "+ 
+					"tiposCobrancas, advogadoProcesso, processo"
+			})
+	})
+	public String removerAdvogados(){
+		try {
+			advogadosVinculados = (List<AdvogadoProcesso>)session.get("advogadosVinculados");
+			boolean resultado = false;
+			for(AdvogadoProcesso ap : advogadosVinculados){
+				if(ap.getAdvogado().getCodigoPessoa() == advogadoProcesso.getAdvogado().getCodigoPessoa()){
+					advogadosVinculados.remove(ap);
+					resultado = true;
+					break;
+				}
+			}
+			if(resultado){
+				setMensagem("Advogado removido com sucesso!");
+				setResultado("sucesso");
+			} else {
+				setMensagem("Ocorreu um erro!");
+				setResultado("erro");
+			}
+		} catch (Exception e) {
+			setMensagem(e.getMessage());
+			setResultado("erro");
+			e.printStackTrace();
+		}
+		jSonMensagem = getMensagem();
+		jSonResultado = getResultado();
+		session.put("advogadosVinculados", advogadosVinculados);
+		return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
+	}
+	
+	/**
 	 * Action para adicionar advogados ao processo
 	 * @author JDGR²
 	 * @return String
@@ -128,34 +190,105 @@ public class CadastrarProcessoAction extends GenericAction{
 	 */
 	@Action(value="adicionarAdvogado", results={
 			@Result(name="cadastrar", type="json", params={
-					"advogadosVinculados", "advogados, clientes,"+ 
+					"response", "advogados, clientes,"+ 
 					"foruns, dias, processos, tiposCausas, "+ 
 					"tiposCobrancas, advogadoProcesso, processo"
 			})
 	})
 	public String adicionarAdvogados(){
 		try {
-			advogadoProcesso.setAdvogado(ProcessoBO.consultarAdvogado(advogadoProcesso.getAdvogado().getCodigoPessoa()));
-			advogadosVinculados.add(advogadoProcesso);
-			advogadoProcesso = new AdvogadoProcesso();
-			setMensagem("Advogado vinculado com sucesso!");
-			setResultado("sucesso");
+			advogadosVinculados = new ArrayList<AdvogadoProcesso>();
+			if(session.get("advogadosVinculados") != null){
+				advogadosVinculados = (List<AdvogadoProcesso>)session.get("advogadosVinculados");
+			}
+			if(validarAdvogado()){
+				advogadoProcesso.setAdvogado(ProcessoBO.consultarAdvogado(advogadoProcesso.getAdvogado().getCodigoPessoa()));
+				advogadosVinculados.add(advogadoProcesso);
+				advogadoProcesso = new AdvogadoProcesso();
+				setMensagem("Advogado vinculado com sucesso!");
+				setResultado("sucesso");
+			}
 		} catch (Exception e) {
 			setMensagem(e.getMessage());
 			setResultado("erro");
+			e.printStackTrace();
 		}
-		session.put("mensagem", getMensagem());
-		session.put("resultado", getResultado());
+		jSonMensagem = getMensagem();
+		jSonResultado = getResultado();
+		session.put("advogadosVinculados", advogadosVinculados);
 		return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
 	}
 	
 	/**
-	 * Método para guardar valores na session
-	 * @author Ricardo
-	 * @since 23/09/2012
+	 * Método para validar advogado que será vincualdo.
+	 * @author JDGR²
+	 * @since 07/10/2012
 	 */
-	private void guardarValoresSession(){
-		//TODO guarda objetos na sessão.
+	private boolean validarAdvogado(){
+		if(advogadoProcesso.getAdvogado().getCodigoPessoa()<=0){
+			setMensagem("Selecione um advogado!");
+			setResultado("erro");
+			return false;
+		} else if(advogadosVinculados != null && advogadosVinculados.size()>0){
+			for(AdvogadoProcesso ap : advogadosVinculados){
+				if(advogadoProcesso.getAdvogado().getCodigoPessoa() == ap.getAdvogado().getCodigoPessoa()){
+					setMensagem("Advogado já está vinculado!");
+					setResultado("erro");
+					return false;
+				}
+			}
+		} else if(advogadoProcesso.getDataInicio() == null){
+			setMensagem("Informe a data de início!");
+			setResultado("erro");
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Método para validar processo que será cadastrado.
+	 * @author JDGR²
+	 * @since 07/10/2012
+	 */
+	private boolean validarProcesso(){
+		if(processo.getCliente() == null || processo.getCliente().getCodigoPessoa() <= 0){
+			setMensagem("Selecione um cliente!");
+			setResultado("erro");
+			return false;
+		} else if(processo.getCausa() == null || processo.getCausa().getCodigoCausa() <= 0){
+			setMensagem("Selecione uma causa!");
+			setResultado("erro");
+			return false;
+		} else if(processo.getForum() == null || processo.getForum().getCodigoPessoa() <= 0){
+			setMensagem("Selecione um forum!");
+			setResultado("erro");
+			return false;
+		} else if(processo.getDataAberturaStr() == null || "".equals(processo.getDataAberturaStr())){
+			setMensagem("Informe a data de abertura do processo!");
+			setResultado("erro");
+			return false;
+		} else if(processo.getDataFechamentoStr() != null && !"".equals(processo.getDataFechamentoStr())){
+			if(UtilDate.convertStringToDate(
+				processo.getDataFechamentoStr()).before(
+						UtilDate.convertStringToDate(processo.getDataAberturaStr()))){
+				setMensagem("Data de fechamento não pode ser menor que a data de abertura!");
+				setResultado("erro");
+				return false;
+			}
+		} else if(processo.getCobranca() == null || processo.getCobranca().getCodigoCobranca() <= 0){
+			setMensagem("Selecione o tipo de cobrança!");
+			setResultado("erro");
+			return false;
+		} else if(advogadosVinculados == null || advogadosVinculados.size() <= 0){
+			setMensagem("Vincule no minímo um advogado ao processo!");
+			setResultado("erro");
+			return false;
+		} else if(processo.getProcesso() == null || "".equals(processo.getProcesso())){
+			setMensagem("Preencha a descrição do processo!");
+			setResultado("erro");
+			return false;
+		}
+		return true;
 	}
 	
 	/**
@@ -349,5 +482,21 @@ public class CadastrarProcessoAction extends GenericAction{
 
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
+	}
+
+	public String getjSonMensagem() {
+		return jSonMensagem;
+	}
+
+	public void setjSonMensagem(String jSonMensagem) {
+		this.jSonMensagem = jSonMensagem;
+	}
+
+	public String getjSonResultado() {
+		return jSonResultado;
+	}
+
+	public void setjSonResultado(String jSonResultado) {
+		this.jSonResultado = jSonResultado;
 	}
 }

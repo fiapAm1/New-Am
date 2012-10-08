@@ -29,6 +29,6 @@ public interface ProcessoDAOInterface {
 	 * Insere um novo processo na tabela AM_PROCESSO
 	 * @param processo
 	 */
-	public void cadastrarProcesso(Processo processo);
+	public Integer cadastrarProcesso(Processo processo);
 
 }
