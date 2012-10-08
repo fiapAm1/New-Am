@@ -41,9 +41,6 @@ public class CadastrarProcessoAction extends GenericAction{
 	private String jSonMensagem;
 	private String jSonResultado;
 	
-	private String jSonMensagem;
-	private String jSonResultado;
-	
 	/**
 	 * Action que direciona para as páginas da funcionalidade de cadastro de processo.
 	 * @author Ricardo
