@@ -61,11 +61,7 @@ public class CadastrarProcessoAction extends GenericAction{
 		} else if(PaginaEnum.CADASTRAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
 			carregarListas();
 			return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
-		} else if(PaginaEnum.LISTAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
-			//carregarListas();
-			//processos = carregarProcessos();
-			return PaginaEnum.LISTAR_PROCESSO.getDescricao();
-		}else {
+		} else {
 			return String.valueOf(PaginaEnum.ERRO.getDescricao());
 		}
 	}
@@ -279,6 +275,10 @@ public class CadastrarProcessoAction extends GenericAction{
 			setMensagem("Selecione o tipo de cobrança!");
 			setResultado("erro");
 			return false;
+		} else if(processo.getDiaVencimento() == null || processo.getDiaVencimento() <= 0){
+			setMensagem("Selecione um dia de vencimento!");
+			setResultado("erro");
+			return false;
 		} else if(advogadosVinculados == null || advogadosVinculados.size() <= 0){
 			setMensagem("Vincule no minímo um advogado ao processo!");
 			setResultado("erro");
@@ -298,7 +298,6 @@ public class CadastrarProcessoAction extends GenericAction{
 	 */
 	private void carregarListas(){
 		advogados = carregarAdvogados();
-		advogadosVinculados = carregarAdvogadosVinculados();
 		clientes = carregarClientes();
 		dias = carregarDias();
 		foruns = carregarForuns();
