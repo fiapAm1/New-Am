@@ -127,10 +127,16 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 				
 				processo.setProcesso(rs.getString("DS_PROCESSO"));
 				processo.setDataAberturaStr(UtilDate.convertDateToString(rs.getDate("DT_ABERTURA")));
-				processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				if(rs.getDate("DT_FECHAMENTO") != null){
+					processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				}
 				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
-				processo.setResultado(rs.getInt("CD_RESULTADO"));
-				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				if(((Integer)rs.getInt("CD_RESULTADO")) != null){
+					processo.setResultado(rs.getInt("CD_RESULTADO"));
+				}
+				if(rs.getString("DS_OBSERVACAO") != null){
+					processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				}
 			}
 			
 		} catch(SQLException e) {
@@ -243,10 +249,16 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 				
 				processo.setProcesso(rs.getString("DS_PROCESSO"));
 				processo.setDataAberturaStr(UtilDate.convertDateToString(rs.getDate("DT_ABERTURA")));
-				processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				if(rs.getDate("DT_FECHAMENTO") != null){
+					processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				}
 				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
-				processo.setResultado(rs.getInt("CD_RESULTADO"));
-				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				if(((Integer)rs.getInt("CD_RESULTADO")) != null){
+					processo.setResultado(rs.getInt("CD_RESULTADO"));
+				}
+				if(rs.getString("DS_OBSERVACAO") != null){
+					processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				}
 				
 				processos.add(processo);
 			}
@@ -305,10 +317,16 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 				
 				processo.setProcesso(rs.getString("DS_PROCESSO"));
 				processo.setDataAberturaStr(UtilDate.convertDateToString(rs.getDate("DT_ABERTURA")));
-				processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				if(rs.getDate("DT_FECHAMENTO") != null){
+					processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				}
 				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
-				processo.setResultado(rs.getInt("CD_RESULTADO"));
-				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				if(((Integer)rs.getInt("CD_RESULTADO")) != null){
+					processo.setResultado(rs.getInt("CD_RESULTADO"));
+				}
+				if(rs.getString("DS_OBSERVACAO") != null){
+					processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				}
 				
 				processos.add(processo);
 			}
@@ -366,10 +384,16 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 				
 				processo.setProcesso(rs.getString("DS_PROCESSO"));
 				processo.setDataAberturaStr(UtilDate.convertDateToString(rs.getDate("DT_ABERTURA")));
-				processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				if(rs.getDate("DT_FECHAMENTO") != null){
+					processo.setDataFechamentoStr(UtilDate.convertDateToString(rs.getDate("DT_FECHAMENTO")));
+				}
 				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
-				processo.setResultado(rs.getInt("CD_RESULTADO"));
-				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				if(((Integer)rs.getInt("CD_RESULTADO")) != null){
+					processo.setResultado(rs.getInt("CD_RESULTADO"));
+				}
+				if(rs.getString("DS_OBSERVACAO") != null){
+					processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				}
 				
 				processos.add(processo);
 			}
