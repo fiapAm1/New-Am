@@ -39,7 +39,7 @@
 						</li>
 						<li>
 							<s:url var="url_ListarProcesso" 
-				   				   value="forwardCadastrarProcesso">
+				   				   value="forwardListarProcesso">
 								<s:param name="paginaDirecionar">listar</s:param>
 							</s:url>
 			

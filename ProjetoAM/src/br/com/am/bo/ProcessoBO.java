@@ -17,6 +17,42 @@ import br.com.am.model.Processo;
 public class ProcessoBO extends GenericBO{
 	
 	/**
+	 * Método que retorna um processo a partir do número passado como paramentro.
+	 * @author Rodrigo
+	 * @since 26/09/2012
+	 * @param nomeCliente, codigoCausa
+	 * @return List<Processo>
+	 */
+	public static List<Processo> consultarProcessos(String nomeCliente, int codigoCausa) {
+		ProcessoDAOInterface processoDAO = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getProcessoDAO();
+		return processoDAO.consultarProcessos(nomeCliente, codigoCausa);
+	}
+	
+	/**
+	 * Método que retorna uma lista de processos a partir do nome do cliente
+	 * @author Rodrigo
+	 * @since 26/09/2012
+	 * @param nomeCliente
+	 * @return List<Processo>
+	 */
+	public static List<Processo> consultarProcessos(String nomeCliente) {
+		ProcessoDAOInterface processoDAO = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getProcessoDAO();
+		return processoDAO.consultarProcessos(nomeCliente);
+	}
+	
+	/**
+	 * Método que retorna uma lista de processos a partir do tipo de causa
+	 * @author Rodrigo
+	 * @since 26/09/2012
+	 * @param codigoCausa
+	 * @return List<Processo>
+	 */
+	public static List<Processo> consultarProcessos(int codigoCausa) {
+		ProcessoDAOInterface processoDAO = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getProcessoDAO();
+		return processoDAO.consultarProcessos(codigoCausa);
+	}
+	
+	/**
 	 * Método que retorna uma lista de processos.
 	 * @author Rodrigo
 	 * @since 26/09/2012
