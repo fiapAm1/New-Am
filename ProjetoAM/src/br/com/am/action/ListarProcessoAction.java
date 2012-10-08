@@ -47,7 +47,7 @@ public class ListarProcessoAction extends GenericAction{
 	
 	/**
 	 * Action para listar processo
-	 * @author Ricardo
+	 * @author JDGR²
 	 * @return String
 	 * @since 18/09/2012
 	 */

@@ -16,7 +16,6 @@
 			action="listarProcesso"
 			method="post"
 			theme="simple">
-		
 		<jsp:include page="../../util/includes/menu.jsp" />	
 		<fieldset>
 			<legend>Pesquisa de Processo</legend>
