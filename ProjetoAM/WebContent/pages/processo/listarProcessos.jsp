@@ -77,9 +77,9 @@
 								<td class="par"><s:property value="processo" /></td>
 								<td class="par"><s:property value="cliente.nomePessoa"/></td>
 								<td class="par"><s:property value="causa.causa"/></td>
-								<td class="par"><s:property value="dataAbertura"/></td>
-								<td class="par"><s:property value="dataFechamento"/></td>
-								<td class="par"><s:property value="resultado"/></td>
+								<td class="par"><s:property value="dataAberturaStr"/></td>
+								<td class="par"><s:property value="dataFechamentoStr"/></td>
+								<td class="par"><s:property value="resultadoStr"/></td>
 								<td align="center" 
 									class="impar">
 									<s:url id="url_ExibirProcesso"
@@ -88,7 +88,7 @@
 												 value="numeroProcesso"/>
 									</s:url>
 									<s:a href="%{url_ExibirProcesso}">
-										<img src="../img/formee/form-ic-info.png" 
+										<img src="../css/img/formee/form-ic-info.png" 
 							 				 alt="Exibir este processo" 
 							 				 title="Exibir este processo"/>
 									</s:a>
@@ -102,7 +102,7 @@
 										<s:param name="paginaDirecionar">alterar</s:param>
 									</s:url>
 									<s:a href="%{url_AtualizarProcesso}">
-										<img src="../img/formee/form-ic-success.png" 
+										<img src="../css/img/formee/form-ic-success.png" 
 							 				 alt="Atualizar este processo" 
 							 				 title="Atualizar este processo"/>
 									</s:a>

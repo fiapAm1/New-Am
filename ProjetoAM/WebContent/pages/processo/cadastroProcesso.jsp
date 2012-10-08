@@ -99,7 +99,7 @@
 							<div class="grid-12-12">
 								<s:radio id="radio_ResultadoCausa"
 										 name="processo.resultadoCausa"
-										 list="#{'1':'Ganha','0':'Perda'}"/>
+										 list="#{'2':'Ganha','1':'Perda'}"/>
 							</div>	
 						</fieldset>
 					</div>

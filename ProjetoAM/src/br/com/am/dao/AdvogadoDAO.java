@@ -105,6 +105,7 @@ public class AdvogadoDAO implements AdvogadoDAOInterface{
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT ");
 		query.append("		ADVOGADO.CD_PESSOA_ADV, ");
+		query.append("		ADVOGADO_PROCESSO.NR_PROCESSO, ");	
 		query.append("		ADVOGADO_PROCESSO.DT_INICIO_PARTICIPACAO, ");
 		query.append("		PESSOA.NM_PESSOA ");
 		query.append("FROM ");

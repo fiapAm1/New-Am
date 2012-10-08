@@ -30,7 +30,7 @@
 								  listKey="codigoPessoa"
 								  listValue="nomePessoa"
 								  disabled="true"
-								  value="%{pessoa.cliente.codigoPessoa}"/>
+								  value="%{processo.cliente.codigoPessoa}"/>
 					</div>
 					<div class="grid-11-12">
 						<s:label value="Selecione um Tipo de Causa:"
@@ -65,7 +65,7 @@
 								<s:textfield id="textfield_DataAbertura"											 
 											 maxlength="10"
 											 disabled="true"
-											 value="%{processo.dataAbertura}"/>
+											 value="%{processo.dataAberturaStr}"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Data de Fechamento:"
@@ -73,7 +73,7 @@
 								<s:textfield id="textfield_DataFechamento"
 											 maxlength="10"
 											 disabled="true"
-											 value="%{processo.dataFechamento}"/>
+											 value="%{processo.dataFechamentoStr}"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Selecione um Tipo de Cobrança:"
@@ -146,7 +146,7 @@
 										<td align="left" 
 											width="30%"
 											class="par">
-											<s:property value="dataInicio"/>
+											<s:property value="dataInicioStr"/>
 										</td>
 									</tr>
 								</s:iterator>
@@ -178,6 +178,7 @@
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Voltar"
+						  action="forwardHome"
 						  value="Voltar"/>
 			</div> 			
 		</fieldset>

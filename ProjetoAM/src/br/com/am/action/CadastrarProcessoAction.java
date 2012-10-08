@@ -127,12 +127,12 @@ public class CadastrarProcessoAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="exibirProcesso", results={
-			@Result(location="/pages/processo/exibirProcesso.jsp", name="exibir"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/processo/exibirProcesso.jsp", name="exibir")
 	})
 	public String exibirProcesso(){
 		carregarListas();
 		processo = carregarProcesso();
+		advogadosVinculados = carregarAdvogadosVinculados();
 		return String.valueOf(PaginaEnum.EXIBIR_PROCESSO.getDescricao());
 	}
 	

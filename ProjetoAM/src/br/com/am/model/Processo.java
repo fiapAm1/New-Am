@@ -1,10 +1,9 @@
+
 package br.com.am.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import br.com.am.bo.ProcessoBO;
-import br.com.am.util.UtilDate;
 
 /**
  * 
@@ -178,5 +177,16 @@ public class Processo implements Serializable{
 
 	public void setDataFechamentoStr(String dataFechamentoStr) {
 		this.dataFechamentoStr = dataFechamentoStr;
+	}
+	
+	public String getResultadoStr(){
+		switch (resultado) {
+		case 1:
+			return "Perda";
+		case 2:
+			return "Ganha";
+		default:
+			return "Sem Resultado";
+		}
 	}
 }
