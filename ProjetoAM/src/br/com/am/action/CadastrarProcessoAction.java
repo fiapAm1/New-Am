@@ -58,11 +58,7 @@ public class CadastrarProcessoAction extends GenericAction{
 		} else if(PaginaEnum.CADASTRAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
 			carregarListas();
 			return PaginaEnum.CADASTRAR_PROCESSO.getDescricao();
-		} else if(PaginaEnum.LISTAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
-			//carregarListas();
-			//processos = carregarProcessos();
-			return PaginaEnum.LISTAR_PROCESSO.getDescricao();
-		}else {
+		} else {
 			return String.valueOf(PaginaEnum.ERRO.getDescricao());
 		}
 	}
@@ -118,26 +114,6 @@ public class CadastrarProcessoAction extends GenericAction{
 		processo = carregarProcesso();
 		return String.valueOf(PaginaEnum.EXIBIR_PROCESSO.getDescricao());
 	}
-<<<<<<< HEAD
-
-=======
-	
-//	/**
-//	 * Action para listar processo
-//	 * @author Ricardo
-//	 * @return String
-//	 * @since 18/09/2012
-//	 */
-//	@Action(value="listarProcesso", results={
-//			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
-//			@Result(location="/erro.jsp", name="erro")
-//	})
-//	public String listarProcesso(){
-//		carregarListas();
-//		processos = carregarProcessos();
-//		return String.valueOf(PaginaEnum.LISTAR_PROCESSO.getDescricao());
-//	}
->>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 	
 	/**
 	 * Action para adicionar advogados ao processo

@@ -26,6 +26,27 @@ public interface ProcessoDAOInterface {
 	public Processo consultarProcesso(int numeroProcesso);
 	
 	/**
+	 * Busca uma lista de processos através do nome do cliente ou tipo de causa
+	 * @param numeroProcesso
+	 * @return List<Processo>
+	 */
+	public List<Processo> consultarProcessos(String nomeCliente, int codigoCausa);
+	
+	/**
+	 * Busca uma lista de processos através do nome do cliente
+	 * @param numeroProcesso
+	 * @return List<Processo>
+	 */
+	public List<Processo> consultarProcessos(String nomeCliente);
+	
+	/**
+	 * Busca uma lista de processos através do tipo de causa
+	 * @param numeroProcesso
+	 * @return Processo
+	 */
+	public List<Processo> consultarProcessos(int codigoCausa);	
+	
+	/**
 	 * Insere um novo processo na tabela AM_PROCESSO
 	 * @param processo
 	 */

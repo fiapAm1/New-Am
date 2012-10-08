@@ -16,11 +16,8 @@
 			action="listarProcesso"
 			method="post"
 			theme="simple">
-<<<<<<< HEAD
+		
 		<jsp:include page="../../util/includes/menu.jsp" />	
-=======
-		<jsp:include page="../../util/includes/menu.jsp" />
->>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 		<fieldset>
 			<legend>Pesquisa de Processo</legend>
 			<div class="grid-12-12">
@@ -28,6 +25,24 @@
 					<div class="grid-4-12">
 						<s:label value="Número do processo:" for="textfield_num_processo"/>
 						<s:textfield id="textfield_num_processo" name="numeroProcesso"/>
+					</div>
+				</fieldset>
+				<fieldset>	
+					<div class="grid-4-12">
+						<s:label value="Selecione um Tipo de Causa:"
+								 for="select_TipoCausa"/>
+						<s:select id="select_TipoCausa"
+								  headerKey="0"
+								  headerValue="Selecione"
+								  list="tiposCausas"
+								  listKey="codigoCausa"
+								  listValue="causa"
+								  name="codigoCausa"/>		  
+					</div>
+					<div class="grid-4-12">
+						<s:label value="Cliente:"
+						 		 for="textfield_cliente"/>
+						 <s:textfield id="textfield_cliente" name="nomeCliente"/>
 					</div>
 				</fieldset>
 			</div>

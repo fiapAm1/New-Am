@@ -83,7 +83,8 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 		
 		//Comunicação
 		String sql = "SELECT NR_PROCESSO,  CD_PESSOA_FORUM,  CD_PESSOA_CLIENTE,  CD_CAUSA,  CD_COBRANCA,  DS_PROCESSO,  DT_ABERTURA, " +
-				     " DT_FECHAMENTO,  DD_DIA_VENCIMENTO,  CD_RESULTADO,  DS_OBSERVACAO FROM AM_PROCESSO WHERE NR_PROCESSO = ?";
+				     " DT_FECHAMENTO,  DD_DIA_VENCIMENTO,  CD_RESULTADO,  DS_OBSERVACAO " +
+				     "FROM AM_PROCESSO WHERE NR_PROCESSO = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Processo processo = null;
@@ -162,6 +163,192 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 		}
 		
 		
+	}
+
+	@Override
+	public List<Processo> consultarProcessos(String nomeCliente, int codigoCausa) {
+		
+		//Conexão
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		//Comunicação
+		String sql = "SELECT NR_PROCESSO,  CD_PESSOA_FORUM,  p.CD_PESSOA_CLIENTE,  CD_CAUSA,  CD_COBRANCA,  DS_PROCESSO,  DT_ABERTURA, " +
+					 "DT_FECHAMENTO,  DD_DIA_VENCIMENTO,  CD_RESULTADO,  DS_OBSERVACAO " +
+					 "FROM AM_PROCESSO p " +
+				     "LEFT JOIN AM_CLIENTE cli ON cli.CD_PESSOA_CLIENTE = p.CD_PESSOA_CLIENTE " +
+				     "LEFT JOIN AM_PESSOA pes ON pes.CD_PESSOA = cli.CD_PESSOA_CLIENTE " +
+				     "WHERE NM_PESSOA LIKE ? " +
+				     "AND CD_CAUSA = ? ";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Processo processo = null;
+		List<Processo> processos = new ArrayList<>();
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "%" + nomeCliente.toUpperCase() + "%");
+			ps.setInt(2, codigoCausa);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				processo = new Processo();
+				processo.setNumeroProcesso(rs.getInt("NR_PROCESSO"));
+				
+				Forum forum = ProcessoBO.consultarForum(rs.getInt("CD_PESSOA_FORUM"));
+				processo.setForum(forum);
+				
+				Cliente cliente = ProcessoBO.consultarCliente(rs.getInt("CD_PESSOA_CLIENTE"));
+				processo.setCliente(cliente);
+				
+				TipoCausa causa = ProcessoBO.consultarTipoCausa(rs.getInt("CD_CAUSA"));
+				processo.setCausa(causa);
+				
+				TipoCobranca cobranca = ProcessoBO.consultarTipoCobranca(rs.getInt("CD_COBRANCA"));
+				processo.setCobranca(cobranca);
+				
+				processo.setProcesso(rs.getString("DS_PROCESSO"));
+				processo.setDataAbertura(rs.getDate("DT_ABERTURA"));
+				processo.setDataFechamento(rs.getDate("DT_FECHAMENTO"));
+				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
+				processo.setResultado(rs.getInt("CD_RESULTADO"));
+				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				
+				processos.add(processo);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, ps, rs);
+		}
+		
+		return processos;
+	}
+
+	@Override
+	public List<Processo> consultarProcessos(String nomeCliente) {
+		
+		//Conexão
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		//Comunicação
+		String sql = "SELECT NR_PROCESSO,  CD_PESSOA_FORUM,  p.CD_PESSOA_CLIENTE,  CD_CAUSA,  CD_COBRANCA,  DS_PROCESSO,  DT_ABERTURA, " +
+					 "DT_FECHAMENTO,  DD_DIA_VENCIMENTO,  CD_RESULTADO,  DS_OBSERVACAO " +
+					 "FROM AM_PROCESSO p " +	
+				     "LEFT JOIN AM_CLIENTE cli ON cli.CD_PESSOA_CLIENTE = p.CD_PESSOA_CLIENTE " +
+				     "LEFT JOIN AM_PESSOA pes ON pes.CD_PESSOA = cli.CD_PESSOA_CLIENTE " +
+				     "WHERE NM_PESSOA LIKE ? ";
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Processo processo = null;
+		List<Processo> processos = new ArrayList<>();
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "%" + nomeCliente.toUpperCase() + "%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				processo = new Processo();
+				processo.setNumeroProcesso(rs.getInt("NR_PROCESSO"));
+				
+				Forum forum = ProcessoBO.consultarForum(rs.getInt("CD_PESSOA_FORUM"));
+				processo.setForum(forum);
+				
+				Cliente cliente = ProcessoBO.consultarCliente(rs.getInt("CD_PESSOA_CLIENTE"));
+				processo.setCliente(cliente);
+				
+				TipoCausa causa = ProcessoBO.consultarTipoCausa(rs.getInt("CD_CAUSA"));
+				processo.setCausa(causa);
+				
+				TipoCobranca cobranca = ProcessoBO.consultarTipoCobranca(rs.getInt("CD_COBRANCA"));
+				processo.setCobranca(cobranca);
+				
+				processo.setProcesso(rs.getString("DS_PROCESSO"));
+				processo.setDataAbertura(rs.getDate("DT_ABERTURA"));
+				processo.setDataFechamento(rs.getDate("DT_FECHAMENTO"));
+				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
+				processo.setResultado(rs.getInt("CD_RESULTADO"));
+				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				
+				processos.add(processo);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, ps, rs);
+		}
+		
+		return processos;
+	}
+
+	@Override
+	public List<Processo> consultarProcessos(int codigoCausa) {
+		
+		//Conexão
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		//Comunicação
+		String sql = "SELECT NR_PROCESSO,  CD_PESSOA_FORUM,  p.CD_PESSOA_CLIENTE,  CD_CAUSA,  CD_COBRANCA,  DS_PROCESSO,  DT_ABERTURA, " +
+					 " DT_FECHAMENTO,  DD_DIA_VENCIMENTO,  CD_RESULTADO,  DS_OBSERVACAO " +
+					 "FROM AM_PROCESSO p " +
+				     "LEFT JOIN AM_CLIENTE cli ON cli.CD_PESSOA_CLIENTE = p.CD_PESSOA_CLIENTE " +
+				     "LEFT JOIN AM_PESSOA pes ON pes.CD_PESSOA = cli.CD_PESSOA_CLIENTE " +
+				     "WHERE CD_CAUSA = ? ";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Processo processo = null;
+		List<Processo> processos = new ArrayList<>();
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, codigoCausa);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				processo = new Processo();
+				processo.setNumeroProcesso(rs.getInt("NR_PROCESSO"));
+				
+				Forum forum = ProcessoBO.consultarForum(rs.getInt("CD_PESSOA_FORUM"));
+				processo.setForum(forum);
+				
+				Cliente cliente = ProcessoBO.consultarCliente(rs.getInt("CD_PESSOA_CLIENTE"));
+				processo.setCliente(cliente);
+				
+				TipoCausa causa = ProcessoBO.consultarTipoCausa(rs.getInt("CD_CAUSA"));
+				processo.setCausa(causa);
+				
+				TipoCobranca cobranca = ProcessoBO.consultarTipoCobranca(rs.getInt("CD_COBRANCA"));
+				processo.setCobranca(cobranca);
+				
+				processo.setProcesso(rs.getString("DS_PROCESSO"));
+				processo.setDataAbertura(rs.getDate("DT_ABERTURA"));
+				processo.setDataFechamento(rs.getDate("DT_FECHAMENTO"));
+				processo.setDiaVencimento(rs.getInt("DD_DIA_VENCIMENTO"));
+				processo.setResultado(rs.getInt("CD_RESULTADO"));
+				processo.setObservacao(rs.getString("DS_OBSERVACAO"));
+				
+				processos.add(processo);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, ps, rs);
+		}
+		
+		return processos;
 	}
 
 }
