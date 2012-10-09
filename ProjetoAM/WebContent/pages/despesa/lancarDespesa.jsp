@@ -9,11 +9,7 @@
 <title>Lançamento de Despesas</title>
 </head>
 <body>
-	<s:form id="form_LancarDepesas"
-			cssClass="formee" 
-			action="cadastrarDespesa" 
-			method="post" 
-			theme="simple">
+	<s:form id="form_LancarDepesas" cssClass="formee" action="cadastrarDespesa" method="post" theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend>Lançar Despesas</legend>
@@ -25,15 +21,11 @@
 					<s:textfield id="textfield_Codigo" name="numeroProcesso" />
 				</div>
 				<div class="grid-3-12">
-				<s:submit id="submit_Pesquisar"
-						  value="Pesquisar"
-						  action="pesquisarProcessoDespesas"/>
+				<s:submit id="submit_Pesquisar" value="Pesquisar" action="pesquisarProcessoDespesas"/>
 				</div>
 			</div>
 			<div class="grid-12-12">
-				<table id="table_Audiencias"
-					   class="lawyer-table"
-					   style="margin-bottom: 5% !important">
+				<table id="table_Audiencias" class="lawyer-table" style="margin-bottom: 5% !important">
 					<caption>Processo</caption>
 					<thead>
 						<tr>
@@ -42,21 +34,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator id="iterator_Processo"
-									value="processos">
+						<s:iterator id="iterator_Processo" value="processos">
 							<tr>
-								<td class="par"><s:property value="numeroProcesso"/></td>
-								<td class="par"><s:property value="processo"/></td>
+								<td class="par">
+									<s:property value="numeroProcesso"/>
+								</td>
+								<td class="par">
+									<s:property value="processo"/>
+								</td>
 							</tr>			
 						</s:iterator>
 					</tbody>
 				</table>
-				<table id="table_Audiencias"
-					   class="lawyer-table">
+				<table id="table_Audiencias" class="lawyer-table">
 					<caption>Despesas Filtradas</caption>
 					<thead>
 						<tr>
-							<th width="1%" ></th>
+							<th width="1%" />
 							<th width="15%" class="par">Tipo da Despesa</th>
 							<th width="10%" class="par">Valor(R$)</th>
 							<th width="10%" class="par" >Data de Lançamento</th>
@@ -64,28 +58,31 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator id="iterator_Despesas"
-									value="despesas">
+						<s:iterator id="iterator_Despesas" value="despesas">
 							<tr>
 								<td>
-									<input id="radio_Registro"
-										   type="radio" 
-										   name="codigoLancamento" 
-										   value="${codigoLancamento}"
+									<input id="radio_Registro" type="radio" name="codigoLancamento" value="${codigoLancamento}"
 										   onclick="javascript: localizarDespesa(this);"/>
 								</td>
-								<td class="par"><s:property value="tipoDespesa.despesa"/></td>
-								<td class="par"><s:property value="valorDespesa"/></td>
-								<td class="par"><s:date name="dataDespesa" format="dd/MM/yyyy"/></td>
-								<td class="par"><s:property value="observacao"/></td>
+								<td class="par">
+									<s:property value="tipoDespesa.despesa"/>
+								</td>
+								<td class="par">
+									<s:property value="valorDespesa"/>
+								</td>
+								<td class="par">
+									<s:date name="dataDespesa" format="dd/MM/yyyy"/>
+								</td>
+								<td class="par">
+									<s:property value="observacao"/>
+								</td>
 							</tr>			
 						</s:iterator>
 					</tbody>
 				</table>
 				<div class="grid-8-12">
 					<div class="grid-2-12">
-						<s:label value="Tipo de Despesa:"
-								 for="select_TipoDespesa"/>
+						<s:label value="Tipo de Despesa:" for="select_TipoDespesa"/>
 					</div>
 					<div class="grid-4-12">
 						<s:select id="select_TipoDespesa"
@@ -105,30 +102,17 @@
 					</div>
 				</div>
 				<div class="grid-8-12">
-					<s:label value="Observação:"
-					 		 for="textarea_Observacao"/>
-					<s:textarea id="textarea_Observacao"
-								name="despesa.observacao"
-								cols="10"
-								rows="25"/>
+					<s:label value="Observação:" for="textarea_Observacao"/>
+					<s:textarea id="textarea_Observacao" name="despesa.observacao" cols="10" rows="25"/>
 				</div>
 			</div>
 			<div class="grid-12-12">
 				<hr></hr>
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Incluir"
-						  action="cadastrarDespesa"
-						  value="Incluir"/>
-				<s:submit id="submit_Alterar"
-						  action="alterarDespesa"
-						  value="Alterar"/>
-				<s:submit id="submit_Excluir"
-						  action="excluirDespesa"
-						  value="Excluir"/>
-				<s:submit id="submit_Voltar"
-						  action="forwardHome"
-						  value="Voltar"/>
+				<s:submit id="submit_Incluir" action="cadastrarDespesa" value="Incluir"/>
+				<s:submit id="submit_Alterar" action="alterarDespesa" value="Alterar"/>
+				<s:submit id="submit_Excluir" action="excluirDespesa" value="Excluir"/>
 			</div>
 		</fieldset>
 	</s:form>

@@ -11,11 +11,9 @@
 <title>Emissão de Relatório de Audiências</title>
 </head>
 <body>
-	<s:form id="form_EmitirRelatorio" 
-				action="emitirAudiencia" 
-				method="post" 
-				cssClass="formee"
-				theme="simple">
+	<s:form id="form_EmitirRelatorio" action="emitirAudiencia"	method="post" cssClass="formee"	theme="simple">
+		
+		<jsp:include page="../../util/includes/menu.jsp" />		
 		<fieldset>
 			<legend>Pesquisar Audiências por Processo</legend>
 			<div class="grid-6-12">
@@ -64,12 +62,7 @@
 				<hr></hr>
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Emitir"
-						  action="emitirAudiencia"
-						  value="Emitir Relatório"/>
-				<s:submit id="submit_Voltar"
-						  action="home"
-						  value="Voltar"/>
+				<s:submit id="submit_Emitir" action="emitirAudiencia" value="Emitir Relatório"/>
 			</div>
 		</fieldset>
 	</s:form>

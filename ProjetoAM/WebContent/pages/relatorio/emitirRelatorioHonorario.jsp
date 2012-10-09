@@ -12,6 +12,7 @@
 </head>
 <body>
 	<s:form id="form_EmitirRelatorio" action="emitirHonorario" method="post" cssClass="formee" theme="simple">
+		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend>Pesquisar Honorários por Processo</legend>
 			<div class="grid-4-12">
@@ -71,7 +72,6 @@
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Emitir" action="emitir" value="Emitir Relatório"/>
-				<s:submit id="submit_Voltar" action="home" value="Voltar"/>
 			</div>
 		</fieldset>
 	</s:form>

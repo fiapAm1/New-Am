@@ -9,11 +9,7 @@
 <title>Registro de Pagamentos</title>
 </head>
 <body>
-	<s:form id="form_RegistrarPagamento" 
-		  	cssClass="formee"
-		  	action="realizarPagamento" 
-		  	method="post" 
-		  	theme="simple">
+	<s:form id="form_RegistrarPagamento" cssClass="formee" action="realizarPagamento" method="post" theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
 			<legend>Registro de Pagamento por Processo</legend>
@@ -25,14 +21,11 @@
 					<s:textfield id="textfield_Codigo" name="titulo.processo.numeroProcesso" />
 				</div>
 				<div class="grid-3-12">
-				<s:submit id="submit_Pesquisar"
-						  value="Pesquisar"
-						  action="pesquisarTitulosProcesso"/>
+				<s:submit id="submit_Pesquisar" value="Pesquisar" action="pesquisarTitulosProcesso"/>
 				</div>
 			</div>
 			<div class="grid-12-12">
-				<table id="table_Processos"
-					   class="lawyer-table">
+				<table id="table_Processos" class="lawyer-table">
 					<caption>Processo Filtrado</caption>
 					<thead>
 						<tr>
@@ -44,22 +37,30 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator id="iterator_Processo"
-									value="processos">
+						<s:iterator id="iterator_Processo" value="processos">
 							<tr>
-								<td class="par"><s:property value="numeroProcesso"/></td>
-								<td class="par"><s:property value="processo"/></td>
-								<td class="par"><s:property value="cobranca.periodoCobranca"/></td>
-								<td class="par"><s:property value="cobranca.taxaJuros"/></td>
-								<td class="par"><s:property value="diaVencimento"/></td>
+								<td class="par">
+									<s:property value="numeroProcesso"/>
+								</td>
+								<td class="par">
+									<s:property value="processo"/>
+								</td>
+								<td class="par">
+									<s:property value="cobranca.periodoCobranca"/>
+								</td>
+								<td class="par">
+									<s:property value="cobranca.taxaJuros"/>
+								</td>
+								<td class="par">
+									<s:property value="diaVencimento"/>
+								</td>
 							</tr>			
 						</s:iterator>
 					</tbody>
 				</table>
 			</div>
 			<div class="grid-12-12">
-				<table id="table_Tituloss"
-					   class="lawyer-table">
+				<table id="table_Tituloss" class="lawyer-table">
 					<caption>Títulos a Pagar do Processo</caption>
 					<thead>
 						<tr>
@@ -72,25 +73,30 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator id="iterator_Titulos"
-									value="titulos">
+						<s:iterator id="iterator_Titulos" value="titulos">
 							<tr>
-								<td class="par"><s:property value="numeroTitulo"/></td>
-								<td class="par"><s:property value="agenciaCedente"/></td>
-								<td class="par"><s:date name="dataDocumento" format="dd/MM/yyyy"/></td>
-								<td class="par"><s:date name="dataVencimento" format="dd/MM/yyyy"/></td>
-								<td class="par"><s:property value="valorDocumento"/></td>
+								<td class="par">
+									<s:property value="numeroTitulo"/>
+								</td>
+								<td class="par">
+									<s:property value="agenciaCedente"/> 
+								</td>
+								<td class="par">
+									<s:date name="dataDocumento" format="dd/MM/yyyy"/>
+								</td>
+								<td class="par">
+									<s:date name="dataVencimento" format="dd/MM/yyyy"/>
+								</td>
+								<td class="par">
+									<s:property value="valorDocumento"/>
+								</td>
 								<td>
-									<s:url var="url_PagarTitulo" 
-			   							   value="realizarPagamento">
-										<s:param name="titulo.numeroTitulo"
-												 value="numeroTitulo"/>
+									<s:url var="url_PagarTitulo" value="realizarPagamento">
+										<s:param name="titulo.numeroTitulo" value="numeroTitulo"/>
 									</s:url>
 		
 									<s:a href="%{url_PagarTitulo}">
-										<img src="../css/img/formee/form-ic-success.png" 
-							 				 alt="Efeturar Pagamento do Título" 
-							 				 title="Efeturar Pagamento do Título"/>
+										<img src="../css/img/formee/form-ic-success.png" alt="Efeturar Pagamento do Título" title="Efeturar Pagamento do Título"/>
 									</s:a>
 								 </td>
 							</tr>			
@@ -99,8 +105,7 @@
 				</table>
 			</div>
 			<div class="grid-12-12">
-				<table id="table_TitulosPagos"
-					   class="lawyer-table">
+				<table id="table_TitulosPagos" class="lawyer-table">
 					<caption>Títulos Pagos do Processo</caption>
 					<thead>
 						<tr>
@@ -110,24 +115,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<s:iterator id="iterator_Titulos"
-									value="titulosPagos">
+						<s:iterator id="iterator_Titulos" value="titulosPagos">
 							<tr>
-								<td class="par"><s:property value="titulo.numeroTitulo"/></td>
-								<td class="par"><s:date name="dataPagamento" format="dd/MM/yyyy"/></td>
-								<td class="par"><s:property value="valorPago"/></td>
+								<td class="par">
+									<s:property value="titulo.numeroTitulo"/>
+								</td>
+								<td class="par">
+									<s:date name="dataPagamento" format="dd/MM/yyyy"/>
+								</td>
+								<td class="par">
+									<s:property value="valorPago"/>
+								</td>
 							</tr>			
 						</s:iterator>
 					</tbody>
 				</table>
-			</div>
-			<div class="grid-12-12">
-				<hr></hr>
-			</div>
-			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Voltar"
-						  value="Voltar"
-						  action="forwardHome"/>
 			</div>
 		</fieldset>
 	</s:form>
