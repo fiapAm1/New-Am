@@ -18,7 +18,7 @@
 			<div class="grid-6-12">
 				<fieldset>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Cliente:" for="select_Cliente"/>
+						<s:label value="Cliente:" for="select_Cliente"/>
 						<s:select id="select_Cliente"
 								  headerKey="0"
 								  headerValue="Selecione"
@@ -29,7 +29,7 @@
 								  value="%{processo.cliente.codigoPessoa}"/>
 					</div>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Tipo de Causa:" for="select_TipoCausa"/>
+						<s:label value="Tipo de Causa:" for="select_TipoCausa"/>
 						<s:select id="select_TipoCausa"
 								  headerKey="0"
 								  headerValue="Selecione"
@@ -40,7 +40,7 @@
 								  value="%{processo.causa.codigoCausa}"/>
 					</div>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Forum:" for="select_Forum"/>
+						<s:label value="Forum:" for="select_Forum"/>
 						<s:select id="select_Forum"
 								  headerKey="0"
 								  headerValue="Selecione"
@@ -62,7 +62,7 @@
 								<s:textfield id="textfield_DataFechamento" maxlength="10" disabled="true" value="%{processo.dataFechamentoStr}"/>
 							</div>
 							<div class="grid-6-12">
-								<s:label value="Selecione um Tipo de Cobrança:" for="select_TipoCobranca"/>
+								<s:label value="Tipo de Cobrança:" for="select_TipoCobranca"/>
 								<s:select id="select_TipoCobranca"
 								  		  headerKey="0"
 								  		  headerValue="Selecione"
@@ -73,7 +73,7 @@
 								  		  value="%{processo.cobranca.codigoCobranca}"/>
 							</div>
 							<div class="grid-6-12">
-								<s:label value="Selecione Dia de Vencimento:" for="select_DiaVencimento"/>
+								<s:label value="Dia de Vencimento:" for="select_DiaVencimento"/>
 								<s:select id="select_DiaVencimento"
 								  		  headerKey="0"
 								  		  headerValue="Selecione"
@@ -87,7 +87,7 @@
 						<fieldset>
 							<legend class="grid-12-12">Resultado da causa</legend>
 							<div class="grid-12-12">
-								<s:radio id="radio_ResultadoCausa" list="#{'1':'Ganha','0':'Perdida'}" value="%{processo.resultadoCausa}" disabled="true"/>
+								<s:radio id="radio_ResultadoCausa" list="#{'2':'Ganha','1':'Perdida'}" value="%{processo.resultadoCausa}" disabled="true"/>
 							</div>	
 						</fieldset>
 					</div>
