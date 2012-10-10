@@ -12,7 +12,7 @@
 	<s:form id="form_CadastrarProcesso"
 			cssClass="formee"
 			action="cadastrarProcesso"
-			method="post"
+			method="get"
 			theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
@@ -131,7 +131,7 @@
 							   onclick="javascript: adicionarAdvogado();"
 							   value="Vincular Advogado"
 							   align="left"
-							   type="button"/>
+							   type="button"></input>
 					</div>	
 					<div class="grid-12-12"
 						 style="overflow-y: scroll; height: 245px !important">

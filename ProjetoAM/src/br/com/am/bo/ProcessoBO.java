@@ -79,6 +79,17 @@ public class ProcessoBO extends GenericBO{
 	}
 	
 	/**
+	 * Método que realiza o alteração de um processo.
+	 * @author JDGR²
+	 * @since 26/09/2012
+	 * @param processo
+	 */
+	public static void alterarProcesso(Processo processo) {
+		ProcessoDAOInterface processoDAO = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getProcessoDAO();	
+		processoDAO.alterarProcesso(processo);
+	}
+	
+	/**
 	 * Método que retorna advogados vinculados ao um processo.
 	 * @author JDGR²
 	 * @since 06/10/2012
@@ -91,7 +102,7 @@ public class ProcessoBO extends GenericBO{
 	}
 	
 	/**
-	 * Método que cadastra advogados vinculados ao um processo.
+	 * Método que cadastra advogados vinculados a um processo.
 	 * @author JDGR²
 	 * @since 06/10/2012
 	 * @param numeroProcesso
@@ -100,5 +111,17 @@ public class ProcessoBO extends GenericBO{
 	public static void cadastrarAdvogadosVinculados(AdvogadoProcesso advogadoProcesso, Integer numeroProcesso){
 		AdvogadoDAOInterface dao = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getAdvogadoDAO();
 		dao.cadastrarAdvogadosVinculados(advogadoProcesso, numeroProcesso);
+	}
+	
+	/**
+	 * Método que remove advogados vinculados a um processo.
+	 * @author JDGR²
+	 * @since 08/10/2012
+	 * @param numeroProcesso
+	 * @return List<Advogado>
+	 */
+	public static void removerAdvogadoVinculado(AdvogadoProcesso advogadoProcesso, Integer numeroProcesso){
+		AdvogadoDAOInterface dao = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getAdvogadoDAO();
+		dao.removerAdvogadoVinculado(advogadoProcesso, numeroProcesso);
 	}
 }

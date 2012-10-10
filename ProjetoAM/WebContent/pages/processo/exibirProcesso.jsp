@@ -178,7 +178,7 @@
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Voltar"
-						  action="forwardHome"
+						  action="forwardListarProcesso"
 						  value="Voltar"/>
 			</div> 			
 		</fieldset>

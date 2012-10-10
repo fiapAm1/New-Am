@@ -12,6 +12,7 @@ import br.com.am.dao.connections.ConnectionFactory;
 import br.com.am.dao.interfaces.AdvogadoDAOInterface;
 import br.com.am.model.Advogado;
 import br.com.am.model.AdvogadoProcesso;
+import br.com.am.util.UtilDate;
 
 
 public class AdvogadoDAO implements AdvogadoDAOInterface{
@@ -104,19 +105,19 @@ public class AdvogadoDAO implements AdvogadoDAOInterface{
 		
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT ");
-		query.append("		ADVOGADO.CD_PESSOA_ADV, ");
+		query.append("		ADVOGADO_PROCESSO.CD_PESSOA_ADV, ");
 		query.append("		ADVOGADO_PROCESSO.NR_PROCESSO, ");	
 		query.append("		ADVOGADO_PROCESSO.DT_INICIO_PARTICIPACAO, ");
 		query.append("		PESSOA.NM_PESSOA ");
 		query.append("FROM ");
-		query.append("		AM_ADVOGADO ADVOGADO ");
-		query.append("LEFT JOIN ");
 		query.append("		AM_ADVOGADO_PROCESSO ADVOGADO_PROCESSO ");
+		query.append("LEFT JOIN ");
+		query.append("		AM_ADVOGADO ADVOGADO ");
 		query.append("ON ADVOGADO.CD_PESSOA_ADV = ADVOGADO_PROCESSO.CD_PESSOA_ADV ");
-		query.append("AND ADVOGADO_PROCESSO.NR_PROCESSO = ? ");
 		query.append("LEFT JOIN ");
 		query.append("		AM_PESSOA PESSOA ");
-		query.append("ON ADVOGADO.CD_PESSOA_ADV = PESSOA.CD_PESSOA");		
+		query.append("ON ADVOGADO.CD_PESSOA_ADV = PESSOA.CD_PESSOA ");
+		query.append("WHERE ADVOGADO_PROCESSO.NR_PROCESSO = ? ");
 		
 		List<AdvogadoProcesso> list = null;
 		PreparedStatement psmt = null;
@@ -130,7 +131,7 @@ public class AdvogadoDAO implements AdvogadoDAOInterface{
 				AdvogadoProcesso ap = new AdvogadoProcesso();
 				ap.getAdvogado().setCodigoPessoa(rs.getInt(1));
 				ap.getProcesso().setNumeroProcesso(rs.getInt(2));
-				ap.setDataInicio(rs.getDate(3));
+				ap.setDataInicioStr(UtilDate.convertDateToString(rs.getDate(3)));
 				ap.getAdvogado().setNomePessoa(rs.getString(4));
 				list.add(ap);
 			}
@@ -159,7 +160,36 @@ public class AdvogadoDAO implements AdvogadoDAOInterface{
 			psmt = conn.prepareStatement(query.toString());
 			psmt.setInt(1, codigoProcesso.intValue());
 			psmt.setInt(2, advogadoProcesso.getAdvogado().getCodigoPessoa());
-			psmt.setDate(3, new Date(advogadoProcesso.getDataInicio().getTime()));
+			psmt.setDate(3, new Date(UtilDate.convertStringToDate(advogadoProcesso.getDataInicioStr()).getTime()));
+			
+			psmt.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, psmt);
+		}
+	}
+	
+	@Override
+	public void removerAdvogadoVinculado(AdvogadoProcesso advogadoProcesso, Integer codigoProcesso) {
+		
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		StringBuffer query = new StringBuffer();
+		query.append("DELETE FROM ");
+		query.append("	AM_ADVOGADO_PROCESSO ");
+		query.append("WHERE ");
+		query.append("	NR_PROCESSO = ? ");
+		query.append("AND ");
+		query.append("	CD_PESSOA_ADV = ?");		
+		
+		PreparedStatement psmt = null;
+		
+		try {
+			psmt = conn.prepareStatement(query.toString());
+			psmt.setInt(1, codigoProcesso.intValue());
+			psmt.setInt(2, advogadoProcesso.getAdvogado().getCodigoPessoa());
 			
 			psmt.execute();
 			

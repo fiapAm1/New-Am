@@ -51,5 +51,11 @@ public interface ProcessoDAOInterface {
 	 * @param processo
 	 */
 	public Integer cadastrarProcesso(Processo processo);
+	
+	/**
+	 * Altera um processo na tabela AM_PROCESSO
+	 * @param processo
+	 */
+	public void alterarProcesso(Processo processo);
 
 }
