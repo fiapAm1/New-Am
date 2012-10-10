@@ -27,7 +27,7 @@
 				</s:a>				
 			</li>
 			<li class="current">
-				<span>Processos<span>
+				<span>Processos</span>
 				<ul>
 					<li>
 						<s:url var="url_CadastroProcesso" 
@@ -52,7 +52,7 @@
 				</ul>
 			</li>
 			<li class="current">
-				<span>Relatórios<span>
+				<span>Relatórios</span>
 				<ul>
 					<li>
 						<s:url var="url_RelatorioHonorario" 
@@ -77,7 +77,7 @@
 				</ul>
 			</li>
 			<li class="current">
-				<span>Negócios<span>
+				<span>Negócios</span>
 				<ul>
 					<li>
 						<s:url var="url_RegistrarPagamento" 
