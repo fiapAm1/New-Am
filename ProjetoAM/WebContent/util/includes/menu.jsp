@@ -11,97 +11,98 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 </head>
 <body>
-	<fieldset class="fieldMenu">
-		<div class="divMenu">
-			<ul class="sf-menu">
-				<li>
-					<s:url var="url_Home" 
-				   		   value="forwardHome">
-						<s:param name="paginaDirecionar">home</s:param>
-					</s:url>
-			
-					<s:a href="%{url_Home}">
-						HOME
-					</s:a>				
-				</li>
-				<li class="current">
-					<s:a>Processos</s:a>
-					<ul>
-						<li>
-							<s:url var="url_CadastroProcesso" 
-				   				   value="forwardCadastrarProcesso">
-								<s:param name="paginaDirecionar">cadastrar</s:param>
-							</s:url>
-			
-							<s:a href="%{url_CadastroProcesso}">
-								Cadastrar Processo
-							</s:a>
-						</li>
-						<li>
-							<s:url var="url_ListarProcesso" 
-				   				   value="forwardListarProcesso">
-								<s:param name="paginaDirecionar">listar</s:param>
-							</s:url>
-			
-							<s:a href="%{url_ListarProcesso}">
-								Listar Processos
-							</s:a>
-						</li>
-					</ul>
-				</li>
-				<li class="current">
-					<s:a>Relatórios</s:a>
-					<ul>
-						<li>
-							<s:url var="url_RelatorioHonorario" 
-								   value="forwardRelatorio">
-								<s:param name="paginaDirecionar">emitirHonorario</s:param>
-							</s:url>
-							
-							<s:a href="%{url_RelatorioHonorario}">
-								Honorário
-							</s:a>
-						</li>
-						<li>
-							<s:url var="url_RelatorioAudiencia" 
-								   value="forwardRelatorio">
-								<s:param name="paginaDirecionar">emitirAudiencia</s:param>
-							</s:url>
-							
-							<s:a href="%{url_RelatorioAudiencia}">
-								Audiência
-							</s:a>
-						</li>
-					</ul>
-				</li>
-				<li class="current">
-					<s:a>Negócios</s:a>
-					<ul>
-						<li>
-							<s:url var="url_RegistrarPagamento" 
-								   value="forwardRegistrarPagamento">
-								<s:param name="paginaDirecionar">registrarPagamento</s:param>
-							</s:url>
-							
-							<s:a href="%{url_RegistrarPagamento}">
-								Registrar Pagamento por Processo
-							</s:a>
-						</li>
-						<li>
-							<s:url var="url_LancarDespesas" 
-								   value="forwardLancarDespesa">
-								<s:param name="paginaDirecionar">lancar</s:param>
-							</s:url>
-							
-							<s:a href="%{url_LancarDespesas}">
-								Lançar Despesas por Processo
-							</s:a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</fieldset>
+	<div class="divMenu">
+		<a class="logo" href="#" title="Home">
+			<img src="../css/img/logo-azevedo.png" alt="Advocacia Azevedo" />
+		</a>
+		<ul class="sf-menu">
+			<li>
+				<s:url var="url_Home" 
+			   		   value="forwardHome">
+					<s:param name="paginaDirecionar">home</s:param>
+				</s:url>
+		
+				<s:a href="%{url_Home}">
+					Home
+				</s:a>				
+			</li>
+			<li class="current">
+				<s:a>Processos</s:a>
+				<ul>
+					<li>
+						<s:url var="url_CadastroProcesso" 
+			   				   value="forwardCadastrarProcesso">
+							<s:param name="paginaDirecionar">cadastrar</s:param>
+						</s:url>
+		
+						<s:a href="%{url_CadastroProcesso}">
+							Cadastrar Processo
+						</s:a>
+					</li>
+					<li>
+						<s:url var="url_ListarProcesso" 
+			   				   value="forwardListarProcesso">
+							<s:param name="paginaDirecionar">listar</s:param>
+						</s:url>
+		
+						<s:a href="%{url_ListarProcesso}">
+							Listar Processos
+						</s:a>
+					</li>
+				</ul>
+			</li>
+			<li class="current">
+				<s:a>Relatórios</s:a>
+				<ul>
+					<li>
+						<s:url var="url_RelatorioHonorario" 
+							   value="forwardRelatorio">
+							<s:param name="paginaDirecionar">emitirHonorario</s:param>
+						</s:url>
+						
+						<s:a href="%{url_RelatorioHonorario}">
+							Honorário
+						</s:a>
+					</li>
+					<li>
+						<s:url var="url_RelatorioAudiencia" 
+							   value="forwardRelatorio">
+							<s:param name="paginaDirecionar">emitirAudiencia</s:param>
+						</s:url>
+						
+						<s:a href="%{url_RelatorioAudiencia}">
+							Audiência
+						</s:a>
+					</li>
+				</ul>
+			</li>
+			<li class="current">
+				<s:a>Negócios</s:a>
+				<ul>
+					<li>
+						<s:url var="url_RegistrarPagamento" 
+							   value="forwardRegistrarPagamento">
+							<s:param name="paginaDirecionar">registrarPagamento</s:param>
+						</s:url>
+						
+						<s:a href="%{url_RegistrarPagamento}">
+							Registrar Pagamento por Processo
+						</s:a>
+					</li>
+					<li>
+						<s:url var="url_LancarDespesas" 
+							   value="forwardLancarDespesa">
+							<s:param name="paginaDirecionar">lancar</s:param>
+						</s:url>
+						
+						<s:a href="%{url_LancarDespesas}">
+							Lançar Despesas por Processo
+						</s:a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 	<div id="div_Mensagem"
 		 class="formee-msg-info"
 		 style="display: none">

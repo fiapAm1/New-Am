@@ -14,33 +14,27 @@
 	<s:form id="form_ListarProcessos" cssClass="formee"	action="listarProcesso"	method="post" theme="simple">
 	
 		<jsp:include page="../../util/includes/menu.jsp" />
-		<fieldset>
-			<legend>Pesquisa de Processo</legend>
-			<div class="grid-12-12">
-				<fieldset>
-					<div class="grid-4-12">
-						<s:label value="Número do processo:" for="textfield_num_processo"/>
-						<s:textfield id="textfield_num_processo" name="numeroProcesso"/>
-					</div>
-				</fieldset>
-				<fieldset>	
-					<div class="grid-4-12">
-						<s:label value="Selecione um Tipo de Causa:"
-								 for="select_TipoCausa"/>
-						<s:select id="select_TipoCausa"
-								  headerKey="0"
-								  headerValue="Selecione"
-								  list="tiposCausas"
-								  listKey="codigoCausa"
-								  listValue="causa"
-								  name="codigoCausa"/>		  
-					</div>
-					<div class="grid-4-12">
-						<s:label value="Cliente:"
-						 		 for="textfield_cliente"/>
-						 <s:textfield id="textfield_cliente" name="nomeCliente"/>
-					</div>
-				</fieldset>
+		<div class="content">
+			<h2>Pesquisa de Processo</h2>
+			<div class="grid-6-12">
+				<s:label value="Número do processo:" for="textfield_num_processo"/>
+				<s:textfield id="textfield_num_processo" name="numeroProcesso"/>
+			</div>
+			<div class="grid-6-12 clear">
+				<s:label value="Selecione um Tipo de Causa:"
+						 for="select_TipoCausa"/>
+				<s:select id="select_TipoCausa"
+						  headerKey="0"
+						  headerValue="Selecione"
+						  list="tiposCausas"
+						  listKey="codigoCausa"
+						  listValue="causa"
+						  name="codigoCausa"/>		  
+			</div>
+			<div class="grid-6-12">
+				<s:label value="Cliente:"
+				 		 for="textfield_cliente"/>
+				 <s:textfield id="textfield_cliente" name="nomeCliente"/>
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Pesquisar"
@@ -48,12 +42,8 @@
 						  action="listarProcesso"/>
 			</div>
 			<div class="grid-12-12">
-				<hr />
-			</div>		
-			<div class="grid-12-12">
 				<table id="table_Processos" 
-					   class="lawyer-table"
-					   style="margin-left: 10px !important;">
+					   class="lawyer-table">
 					<caption><strong>Processos Filtrados</strong></caption>
 					<thead>				
 						<tr>
@@ -77,8 +67,7 @@
 								<td class="par"><s:property value="dataAberturaStr"/></td>
 								<td class="par"><s:property value="dataFechamentoStr"/></td>
 								<td class="par"><s:property value="resultadoStr"/></td>
-								<td align="center" 
-									class="impar">
+								<td class="impar">
 									<s:url id="url_ExibirProcesso"
 										   action="exibirProcesso">
 										<s:param name="processo.numeroProcesso" 
@@ -90,8 +79,7 @@
 							 				 title="Exibir este processo"/>
 									</s:a>
 								</td>
-								<td align="center" 
-									class="impar">
+								<td	class="impar">
 									<s:url id="url_AtualizarProcesso"
 										   action="forwardCadastrarProcesso">
 										<s:param name="processo.numeroProcesso" 
@@ -108,8 +96,8 @@
 						</s:iterator>
 					</tbody>	
 				</table>
-			</div>	
-		</fieldset>		
+			</div>
+		</div>	
 	</s:form>
 </body>
 </html>

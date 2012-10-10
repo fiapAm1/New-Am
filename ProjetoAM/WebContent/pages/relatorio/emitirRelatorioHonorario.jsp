@@ -13,32 +13,23 @@
 <body>
 	<s:form id="form_EmitirRelatorio" action="emitirHonorario" method="post" cssClass="formee" theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
-		<fieldset>
-			<legend>Pesquisar Honorários por Processo</legend>
-			<div class="grid-4-12">
-				<div class="grid-5-12">
+		<div class="content">
+			<h2>Pesquisar Honorários por Processo</h2>
+				<div class="grid-6-12">
 					<s:label value="Código do Processo" for="textfield_Codigo" />
-				</div>
-				<div class="grid-7-12">
 					<s:textfield id="textfield_Codigo" name="codigoProcesso" />
 				</div>
-			</div>
-			<div class="grid-4-12">
-				<div class="grid-5-12">
+				<div class="grid-6-12">
 					<s:label value="Selecione uma Tarefa:" for="select_Tarefa"/>
-				</div>
-				<div class="grid-7-12">
 					<s:select id="select_Tarefa"
+								cssClass="formee-medium"
 							  headerKey="0"
 							  headerValue="Selecione"
 							  list="tarefas"
 							  listKey="codigo"
 							  listValue="tarefa"
 							  name="codigoTarefa"/>
-				</div>
-			</div>
-			<div class="grid-4-12" style="text-align: left;">
-				<s:submit id="submit_Pesquisar" value="Pesquisar" action="pesquisarHonorario"/>
+				<s:submit cssClass="formee-button left" id="submit_Pesquisar" value="Pesquisar" action="pesquisarHonorario"/>
 			</div>
 			<div class="grid-12-12">
 				<table id="table_Processos" class="lawyer-table">
@@ -67,13 +58,10 @@
 			<div class="grid-3-12" >
 				<s:label id="label_somaHonorario" name="somaHonorario" />
 			</div>
-			<div class="grid-12-12">
-				<hr></hr>
-			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Emitir" action="emitir" value="Emitir Relatório"/>
 			</div>
-		</fieldset>
+		</div>
 	</s:form>
 </body>
 </html>
