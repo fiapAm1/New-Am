@@ -13,6 +13,7 @@
 <body>
 	<s:form cssClass="formee" action="listarProcesso" method="post" theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
+<<<<<<< HEAD
 		<div class="content">
 			<h2>Processo Selecionado</h2>
 			<div class="box box-processo">
@@ -86,6 +87,7 @@
 							  		  value="%{processo.diaVencimento}"/>
 						</div>
 					</div>
+<<<<<<< HEAD
 				</div>	
 				<div class="box box-causa">
 					<div class="grid-12-12">
@@ -94,6 +96,7 @@
 							<s:radio id="radio_ResultadoCausa" list="#{'1':'Ganha','0':'Perdida'}" value="%{processo.resultadoCausa}" disabled="true"/>
 						</div>	
 					</div>
+<<<<<<< HEAD
 				</div>
 				<div class="grid-12-12">
 					<s:label value="Observação:" for="textarea_Observacao"/>

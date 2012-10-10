@@ -118,7 +118,7 @@
 							   onclick="javascript: adicionarAdvogado();"
 							   value="Vincular Advogado"
 							   align="left"
-							   type="button"/>
+							   type="button"></input>
 					</div>	
 					<div class="grid-12-12">
 						<table id="table_AdvogadosVinculados" class="lawyer-table">

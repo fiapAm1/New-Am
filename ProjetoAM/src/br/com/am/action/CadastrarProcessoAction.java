@@ -57,6 +57,9 @@ public class CadastrarProcessoAction extends GenericAction{
 		if(PaginaEnum.ALTERAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
 			carregarListas();
 			processo = carregarProcesso();
+			advogadosVinculados = carregarAdvogadosVinculados();
+			session.put("advogadosVinculados", advogadosVinculados);
+			session.put("vinculados", advogadosVinculados);
 			return PaginaEnum.ALTERAR_PROCESSO.getDescricao();
 		} else if(PaginaEnum.CADASTRAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
 			carregarListas();
@@ -109,14 +112,43 @@ public class CadastrarProcessoAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="alterarProcesso", results={
-			@Result(location="/pages/processo/listarProcessos.jsp", name="listar"),
-			@Result(location="/erro.jsp", name="erro")
+			@Result(location="/pages/processo/alterarProcessos.jsp", name="alterar"),
+			@Result(location="/pages/processo/listarProcessos.jsp", name="listar")
 	})
 	public String alterarProcesso(){
-		//TODO implementar
-		System.out.println("Alterar");
-		carregarListas();
+		try {
+			advogadosVinculados = (List<AdvogadoProcesso>)session.get("advogadosVinculados");
+			List<AdvogadoProcesso> vinculados = (List<AdvogadoProcesso>)session.get("vinculados");
+			Boolean encontrado = false;
+			if(validarProcesso()){
+				ProcessoBO.alterarProcesso(processo);
+				
+				for(AdvogadoProcesso apOld : vinculados){
+					for(AdvogadoProcesso apNew : advogadosVinculados){
+						if(apOld.getAdvogado().getCodigoPessoa() != apNew.getAdvogado().getCodigoPessoa()){
+							ProcessoBO.cadastrarAdvogadosVinculados(apNew, processo.getNumeroProcesso());
+							encontrado = true;
+						}
+					}
+					if(!encontrado){
+						ProcessoBO.removerAdvogadoVinculado(apOld, processo.getNumeroProcesso());
+						encontrado = false;
+					}
+				}
+				
+				setMensagem("Processo alterado com sucesso!");
+				setResultado("sucesso");
+			} else {
+				carregarListas();
+				return PaginaEnum.ALTERAR_PROCESSO.getDescricao();
+			}
+		} catch (Exception e) {
+			setMensagem(e.getMessage());
+			setResultado("erro");
+			e.printStackTrace();
+		}
 		processos = carregarProcessos();
+		session.put("advogadosVinculados", new ArrayList<AdvogadoProcesso>());
 		return PaginaEnum.LISTAR_PROCESSO.getDescricao();
 	}
 	
@@ -144,7 +176,7 @@ public class CadastrarProcessoAction extends GenericAction{
 	 */
 	@Action(value="removerAdvogado", results={
 			@Result(name="cadastrar", type="json", params={
-					"response", "advogados, clientes,"+ 
+					"excludeProperties", "advogados, clientes,"+ 
 					"foruns, dias, processos, tiposCausas, "+ 
 					"tiposCobrancas, advogadoProcesso, processo"
 			})
@@ -186,7 +218,7 @@ public class CadastrarProcessoAction extends GenericAction{
 	 */
 	@Action(value="adicionarAdvogado", results={
 			@Result(name="cadastrar", type="json", params={
-					"response", "advogados, clientes,"+ 
+					"excludeProperties", "advogados, clientes,"+ 
 					"foruns, dias, processos, tiposCausas, "+ 
 					"tiposCobrancas, advogadoProcesso, processo"
 			})
@@ -233,7 +265,7 @@ public class CadastrarProcessoAction extends GenericAction{
 					return false;
 				}
 			}
-		} else if(advogadoProcesso.getDataInicio() == null){
+		} else if(advogadoProcesso.getDataInicioStr() == null || "".equals(advogadoProcesso.getDataInicioStr())){
 			setMensagem("Informe a data de início!");
 			setResultado("erro");
 			return false;

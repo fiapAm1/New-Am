@@ -11,7 +11,8 @@
 <title>Alterar Processos</title>
 </head>
 <body>
-	<s:form cssClass="formee"
+	<s:form id="form_AlterarProcesso"
+			cssClass="formee"
 			action="alterarProcesso"
 			method="post"
 			theme="simple">
@@ -67,18 +68,17 @@
 										 for="textfield_DataAbertura"/>
 								<s:textfield id="textfield_DataAbertura"											 
 											 maxlength="10"
-											 name="processo.dataAbertura"
+											 name="processo.dataAberturaStr"
 											 disabled="true"
-											 value="%{processo.dataAbertura}"/>
+											 value="%{processo.dataAberturaStr}"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Data de Fechamento:"
 										 for="textfield_DataFechamento"/>
 								<s:textfield id="textfield_DataFechamento"
 											 maxlength="10"
-											 name="processo.dataFechamento"
-											 disabled="true"
-											 value="%{processo.dataFechamento}"/>
+											 name="processo.dataFechamentoStr"
+											 value="%{processo.dataFechamentoStr}"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Selecione um Tipo de Cobrança:"
@@ -112,8 +112,7 @@
 							<div class="grid-12-12">
 								<s:radio id="radio_ResultadoCausa"
 										 name="processo.resultadoCausa"
-										 list="#{'1':'Ganha','0':'Perda'}"
-										 disabled="true"
+										 list="#{'2':'Ganha','1':'Perda'}"
 										 value="%{processo.resultadoCausa}"/>
 							</div>	
 						</fieldset>
@@ -138,14 +137,16 @@
 								 for="textfield_DataInclusao"/>
 						<s:textfield id="textfield_DataInclusao"
 									 maxlength="10"
-									 name="advogadoProcesso.dataInicio"/>
+									 name="advogadoProcesso.dataInicioStr"/>
 					</div>
 					<div class="grid-6-12"
 						 style="top: 4% !important">
-						<s:submit id="submit_Adicionar"
-								  action="adicionarAdvogado"
-								  value="Adicionar advogado ao processo"
-								  align="left"/>
+						<input id="button_Adicionar"
+							   class="formee-button"
+							   onclick="javascript: adicionarAdvogado();"
+							   value="Vincular Advogado"
+							   align="left"
+							   type="button"/>
 					</div>	
 					<div class="grid-12-12"
 						 style="overflow-y: scroll; height: 245px !important">
@@ -184,7 +185,7 @@
 										<td align="left" 
 											width="30%"
 											class="par">
-											<s:property value="dataInicio"/>
+											<s:property value="dataInicioStr"/>
 										</td>
 										<td align="center" 
 											width="20%"
@@ -195,7 +196,7 @@
 														 value="advogado.codigoPessoa"/>
 											</s:url>
 											<s:a href="%{url_RemoverAdvogado}">
-												<img src="../img/formee/form-ic-error.png" 
+												<img src="../css/img/formee/form-ic-error.png" 
 									 				 alt="Remover Advogado" 
 									 				 title="Remover Advogado"/>
 											</s:a>
@@ -232,7 +233,7 @@
 				<s:submit id="submit_Confirmar"
 						  value="Confirmar"/>
 				<s:submit id="submit_Voltar"
-						  action="listarProcesso"
+						  action="forwardListarProcesso"
 						  value="Voltar"/>
 			</div> 			
 		</fieldset>

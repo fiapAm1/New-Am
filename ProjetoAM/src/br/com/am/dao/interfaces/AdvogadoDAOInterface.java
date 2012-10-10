@@ -44,5 +44,13 @@ public interface AdvogadoDAOInterface {
 	 * @param numeroProcesso
 	 */
 	public void cadastrarAdvogadosVinculados(AdvogadoProcesso advogadoProcesso, Integer numeroProcesso);
+	
+	/**
+	 * Remove advogado vinculado de um processo.
+	 * @author JDGR²
+	 * @param advogadoProcesso
+	 * @param numeroProcesso
+	 */
+	public void removerAdvogadoVinculado(AdvogadoProcesso advogadoProcesso, Integer numeroProcesso);
 
 }

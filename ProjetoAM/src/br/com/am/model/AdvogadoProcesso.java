@@ -1,9 +1,6 @@
 package br.com.am.model;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import br.com.am.util.UtilDate;
 
 /**
  * 
@@ -16,7 +13,7 @@ public class AdvogadoProcesso implements Serializable{
 	
 	private Advogado advogado = new Advogado();
 	private Processo processo = new Processo();
-	private Date dataInicio;
+	private String dataInicioStr;
 	
 	public Advogado getAdvogado() {
 		return advogado;
@@ -30,19 +27,10 @@ public class AdvogadoProcesso implements Serializable{
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
 	}
-	public Date getDataInicio() {
-		return dataInicio;
+	public String getDataInicioStr() {
+		return dataInicioStr;
 	}
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-	public void setDataInicioStr(String dataInicio){
-		setDataInicio(UtilDate.convertStringToDate(dataInicio));
-	}
-	public String getDataInicioStr(){
-		if(getDataInicio() != null){
-			return UtilDate.convertDateToString(getDataInicio()).toString();
-		}
-		return "";
+	public void setDataInicioStr(String dataInicioStr) {
+		this.dataInicioStr = dataInicioStr;
 	}
 }

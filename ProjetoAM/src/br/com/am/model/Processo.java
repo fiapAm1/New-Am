@@ -180,13 +180,13 @@ public class Processo implements Serializable{
 	}
 	
 	public String getResultadoStr(){
-		switch (resultado) {
-		case 1:
-			return "Perda";
-		case 2:
-			return "Ganha";
-		default:
+		if(resultado != null){
+			if(resultado.intValue() == 1){
+				return "Perda";
+			} else if(resultado.intValue() == 2){
+				return "Ganha";
+			}
+		} 
 			return "Sem Resultado";
-		}
 	}
 }

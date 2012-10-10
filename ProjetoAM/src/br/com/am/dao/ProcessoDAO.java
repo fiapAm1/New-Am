@@ -406,4 +406,45 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 		
 		return processos;
 	}
+
+	@Override
+	public void alterarProcesso(Processo processo) {
+		
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		StringBuffer query = new StringBuffer();
+		query.append("UPDATE AM_PROCESSO ");
+		query.append("SET DS_PROCESSO = ?,  DT_FECHAMENTO = ?, "); 
+        query.append(" CD_RESULTADO = ?, DS_OBSERVACAO = ? ");
+        query.append(" WHERE  NR_PROCESSO = ?");
+        PreparedStatement psmt = null;
+		
+		try{
+			psmt = conn.prepareCall(query.toString());
+			
+			psmt.setString(1, processo.getProcesso());
+			if(!"".equals(processo.getDataFechamentoStr()) && processo.getDataFechamentoStr() != null){
+				psmt.setDate(2, new Date(UtilDate.convertStringToDate(processo.getDataFechamentoStr()).getTime()));
+			} else {
+				psmt.setNull(2, Types.DATE);
+			}
+			if(processo.getResultado() != null){
+				psmt.setInt(3, processo.getResultado().intValue());
+			} else {
+				psmt.setNull(3, Types.INTEGER);
+			}
+			if(processo.getObservacao() != null){
+				psmt.setString(4, processo.getObservacao().toString());
+			} else {
+				psmt.setNull(4, Types.VARCHAR);
+			}
+			psmt.setInt(5, processo.getNumeroProcesso());
+			
+			psmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, psmt);
+		}
+	}
 }
