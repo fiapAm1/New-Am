@@ -154,11 +154,11 @@
 							</tbody>
 						</table>
 					</div>
-			</div>	
+				</div>	
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Confirmar" value="Confirmar"/>
 			</div>
-			</div> 			
+		</div> 			
 	</s:form>
 </body>
 </html>
