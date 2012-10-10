@@ -172,15 +172,7 @@
 				<s:textarea id="textarea_Observacao"
 							disabled="true"
 							value="%{processo.observacao}"/>
-			</div>		
-			<div class="grid-12-12">
-				<hr></hr>
-			</div>
-			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Voltar"
-						  action="forwardListarProcesso"
-						  value="Voltar"/>
-			</div> 			
+			</div>			
 		</fieldset>
 	</s:form>
 </body>

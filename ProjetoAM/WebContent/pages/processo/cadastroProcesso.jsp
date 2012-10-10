@@ -12,7 +12,7 @@
 	<s:form id="form_CadastrarProcesso"
 			cssClass="formee"
 			action="cadastrarProcesso"
-			method="get"
+			method="post"
 			theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<fieldset>
@@ -214,9 +214,6 @@
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Confirmar"
 						  value="Confirmar"/>
-				<s:submit id="submit_Voltar"
-						  action="forwardHome"
-						  value="Voltar"/>
 			</div> 			
 		</fieldset>
 	</s:form>

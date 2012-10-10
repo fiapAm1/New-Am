@@ -27,7 +27,9 @@ function ativarMensagem(){
 function visibilidadeMensagem(){
 	if(jQuery("#div_Mensagem").is(":visible")){
 		jQuery("#div_Mensagem").hide("slow");
-	} 
+	} // else {
+		//jQuery("#div_Mensagem").show("slow");
+	//}
 }
 
 function atribuirMensagemDinamica(mensagem, resultado){
