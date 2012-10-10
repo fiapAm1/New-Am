@@ -19,7 +19,7 @@ function ativarMensagem(){
 			jQuery("#div_Mensagem").removeClass(jQuery("#div_Mensagem").attr("class"));
 			jQuery("#div_Mensagem").addClass("formee-msg-info");
 			jQuery("#div_Mensagem").show("slow");
-		}	
+		}
 		desativar = setTimeout('visibilidadeMensagem()', 10000);
 	}
 }
@@ -27,7 +27,7 @@ function ativarMensagem(){
 function visibilidadeMensagem(){
 	if(jQuery("#div_Mensagem").is(":visible")){
 		jQuery("#div_Mensagem").hide("slow");
-	} // else {
+	}// else {
 		//jQuery("#div_Mensagem").show("slow");
 	//}
 }
