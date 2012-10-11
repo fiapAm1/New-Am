@@ -14,8 +14,8 @@
 		<jsp:include page="../../util/includes/menu.jsp" />
 			<div class="content">
 			
-			<h2>Cadastro de Processos</h2>
-			<div class="box box-processo">
+				<h2>Cadastro de Processos</h2>
+				<div class="box box-processo">
 					<h3>Informações básicas</h3>
 					<div class="grid-6-12">
 						<s:label value="Nome do processo:" for="textarea_Descricao"/>
