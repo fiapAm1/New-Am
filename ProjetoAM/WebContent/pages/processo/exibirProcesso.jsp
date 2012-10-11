@@ -105,9 +105,7 @@
 				<h3>Inclusão de advogados</h3>	
 				<div class="grid-12-12">
 					<table class="lawyer-table">
-						<caption>
-							<strong>Advogados Vinculados ao Processo</strong>
-						</caption>
+						<h3>Advogados Vinculados ao Processo</h3>
 						<thead>
 							<tr>
 								<th align="center" width="50%" class="par"> Nome</th>
