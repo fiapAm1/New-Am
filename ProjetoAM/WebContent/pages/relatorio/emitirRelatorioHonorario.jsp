@@ -15,20 +15,20 @@
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<div class="content">
 			<h2>Pesquisar Honorários por Processo</h2>
-				<div class="grid-6-12">
-					<s:label value="Código do Processo" for="textfield_Codigo" />
-					<s:textfield id="textfield_Codigo" name="codigoProcesso" />
-				</div>
-				<div class="grid-6-12">
-					<s:label value="Selecione uma Tarefa:" for="select_Tarefa"/>
-					<s:select id="select_Tarefa"
-								cssClass="formee-medium"
-							  headerKey="0"
-							  headerValue="Selecione"
-							  list="tarefas"
-							  listKey="codigo"
-							  listValue="tarefa"
-							  name="codigoTarefa"/>
+			<div class="grid-6-12">
+				<s:label value="Código do Processo" for="textfield_Codigo" />
+				<s:textfield id="textfield_Codigo" name="codigoProcesso" />
+			</div>
+			<div class="grid-6-12">
+				<s:label value="Selecione uma Tarefa:" for="select_Tarefa"/>
+				<s:select id="select_Tarefa"
+							cssClass="formee-medium"
+						  headerKey="0"
+						  headerValue="Selecione"
+						  list="tarefas"
+						  listKey="codigo"
+						  listValue="tarefa"
+						  name="codigoTarefa"/>
 				<s:submit cssClass="formee-button left" id="submit_Pesquisar" value="Pesquisar" action="pesquisarHonorario"/>
 			</div>
 			<div class="grid-12-12">

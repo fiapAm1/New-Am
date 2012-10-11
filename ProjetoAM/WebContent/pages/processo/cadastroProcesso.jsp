@@ -51,55 +51,46 @@
 								  listValue="nomePessoa"
 								  name="processo.forum.codigoPessoa"/>
 					</div>
-				<div class="box box-prazo">
-					<div class="grid-12-12">
-						<h3>Prazos</h3>
-						<div class="grid-6-12">
-							<s:label value="Data de Abertura:" for="textfield_DataAbertura"/>
-							<s:textfield id="textfield_DataAbertura" maxlength="10" name="processo.dataAberturaStr"/>
-						</div>
-						<div class="grid-6-12">
-							<s:label value="Data de Fechamento:" for="textfield_DataFechamento"/>
-							<s:textfield id="textfield_DataFechamento" maxlength="10" name="processo.dataFechamentoStr"/>
-						</div>
-						<div class="grid-6-12">
-							<s:label value="Tipo de Cobrança:" for="select_TipoCobranca"/>
-							<s:select id="select_TipoCobranca"
-							  		  headerKey="0"
-							  		  headerValue="Selecione"
-							  		  list="tiposCobrancas"
-							  		  listKey="codigoCobranca"
-							  		  listValue="periodoCobranca"
-							  		  name="processo.cobranca.codigoCobranca"
-							  		  required="true"/>
-						</div>
-						<div class="grid-6-12">
-							<s:label value="Dia de Vencimento:" for="select_DiaVencimento"/>
-							<s:select id="select_DiaVencimento"
-							  		  headerKey="0"
-							  		  headerValue="Selecione"
-							  		  list="dias"
-							  		  name="processo.diaVencimento"
-							  		  required="true"/>
-						</div>
-					</div>
-				</div>
-				<div class="box box-causa">
-					<div class="grid-12-12">
-						<h3>Resultado da causa</h3>
+					<div class="box box-prazo">
 						<div class="grid-12-12">
 							<s:radio id="radio_ResultadoCausa" name="processo.resultado" list="#{2:'Ganha',1:'Perdida'}" listKey="key" listValue="value"/>
 						</div>	
-					</div>
+							<h3>Prazos</h3>
+							<div class="grid-6-12">
+								<s:label value="Data de Abertura:" for="textfield_DataAbertura"/>
+								<s:textfield id="textfield_DataAbertura" maxlength="10" name="processo.dataAberturaStr"/>
+							</div>
+							<div class="grid-6-12">
+								<s:label value="Data de Fechamento:" for="textfield_DataFechamento"/>
+								<s:textfield id="textfield_DataFechamento" maxlength="10" name="processo.dataFechamentoStr"/>
+							</div>
+							<div class="grid-6-12">
+								<s:label value="Tipo de Cobrança:" for="select_TipoCobranca"/>
+								<s:select id="select_TipoCobranca"
+								  		  headerKey="0"
+								  		  headerValue="Selecione"
+								  		  list="tiposCobrancas"
+								  		  listKey="codigoCobranca"
+								  		  listValue="periodoCobranca"
+								  		  name="processo.cobranca.codigoCobranca"
+								  		  required="true"/>
+							</div>
+							<div class="grid-6-12">
+								<s:label value="Dia de Vencimento:" for="select_DiaVencimento"/>
+								<s:select id="select_DiaVencimento"
+								  		  headerKey="0"
+								  		  headerValue="Selecione"
+								  		  list="dias"
+								  		  name="processo.diaVencimento"
+								  		  required="true"/>
+							</div>
+					<div class="grid-12-12">
+						<s:label value="Observação:" for="textarea_Observacao"/>
+						<s:textarea id="textarea_Observacao" name="processo.observacao"/>
+					</div>	
 				</div>
-				
-			<div class="grid-12-12">
-				<s:label value="Observação:" for="textarea_Observacao"/>
-				<s:textarea id="textarea_Observacao" name="processo.observacao"/>
-			</div>	
-			</div>
-			<div class="box box-advogado">
-				<h3>Inclusão de advogados</h3>
+				<div class="box box-advogado">
+					<h3>Inclusão de advogados</h3>
 					<div class="grid-12-12">
 						<s:label value="Selecione um Advogado:" for="select_Advogado"/>
 						<s:select id="select_Advogado"
@@ -154,11 +145,11 @@
 							</tbody>
 						</table>
 					</div>
-				</div>	
-			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Confirmar" value="Confirmar"/>
-			</div>
-		</div> 			
+				</div>
+				<div class="grid-12-12" style="text-align: right;">
+					<s:submit id="submit_Confirmar" value="Confirmar"/>
+				</div>
+			</div> 			
 	</s:form>
 </body>
 </html>
