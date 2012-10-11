@@ -24,11 +24,7 @@ public class ConnectionFactory {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
 			//CONEXÃO
-<<<<<<< HEAD
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:amfiap", "AM", "am");
-=======
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "AM", "am");
->>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
