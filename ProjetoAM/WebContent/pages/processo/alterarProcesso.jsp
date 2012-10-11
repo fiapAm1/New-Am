@@ -196,7 +196,6 @@
 		           							<img src="../css/img/formee/form-ic-error.png" 
 								 				 alt="Remover Advogado" 
 								 				 title="Remover Advogado"
-								 				 id=""
 								 				 style="cursor: pointer"
 								 				 onclick="javascript: removerAdvogado(this)"/>
 										</td>
