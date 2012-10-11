@@ -31,36 +31,35 @@
 						  name="codigoTarefa"/>
 				<s:submit cssClass="formee-button left" id="submit_Pesquisar" value="Pesquisar" action="pesquisarHonorario"/>
 			</div>
-			<div class="grid-12-12">
-				<table id="table_Processos" class="lawyer-table">
-					<caption>Honorários Filtrados</caption>
-					<thead>
-						<tr>
-							<th width="40%" class="par">Advogado</th>
-							<th width="40%" class="par" >Data do Honorário</th>
-							<th width="20%" class="par">Valor Tarefa</th>
-						</tr>
-					</thead>
-					<tbody>
-						<s:iterator id="iterator_Honorarios" value="honorarios">
+			<s:if test="%{!honorarios.isEmpty()}">
+				<div class="grid-12-12">
+					<table id="table_Processos" class="lawyer-table">
+						<caption>Honorários Filtrados</caption>
+						<thead>
 							<tr>
-								<td class="par"><s:property value="nomeAdvogado"/></td>
-								<td class="par"><s:date name="dataHonorario" format="dd/MM/yyyy"/></td>
-								<td class="par"><s:property value="valorTarefa"/></td>
-							</tr>			
-						</s:iterator>
-					</tbody>
-				</table>
-			</div>
-			<div class="grid-9-12" style="text-align: right;">
-				<s:label value="Total gasto:" for="label_somaHonorario"/>
-			</div>
-			<div class="grid-3-12" >
-				<s:label id="label_somaHonorario" name="somaHonorario" />
-			</div>
-			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Emitir" action="emitir" value="Emitir Relatório"/>
-			</div>
+								<th width="40%" class="par">Advogado</th>
+								<th width="40%" class="par" >Data do Honorário</th>
+								<th width="20%" class="par">Valor Tarefa</th>
+							</tr>
+						</thead>
+						<tbody>
+							<s:iterator id="iterator_Honorarios" value="honorarios">
+								<tr>
+									<td class="par"><s:property value="nomeAdvogado"/></td>
+									<td class="par"><s:date name="dataHonorario" format="dd/MM/yyyy"/></td>
+									<td class="par"><s:property value="valorTarefa"/></td>
+								</tr>			
+							</s:iterator>
+						</tbody>
+					</table>
+				</div>
+				<div class="grid-9-12" style="text-align: right;">
+					<s:label value="Total gasto:" for="label_somaHonorario"/>
+				</div>
+				<div class="grid-3-12" >
+					<s:label id="label_somaHonorario" name="somaHonorario" />
+				</div>
+			</s:if>
 		</div>
 	</s:form>
 </body>

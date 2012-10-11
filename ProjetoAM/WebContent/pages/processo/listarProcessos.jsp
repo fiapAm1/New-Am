@@ -41,62 +41,65 @@
 						  value="Pesquisar"
 						  action="listarProcesso"/>
 			</div>
-			<div class="grid-12-12">
-				<table id="table_Processos" 
-					   class="lawyer-table">
-					<caption><strong>Processos Filtrados</strong></caption>
-					<thead>				
-						<tr>
-							<th width="10%" class="par"><strong>Processo</strong></th>
-							<th width="15%" class="par"><strong>Cliente</strong></th>
-							<th width="10%" class="par"><strong>Tipo de Causa</strong></th>
-							<th width="10%" class="par"><strong>Abertura</strong></th>
-							<th width="10%" class="par"><strong>Fechamento</strong></th>
-							<th width="5%" class="par"><strong>Resultado</strong></th>
-							<th width="1%" class="impar"></th>
-							<th width="1%" class="impar"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<s:iterator id="iterator_Processos"
-									value="processos">
+			
+			<s:if test="%{!processos.isEmpty()}">
+				<div class="grid-12-12">
+					<table id="table_Processos" 
+						   class="lawyer-table">
+						<h3>Processos Filtrados</h3>
+						<thead>				
 							<tr>
-								<td class="par"><s:property value="processo" /></td>
-								<td class="par"><s:property value="cliente.nomePessoa"/></td>
-								<td class="par"><s:property value="causa.causa"/></td>
-								<td class="par"><s:property value="dataAberturaStr"/></td>
-								<td class="par"><s:property value="dataFechamentoStr"/></td>
-								<td class="par"><s:property value="resultadoStr"/></td>
-								<td class="impar">
-									<s:url id="url_ExibirProcesso"
-										   action="exibirProcesso">
-										<s:param name="processo.numeroProcesso" 
-												 value="numeroProcesso"/>
-									</s:url>
-									<s:a href="%{url_ExibirProcesso}">
-										<img src="../css/img/formee/form-ic-info.png" 
-							 				 alt="Exibir este processo" 
-							 				 title="Exibir este processo"/>
-									</s:a>
-								</td>
-								<td	class="impar">
-									<s:url id="url_AtualizarProcesso"
-										   action="forwardCadastrarProcesso">
-										<s:param name="processo.numeroProcesso" 
-												 value="numeroProcesso"/>
-										<s:param name="paginaDirecionar">alterar</s:param>
-									</s:url>
-									<s:a href="%{url_AtualizarProcesso}">
-										<img src="../css/img/formee/form-ic-success.png" 
-							 				 alt="Atualizar este processo" 
-							 				 title="Atualizar este processo"/>
-									</s:a>
-								</td>
+								<th width="10%" class="par"><strong>Processo</strong></th>
+								<th width="15%" class="par"><strong>Cliente</strong></th>
+								<th width="10%" class="par"><strong>Tipo de Causa</strong></th>
+								<th width="10%" class="par"><strong>Abertura</strong></th>
+								<th width="10%" class="par"><strong>Fechamento</strong></th>
+								<th width="5%" class="par"><strong>Resultado</strong></th>
+								<th width="1%" class="impar"></th>
+								<th width="1%" class="impar"></th>
 							</tr>
-						</s:iterator>
-					</tbody>	
-				</table>
-			</div>
+						</thead>
+						<tbody>
+							<s:iterator id="iterator_Processos"
+										value="processos">
+								<tr>
+									<td class="par"><s:property value="processo" /></td>
+									<td class="par"><s:property value="cliente.nomePessoa"/></td>
+									<td class="par"><s:property value="causa.causa"/></td>
+									<td class="par"><s:property value="dataAberturaStr"/></td>
+									<td class="par"><s:property value="dataFechamentoStr"/></td>
+									<td class="par"><s:property value="resultadoStr"/></td>
+									<td class="impar">
+										<s:url id="url_ExibirProcesso"
+											   action="exibirProcesso">
+											<s:param name="processo.numeroProcesso" 
+													 value="numeroProcesso"/>
+										</s:url>
+										<s:a href="%{url_ExibirProcesso}">
+											<img src="../css/img/formee/form-ic-info.png" 
+								 				 alt="Exibir este processo" 
+								 				 title="Exibir este processo"/>
+										</s:a>
+									</td>
+									<td	class="impar">
+										<s:url id="url_AtualizarProcesso"
+											   action="forwardCadastrarProcesso">
+											<s:param name="processo.numeroProcesso" 
+													 value="numeroProcesso"/>
+											<s:param name="paginaDirecionar">alterar</s:param>
+										</s:url>
+										<s:a href="%{url_AtualizarProcesso}">
+											<img src="../css/img/formee/form-ic-success.png" 
+								 				 alt="Atualizar este processo" 
+								 				 title="Atualizar este processo"/>
+										</s:a>
+									</td>
+								</tr>
+							</s:iterator>
+						</tbody>	
+					</table>
+				</div>
+			</s:if>
 		</div>	
 	</s:form>
 </body>

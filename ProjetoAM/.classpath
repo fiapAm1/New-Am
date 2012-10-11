@@ -27,5 +27,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-json-plugin-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xwork-core-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang3-3.0.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-jquery-chart-plugin-3.3.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-jquery-plugin-3.3.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

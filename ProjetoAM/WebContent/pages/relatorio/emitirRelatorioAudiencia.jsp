@@ -16,46 +16,43 @@
 		<jsp:include page="../../util/includes/menu.jsp" />	
 		<div class="content">
 			
-		<h2>Pesquisar Audiências por Processo</h2>
-		<div class="grid-6-12">
-			<s:label value="Código do Processo" for="textfield_Codigo" />
-			<s:textfield cssClass="formee-medium" id="textfield_Codigo" name="codigoProcesso" />
-			<s:submit id="submit_Pesquisar" cssClass="formee-button left" value="Pesquisar" action="pesquisarAudiencia"/>
-		</div>
-		<div class="grid-6-12" style="text-align: left;">
-		</div>
-		<div class="grid-12-12">
-			<table id="table_Audiencias"
-				   class="lawyer-table">
-				<caption>Audiências Filtadas</caption>
-				<thead>
-					<tr>
-						<th width="15%" class="par">Advogado</th>
-						<th width="15%" class="par">Forum</th>
-						<th width="10%" class="par" >Data da Audiência</th>
-						<th width="30%" class="par">Logradouro</th>
-						<th width="10%" class="par">Número</th>
-						<th width="10%" class="par">Sala</th>
-					</tr>
-				</thead>
-				<tbody>
-					<s:iterator id="iterator_Audiencias"
-								value="audiencias">
-						<tr>
-							<td class="par"><s:property value="nomeAdvogado"/></td>
-							<td class="par"><s:property value="forum"/></td>
-							<td class="par"><s:date name="dataAudiencia" format="dd/MM/yyyy"/></td>
-							<td class="par"><s:property value="logradouro"/></td>
-							<td class="par"><s:property value="numeroEndereco"/></td>
-							<td class="par"><s:property value="sala"/></td>
-						</tr>			
-					</s:iterator>
-				</tbody>
-			</table>
-		</div>
-		<div class="grid-12-12" style="text-align: right;">
-			<s:submit id="submit_Emitir" action="emitirAudiencia" value="Emitir Relatório"/>
-		</div>
+			<h2>Pesquisar Audiências por Processo</h2>
+			<div class="grid-6-12">
+				<s:label value="Código do Processo" for="textfield_Codigo" />
+				<s:textfield cssClass="formee-medium" id="textfield_Codigo" name="codigoProcesso" />
+				<s:submit id="submit_Pesquisar" cssClass="formee-button left" value="Pesquisar" action="pesquisarAudiencia"/>
+			</div>
+			<s:if test="%{!audiencias.isEmpty()}">
+				<div class="grid-12-12">
+					<table id="table_Audiencias"
+						   class="lawyer-table">
+						<h3>Audiências Filtradas</h3>
+						<thead>
+							<tr>
+								<th width="15%" class="par">Advogado</th>
+								<th width="15%" class="par">Forum</th>
+								<th width="10%" class="par" >Data da Audiência</th>
+								<th width="30%" class="par">Logradouro</th>
+								<th width="10%" class="par">Número</th>
+								<th width="10%" class="par">Sala</th>
+							</tr>
+						</thead>
+						<tbody>
+							<s:iterator id="iterator_Audiencias"
+										value="audiencias">
+								<tr>
+									<td class="par"><s:property value="nomeAdvogado"/></td>
+									<td class="par"><s:property value="forum"/></td>
+									<td class="par"><s:date name="dataAudiencia" format="dd/MM/yyyy"/></td>
+									<td class="par"><s:property value="logradouro"/></td>
+									<td class="par"><s:property value="numeroEndereco"/></td>
+									<td class="par"><s:property value="sala"/></td>
+								</tr>			
+							</s:iterator>
+						</tbody>
+					</table>
+				</div>
+			</s:if>
 		</div>
 	</s:form>
 </body>

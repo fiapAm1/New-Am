@@ -12,7 +12,12 @@
 </head>
 <body>
 	<div class="divMenu">
-		<a class="logo" href="#" title="Home">
+	
+		<s:url var="url_Home_logo" 
+	   		   value="forwardHome">
+			<s:param name="paginaDirecionar">home</s:param>
+		</s:url>
+		<a class="logo" href="%{url_Home_logo}" title="Home">
 			<img src="../css/img/logo-azevedo.png" alt="Advocacia Azevedo" />
 		</a>
 		<ul class="sf-menu">
