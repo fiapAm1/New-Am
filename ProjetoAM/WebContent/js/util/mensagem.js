@@ -9,15 +9,15 @@ function ativarMensagem(){
 	if(resultado.val() != null && resultado.val() != ""){
 		if(resultado.val() == "sucesso"){
 			jQuery("#div_Mensagem").removeClass(jQuery("#div_Mensagem").attr("class"));
-			jQuery("#div_Mensagem").addClass("formee-msg-success");
+			jQuery("#div_Mensagem").addClass("formee-msg-success content");
 			jQuery("#div_Mensagem").show("slow");
 		} else if (resultado.val() == "erro") {
 			jQuery("#div_Mensagem").removeClass(jQuery("#div_Mensagem").attr("class"));
-			jQuery("#div_Mensagem").addClass("formee-msg-error");
+			jQuery("#div_Mensagem").addClass("formee-msg-error content");
 			jQuery("#div_Mensagem").show("slow");
 		} else if (resultado.val() == "info"){
 			jQuery("#div_Mensagem").removeClass(jQuery("#div_Mensagem").attr("class"));
-			jQuery("#div_Mensagem").addClass("formee-msg-info");
+			jQuery("#div_Mensagem").addClass("formee-msg-info content");
 			jQuery("#div_Mensagem").show("slow");
 		}
 		desativar = setTimeout('visibilidadeMensagem()', 10000);

@@ -53,6 +53,8 @@
 					</div>
 					<div class="box box-prazo">
 						<div class="grid-12-12">
+							<s:radio id="radio_ResultadoCausa" name="processo.resultado" list="#{2:'Ganha',1:'Perdida'}" listKey="key" listValue="value"/>
+						</div>	
 							<h3>Prazos</h3>
 							<div class="grid-6-12">
 								<s:label value="Data de Abertura:" for="textfield_DataAbertura"/>
@@ -82,17 +84,6 @@
 								  		  name="processo.diaVencimento"
 								  		  required="true"/>
 							</div>
-						</div>
-					</div>
-					<div class="box box-causa">
-						<div class="grid-12-12">
-							<h3>Resultado da causa</h3>
-							<div class="grid-12-12">
-								<s:radio id="radio_ResultadoCausa" name="processo.resultadoCausa" list="#{'2':'Ganha','1':'Perdida'}"/>
-							</div>	
-						</div>
-					</div>
-					
 					<div class="grid-12-12">
 						<s:label value="Observação:" for="textarea_Observacao"/>
 						<s:textarea id="textarea_Observacao" name="processo.observacao"/>
@@ -142,12 +133,12 @@
 											<s:property value="dataInicio"/>
 										</td>
 										<td align="center" width="20%" class="impar">
-											<s:hidden id="hidden_Remover" name="codigoPessoa" value="%{advogado.codigoPessoa}"/>
+											<input type="hidden" id="hidden_Remover" name="codigoPessoa" value="%{advogado.codigoPessoa}"/>
 		           							<img src="../css/img/formee/form-ic-error.png" 
 								 				 alt="Remover Advogado" 
 								 				 title="Remover Advogado"
 								 				 style="cursor: pointer"
-								 				 onclick="javascript: removerAdvogado(document.getElementById('hidden_Remover').getAttribute('value'))"/>
+								 				 onclick="javascript: removerAdvogado(this)"/>
 										</td>
 									</tr>
 								</s:iterator>

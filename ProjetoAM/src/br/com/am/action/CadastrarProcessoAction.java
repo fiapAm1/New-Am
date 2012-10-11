@@ -57,9 +57,11 @@ public class CadastrarProcessoAction extends GenericAction{
 		if(PaginaEnum.ALTERAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
 			carregarListas();
 			processo = carregarProcesso();
-			advogadosVinculados = carregarAdvogadosVinculados();
+			List<AdvogadoProcesso> list = carregarAdvogadosVinculados();
+			advogadosVinculados.addAll(list);
+			session.put("processo", processo);
 			session.put("advogadosVinculados", advogadosVinculados);
-			session.put("vinculados", advogadosVinculados);
+			session.put("vinculados", list);
 			return PaginaEnum.ALTERAR_PROCESSO.getDescricao();
 		} else if(PaginaEnum.CADASTRAR_PROCESSO.getDescricao().equals(getPaginaDirecionar())){
 			carregarListas();
@@ -112,28 +114,24 @@ public class CadastrarProcessoAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	@Action(value="alterarProcesso", results={
-			@Result(location="/pages/processo/alterarProcessos.jsp", name="alterar"),
+			@Result(location="/pages/processo/alterarProcesso.jsp", name="alterar"),
 			@Result(location="/pages/processo/listarProcessos.jsp", name="listar")
 	})
 	public String alterarProcesso(){
 		try {
 			advogadosVinculados = (List<AdvogadoProcesso>)session.get("advogadosVinculados");
 			List<AdvogadoProcesso> vinculados = (List<AdvogadoProcesso>)session.get("vinculados");
+			controleProcessoSessao();
 			Boolean encontrado = false;
 			if(validarProcesso()){
 				ProcessoBO.alterarProcesso(processo);
 				
-				for(AdvogadoProcesso apOld : vinculados){
-					for(AdvogadoProcesso apNew : advogadosVinculados){
-						if(apOld.getAdvogado().getCodigoPessoa() != apNew.getAdvogado().getCodigoPessoa()){
-							ProcessoBO.cadastrarAdvogadosVinculados(apNew, processo.getNumeroProcesso());
-							encontrado = true;
-						}
-					}
-					if(!encontrado){
-						ProcessoBO.removerAdvogadoVinculado(apOld, processo.getNumeroProcesso());
-						encontrado = false;
-					}
+				for(AdvogadoProcesso apOld : vinculados){				
+					ProcessoBO.removerAdvogadoVinculado(apOld, processo.getNumeroProcesso());
+				}
+				
+				for(AdvogadoProcesso apNew : advogadosVinculados){
+					ProcessoBO.cadastrarAdvogadosVinculados(apNew, processo.getNumeroProcesso());
 				}
 				
 				setMensagem("Processo alterado com sucesso!");
@@ -148,7 +146,7 @@ public class CadastrarProcessoAction extends GenericAction{
 			e.printStackTrace();
 		}
 		processos = carregarProcessos();
-		session.put("advogadosVinculados", new ArrayList<AdvogadoProcesso>());
+		limparSessao("advogadosVinculados", "vinculados", "processo");
 		return PaginaEnum.LISTAR_PROCESSO.getDescricao();
 	}
 	
@@ -303,6 +301,16 @@ public class CadastrarProcessoAction extends GenericAction{
 				setResultado("erro");
 				return false;
 			}
+		} else if((processo.getDataFechamentoStr() != null && !"".equals(processo.getDataFechamentoStr()))
+					&& processo.getResultado() == null){
+			setMensagem("Processo não pode ter uma data de fechamento sem um resultado. Informe o resultado!");
+			setResultado("erro");
+			return false;
+		} else if((processo.getDataFechamentoStr() == null || !"".equals(processo.getDataFechamentoStr()))
+				&& processo.getResultado() != null){
+			setMensagem("Processo não pode ter um resultado sem uma data de fechamento. Informe a data de fechamento!");
+			setResultado("erro");
+			return false;
 		} else if(processo.getCobranca() == null || processo.getCobranca().getCodigoCobranca() <= 0){
 			setMensagem("Selecione o tipo de cobrança!");
 			setResultado("erro");
@@ -321,6 +329,21 @@ public class CadastrarProcessoAction extends GenericAction{
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Método para centralizar tratamento de um processo na sessao, com o processo que sera alterdo.
+	 * @author JDGR²
+	 * @since 10/10/2012
+	 */
+	private void controleProcessoSessao(){
+		Processo ps = (Processo)session.get("processo");
+		ps.setDataFechamentoStr(processo.getDataFechamentoStr());
+		ps.setProcesso(processo.getProcesso());
+		ps.setObservacao(processo.getObservacao());
+		ps.setResultado(processo.getResultado());
+		processo = ps;
+		session.put("processo", processo);
 	}
 	
 	/**

@@ -109,7 +109,7 @@
 		</ul>
 	</div>
 	<div id="div_Mensagem"
-		 class="formee-msg-info"
+		 class="formee-msg-info content"
 		 style="display: none">
 		 <strong id="strong_Mensagem">
 		 	<s:property value="mensagem"/>
