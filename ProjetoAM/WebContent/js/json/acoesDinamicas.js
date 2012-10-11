@@ -41,8 +41,9 @@ function removerAdvogado(img){
 	var tr = img.parentNode;
 	var array = tr.childNodes;
 	for(var i in array){
-		if(array[i].nodeName == "INPUT"){
-			var hidden = array[i];
+		var auxHidden = array[i]; 
+		if(auxHidden.nodeName == "INPUT"){
+			var hidden = auxHidden;
 			break;
 		}
 	}
