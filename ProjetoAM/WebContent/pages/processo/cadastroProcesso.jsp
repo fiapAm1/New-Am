@@ -88,7 +88,7 @@
 					<div class="grid-12-12">
 						<h3>Resultado da causa</h3>
 						<div class="grid-12-12">
-							<s:radio id="radio_ResultadoCausa" name="processo.resultadoCausa" list="#{'2':'Ganha','1':'Perdida'}"/>
+							<s:radio id="radio_ResultadoCausa" name="processo.resultado" list="#{2:'Ganha',1:'Perdida'}" listKey="key" listValue="value"/>
 						</div>	
 					</div>
 				</div>
@@ -142,12 +142,12 @@
 											<s:property value="dataInicio"/>
 										</td>
 										<td align="center" width="20%" class="impar">
-											<s:hidden id="hidden_Remover" name="codigoPessoa" value="%{advogado.codigoPessoa}"/>
+											<input type="hidden" id="hidden_Remover" name="codigoPessoa" value="%{advogado.codigoPessoa}"/>
 		           							<img src="../css/img/formee/form-ic-error.png" 
 								 				 alt="Remover Advogado" 
 								 				 title="Remover Advogado"
 								 				 style="cursor: pointer"
-								 				 onclick="javascript: removerAdvogado(document.getElementById('hidden_Remover').getAttribute('value'))"/>
+								 				 onclick="javascript: removerAdvogado(this)"/>
 										</td>
 									</tr>
 								</s:iterator>

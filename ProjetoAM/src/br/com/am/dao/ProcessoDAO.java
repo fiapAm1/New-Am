@@ -428,7 +428,7 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 			} else {
 				psmt.setNull(2, Types.DATE);
 			}
-			if(processo.getResultado() != null){
+			if(processo.getResultado() != null &&  0 != processo.getResultado().intValue()){
 				psmt.setInt(3, processo.getResultado().intValue());
 			} else {
 				psmt.setNull(3, Types.INTEGER);

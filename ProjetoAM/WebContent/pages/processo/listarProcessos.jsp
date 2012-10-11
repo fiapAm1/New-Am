@@ -80,17 +80,20 @@
 									</s:a>
 								</td>
 								<td	class="impar">
-									<s:url id="url_AtualizarProcesso"
-										   action="forwardCadastrarProcesso">
-										<s:param name="processo.numeroProcesso" 
-												 value="numeroProcesso"/>
-										<s:param name="paginaDirecionar">alterar</s:param>
-									</s:url>
-									<s:a href="%{url_AtualizarProcesso}">
-										<img src="../css/img/formee/form-ic-success.png" 
-							 				 alt="Atualizar este processo" 
-							 				 title="Atualizar este processo"/>
-									</s:a>
+									<s:set name="verficarData" value="%{dataFechamentoStr}"/>
+									<s:if test="%{#verficarData==null}">
+										<s:url id="url_AtualizarProcesso"
+											   action="forwardCadastrarProcesso">
+											<s:param name="processo.numeroProcesso" 
+													 value="numeroProcesso"/>
+											<s:param name="paginaDirecionar">alterar</s:param>
+										</s:url>
+										<s:a href="%{url_AtualizarProcesso}">
+											<img src="../css/img/formee/form-ic-success.png" 
+								 				 alt="Atualizar este processo" 
+								 				 title="Atualizar este processo"/>
+										</s:a>
+									</s:if>
 								</td>
 							</tr>
 						</s:iterator>

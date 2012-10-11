@@ -9,11 +9,12 @@ function construirTabelaAdvogadoProcesso(list){
 							list[i].dataInicioStr +
 						"</td>" +
 						"<td align=\"left\"	width=\"20%\" class=\"impar\">" +
+							"<input type=\"hidden\" id=\"hidden_Remover\" name=\"codigoPessoa\" value=\""+list[i].advogado.codigoPessoa+"\"/>"+
 							"<img src=\"../css/img/formee/form-ic-error.png\" "+ 
 					 			 "alt=\"Remover Advogado\""+ 
 					 			 "title=\"Remover Advogado\"" +
 					 			 "style=\"cursor: pointer\"" +
-					 			 "onclick=\"javascript: removerAdvogado("+list[i].advogado.codigoPessoa+")\"/>"+
+					 			 "onclick=\"javascript: removerAdvogado(this)\"/>"+
 						"</td>" +
 					"</tr>";
 	} 
@@ -36,8 +37,16 @@ function adicionarAdvogado(){
 	});
 }
 
-function removerAdvogado(valor){
-	jQuery.getJSON('removerAdvogado', {'advogadoProcesso.advogado.codigoPessoa': valor}, function(json) {
+function removerAdvogado(img){
+	var tr = img.parentNode;
+	var array = tr.childNodes;
+	for(var i in array){
+		if(array[i].nodeName == "INPUT"){
+			var hidden = array[i];
+			break;
+		}
+	}
+	jQuery.getJSON('removerAdvogado', {'advogadoProcesso.advogado.codigoPessoa': hidden.value}, function(json) {
 		var list = json.advogadosVinculados;
 		var table = jQuery("#table_AdvogadosVinculados > tbody:first");
 		table.html("");

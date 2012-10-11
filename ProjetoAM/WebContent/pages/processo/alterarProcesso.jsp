@@ -22,7 +22,7 @@
 			<div class="grid-6-12">
 				<fieldset>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Cliente:"
+						<s:label value="Cliente:"
 								 for="select_Cliente"/>
 						<s:select id="select_Cliente"
 								  headerKey="0"
@@ -35,7 +35,7 @@
 								  value="%{processo.cliente.codigoPessoa}"/>
 					</div>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Tipo de Causa:"
+						<s:label value="Tipo de Causa:"
 								 for="select_TipoCausa"/>
 						<s:select id="select_TipoCausa"
 								  headerKey="0"
@@ -48,7 +48,7 @@
 								  value="%{processo.causa.codigoCausa}"/>
 					</div>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Forum:"
+						<s:label value="Forum:"
 								 for="select_Forum"/>
 						<s:select id="select_Forum"
 								  headerKey="0"
@@ -81,7 +81,7 @@
 											 value="%{processo.dataFechamentoStr}"/>
 							</div>
 							<div class="grid-6-12">
-								<s:label value="Selecione um Tipo de Cobrança:"
+								<s:label value="Tipo de Cobrança:"
 								 		 for="select_TipoCobranca"/>
 								<s:select id="select_TipoCobranca"
 								  		  headerKey="0"
@@ -94,7 +94,7 @@
 								  		  value="%{processo.cobranca.codigoCobranca}"/>
 							</div>
 							<div class="grid-6-12">
-								<s:label value="Selecione Dia de Vencimento:"
+								<s:label value="Dia de Vencimento:"
 								 		 for="select_DiaVencimento"/>
 								<s:select id="select_DiaVencimento"
 								  		  headerKey="0"
@@ -111,9 +111,11 @@
 							<legend class="grid-12-12">Resultado da causa</legend>
 							<div class="grid-12-12">
 								<s:radio id="radio_ResultadoCausa"
-										 name="processo.resultadoCausa"
-										 list="#{'2':'Ganha','1':'Perda'}"
-										 value="%{processo.resultadoCausa}"/>
+										 name="processo.resultado"
+										 listKey="key"
+										 listValue="value"
+										 list="#{2:'Ganha',1:'Perda'}"
+										 value="%{processo.resultado}"/>
 							</div>	
 						</fieldset>
 					</div>
@@ -122,7 +124,7 @@
 			<div class="grid-6-12">
 				<fieldset>
 					<div class="grid-11-12">
-						<s:label value="Selecione um Advogado:"
+						<s:label value="Advogado:"
 						 		 for="select_Advogado"/>
 						<s:select id="select_Advogado"
 						  		  headerKey="0"
@@ -150,7 +152,7 @@
 					</div>	
 					<div class="grid-12-12"
 						 style="overflow-y: scroll; height: 245px !important">
-						<table class="lawyer-table">
+						<table  id="table_AdvogadosVinculados" class="lawyer-table">
 							<caption>
 								<strong>Advogados Vinculados ao Processo</strong>
 							</caption>
@@ -190,16 +192,13 @@
 										<td align="center" 
 											width="20%"
 											class="impar">
-											<s:url id="url_RemoverAdvogado"
-												   action="removerAdvogado">
-												<s:param name="advogadoProcesso.advogado.codigoPessoa" 
-														 value="advogado.codigoPessoa"/>
-											</s:url>
-											<s:a href="%{url_RemoverAdvogado}">
-												<img src="../css/img/formee/form-ic-error.png" 
-									 				 alt="Remover Advogado" 
-									 				 title="Remover Advogado"/>
-											</s:a>
+											<input type="hidden" id="hidden_Remover" name="codigoPessoa" value="${requestScope.advogado.codigoPessoa}"/>
+		           							<img src="../css/img/formee/form-ic-error.png" 
+								 				 alt="Remover Advogado" 
+								 				 title="Remover Advogado"
+								 				 id=""
+								 				 style="cursor: pointer"
+								 				 onclick="javascript: removerAdvogado(this)"/>
 										</td>
 									</tr>
 								</s:iterator>
