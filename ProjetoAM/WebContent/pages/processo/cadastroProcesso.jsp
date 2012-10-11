@@ -9,8 +9,8 @@
 <title>Cadastro de Processos</title>
 </head>
 <body>
-	<s:form id="form_CadastrarProcesso"	cssClass="formee" action="cadastrarProcesso" method="post" theme="simple">
 	
+
 		<jsp:include page="../../util/includes/menu.jsp" />
 			<div class="content">
 				<h2>Cadastro de Processos</h2>
@@ -52,13 +52,6 @@
 					</div>
 					<div class="box box-prazo">
 						<div class="grid-12-12">
-							<s:radio id="radio_ResultadoCausa"
-									 name="processo.resultado"
-									 listKey="key"
-									 listValue="value"
-									 list="#{2:'Ganha',1:'Perda'}"
-									 value="%{processo.resultado}"/>
-						</div>	
 							<h3>Prazos</h3>
 							<div class="grid-6-12">
 								<s:label value="Data de Abertura:" for="textfield_DataAbertura"/>
@@ -86,6 +79,21 @@
 								  		  list="dias"
 								  		  name="processo.diaVencimento"/>
 							</div>
+						</div>
+					</div>
+					<div class="box box-causa">
+						<div class="grid-12-12">
+							<h3>Resultado da causa</h3>
+							<div class="grid-12-12">
+								<s:radio id="radio_ResultadoCausa"
+										 name="processo.resultado"
+										 listKey="key"
+										 listValue="value"
+										 list="#{2:'Ganha',1:'Perda'}"
+										 value="%{processo.resultado}"/>
+							</div>		 
+						</div>			 
+					</div>	
 					<div class="grid-12-12">
 						<s:label value="Observação:" for="textarea_Observacao"/>
 						<s:textarea id="textarea_Observacao" name="processo.observacao"/>
@@ -115,9 +123,7 @@
 					</div>	
 					<div class="grid-12-12">
 						<table id="table_AdvogadosVinculados" class="lawyer-table">
-							<caption>
-								<strong>Advogados Vinculados ao Processo</strong>
-							</caption>
+							<h3>Advogados Vinculados ao Processo</h3>
 							<thead>
 								<tr>
 									<th align="center" width="50%" class="par"> Nome</th>
