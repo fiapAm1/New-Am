@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="divMenu">
-		<a class="logo" href="#" title="Home">
+		<a class="logo" href="forwardHome?paginaDirecionar=home" title="Home">
 			<img src="../css/img/logo-azevedo.png" alt="Advocacia Azevedo" />
 		</a>
 		<ul class="sf-menu">
