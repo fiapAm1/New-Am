@@ -13,7 +13,6 @@
 	
 		<jsp:include page="../../util/includes/menu.jsp" />
 			<div class="content">
-			
 				<h2>Cadastro de Processos</h2>
 				<div class="box box-processo">
 					<h3>Informações básicas</h3>
@@ -53,7 +52,12 @@
 					</div>
 					<div class="box box-prazo">
 						<div class="grid-12-12">
-							<s:radio id="radio_ResultadoCausa" name="processo.resultado" list="#{2:'Ganha',1:'Perdida'}" listKey="key" listValue="value"/>
+							<s:radio id="radio_ResultadoCausa"
+									 name="processo.resultado"
+									 listKey="key"
+									 listValue="value"
+									 list="#{2:'Ganha',1:'Perda'}"
+									 value="%{processo.resultado}"/>
 						</div>	
 							<h3>Prazos</h3>
 							<div class="grid-6-12">
@@ -72,8 +76,7 @@
 								  		  list="tiposCobrancas"
 								  		  listKey="codigoCobranca"
 								  		  listValue="periodoCobranca"
-								  		  name="processo.cobranca.codigoCobranca"
-								  		  required="true"/>
+								  		  name="processo.cobranca.codigoCobranca"/>
 							</div>
 							<div class="grid-6-12">
 								<s:label value="Dia de Vencimento:" for="select_DiaVencimento"/>
@@ -81,8 +84,7 @@
 								  		  headerKey="0"
 								  		  headerValue="Selecione"
 								  		  list="dias"
-								  		  name="processo.diaVencimento"
-								  		  required="true"/>
+								  		  name="processo.diaVencimento"/>
 							</div>
 					<div class="grid-12-12">
 						<s:label value="Observação:" for="textarea_Observacao"/>
@@ -109,7 +111,7 @@
 							   onclick="javascript: adicionarAdvogado();"
 							   value="Vincular Advogado"
 							   align="left"
-							   type="button"></input>
+							   type="button"/>
 					</div>	
 					<div class="grid-12-12">
 						<table id="table_AdvogadosVinculados" class="lawyer-table">
@@ -133,7 +135,7 @@
 											<s:property value="dataInicio"/>
 										</td>
 										<td align="center" width="20%" class="impar">
-											<input type="hidden" id="hidden_Remover" name="codigoPessoa" value="%{advogado.codigoPessoa}"/>
+											<input type="hidden" id="hidden_Remover" name="codigoPessoa" value="${requestScope.advogado.codigoPessoa}"/>
 		           							<img src="../css/img/formee/form-ic-error.png" 
 								 				 alt="Remover Advogado" 
 								 				 title="Remover Advogado"
@@ -149,7 +151,8 @@
 				<div class="grid-12-12" style="text-align: right;">
 					<s:submit id="submit_Confirmar" value="Confirmar"/>
 				</div>
-			</div> 			
+			</div>
+		</div> 			
 	</s:form>
 </body>
 </html>
