@@ -102,8 +102,8 @@ public class CadastrarProcessoAction extends GenericAction{
 			setResultado("erro");
 			e.printStackTrace();
 		}
-		processos = carregarProcessos();
-		session.put("advogadosVinculados", new ArrayList<AdvogadoProcesso>());
+		tiposCausas = carregarTiposCausas();
+		limparSessao("advogadosVinculados");
 		return PaginaEnum.LISTAR_PROCESSO.getDescricao();
 	}
 	
@@ -145,7 +145,7 @@ public class CadastrarProcessoAction extends GenericAction{
 			setResultado("erro");
 			e.printStackTrace();
 		}
-		processos = carregarProcessos();
+		tiposCausas = carregarTiposCausas();
 		limparSessao("advogadosVinculados", "vinculados", "processo");
 		return PaginaEnum.LISTAR_PROCESSO.getDescricao();
 	}
@@ -255,6 +255,10 @@ public class CadastrarProcessoAction extends GenericAction{
 			setMensagem("Selecione um advogado!");
 			setResultado("erro");
 			return false;
+		} else if(advogadoProcesso.getDataInicioStr() == null || "".equals(advogadoProcesso.getDataInicioStr())){
+			setMensagem("Informe a data de início!");
+			setResultado("erro");
+			return false;
 		} else if(advogadosVinculados != null && advogadosVinculados.size()>0){
 			for(AdvogadoProcesso ap : advogadosVinculados){
 				if(advogadoProcesso.getAdvogado().getCodigoPessoa() == ap.getAdvogado().getCodigoPessoa()){
@@ -263,10 +267,6 @@ public class CadastrarProcessoAction extends GenericAction{
 					return false;
 				}
 			}
-		} else if(advogadoProcesso.getDataInicioStr() == null || "".equals(advogadoProcesso.getDataInicioStr())){
-			setMensagem("Informe a data de início!");
-			setResultado("erro");
-			return false;
 		}
 		return true;
 	}
@@ -293,20 +293,12 @@ public class CadastrarProcessoAction extends GenericAction{
 			setMensagem("Informe a data de abertura do processo!");
 			setResultado("erro");
 			return false;
-		} else if(processo.getDataFechamentoStr() != null && !"".equals(processo.getDataFechamentoStr())){
-			if(UtilDate.convertStringToDate(
-				processo.getDataFechamentoStr()).before(
-						UtilDate.convertStringToDate(processo.getDataAberturaStr()))){
-				setMensagem("Data de fechamento não pode ser menor que a data de abertura!");
-				setResultado("erro");
-				return false;
-			}
 		} else if((processo.getDataFechamentoStr() != null && !"".equals(processo.getDataFechamentoStr()))
 					&& processo.getResultado() == null){
 			setMensagem("Processo não pode ter uma data de fechamento sem um resultado. Informe o resultado!");
 			setResultado("erro");
 			return false;
-		} else if((processo.getDataFechamentoStr() == null || !"".equals(processo.getDataFechamentoStr()))
+		} else if((processo.getDataFechamentoStr() == null || "".equals(processo.getDataFechamentoStr()))
 				&& processo.getResultado() != null){
 			setMensagem("Processo não pode ter um resultado sem uma data de fechamento. Informe a data de fechamento!");
 			setResultado("erro");
@@ -327,6 +319,14 @@ public class CadastrarProcessoAction extends GenericAction{
 			setMensagem("Preencha a descrição do processo!");
 			setResultado("erro");
 			return false;
+		} else if(processo.getDataFechamentoStr() != null && !"".equals(processo.getDataFechamentoStr())){
+			if(UtilDate.convertStringToDate(
+				processo.getDataFechamentoStr()).before(
+						UtilDate.convertStringToDate(processo.getDataAberturaStr()))){
+				setMensagem("Data de fechamento não pode ser menor que a data de abertura!");
+				setResultado("erro");
+				return false;
+			}
 		}
 		return true;
 	}

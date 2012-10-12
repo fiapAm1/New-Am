@@ -16,7 +16,7 @@ public class ListarProcessoAction extends GenericAction{
 
 	private static final long serialVersionUID = -8032621170923607709L;
 	
-	private int numeroProcesso;
+	private Integer numeroProcesso;
 	private String nomeCliente;
 	private Integer codigoCausa;
 	
@@ -67,18 +67,26 @@ public class ListarProcessoAction extends GenericAction{
 	 * @since 18/09/2012
 	 */
 	private void carregarProcessos(){
-		
-		if(numeroProcesso > 0) {
+		if(numeroProcesso != null && numeroProcesso > 0) {
 			Processo processo = ProcessoBO.consultarProcesso(numeroProcesso);
-			processos.add(processo);
+			if(processo != null){
+				processos.add(processo);
+			} 
 		} else if (nomeCliente != null && codigoCausa > 0) {
 			processos = ProcessoBO.consultarProcessos(nomeCliente, codigoCausa);
-			
 		} else if (nomeCliente != null && codigoCausa == 0) {
 			processos = ProcessoBO.consultarProcessos(nomeCliente);
 			
 		} else if(codigoCausa > 0 && nomeCliente == null) {
 			processos = ProcessoBO.consultarProcessos(codigoCausa);
+		} 
+		
+		if(processos == null || processos.size() == 0){
+			setMensagem("Nenhum processo encontrado!");
+			setResultado("info");
+		} else {
+			setMensagem(null);
+			setResultado(null);
 		}
 	}
 	
@@ -89,7 +97,7 @@ public class ListarProcessoAction extends GenericAction{
 	 */
 	private void carregarCausas(){
 			tiposCausas = GenericBO.consultarTiposCausas();
-	}	
+	}
 	
 	/**
 	 * @return the processos
@@ -117,20 +125,6 @@ public class ListarProcessoAction extends GenericAction{
 	 */
 	public void setTiposCausas(List<TipoCausa> tiposCausas) {
 		this.tiposCausas = tiposCausas;
-	}
-
-	/**
-	 * @return the numeroProcesso
-	 */
-	public int getNumeroProcesso() {
-		return numeroProcesso;
-	}
-
-	/**
-	 * @param numeroProcesso the numeroProcesso to set
-	 */
-	public void setNumeroProcesso(int numeroProcesso) {
-		this.numeroProcesso = numeroProcesso;
 	}
 
 	/**
@@ -162,4 +156,12 @@ public class ListarProcessoAction extends GenericAction{
 	}
 
 
+	public Integer getNumeroProcesso() {
+		return numeroProcesso;
+	}
+
+
+	public void setNumeroProcesso(Integer numeroProcesso) {
+		this.numeroProcesso = numeroProcesso;
+	}
 }

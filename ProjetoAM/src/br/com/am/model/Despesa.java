@@ -20,7 +20,7 @@ public class Despesa implements Serializable{
 	private TipoDespesa tipoDespesa = new TipoDespesa();
 	private Processo processo = new Processo();
 	private Date dataDespesa;
-	private double valorDespesa;
+	private Double valorDespesa;
 	private String observacao;
 	
 	/**
@@ -116,11 +116,11 @@ public class Despesa implements Serializable{
 		this.observacao = observacao;
 	}
 
-	public double getValorDespesa() {
+	public Double getValorDespesa() {
 		return valorDespesa;
 	}
 
-	public void setValorDespesa(double valorDespesa) {
+	public void setValorDespesa(Double valorDespesa) {
 		this.valorDespesa = valorDespesa;
 	}
 }

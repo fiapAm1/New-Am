@@ -82,8 +82,6 @@ public class LancarDespesasAction extends GenericAction{
 			e.printStackTrace();
 		}
 		carregarDespesas();
-		session.put("mensagem", getMensagem());
-		session.put("resultado", getResultado());
 		if(numeroProcesso != null){
 			pesquisarProcessosAux();
 		}
@@ -125,8 +123,6 @@ public class LancarDespesasAction extends GenericAction{
 			return PaginaEnum.ERRO.getDescricao();
 		}
 		carregarDespesas();
-		session.put("mensagem", getMensagem());
-		session.put("resultado", getResultado());
 		if(numeroProcesso != null){
 			pesquisarProcessosAux();
 		}
@@ -164,8 +160,6 @@ public class LancarDespesasAction extends GenericAction{
 			e.printStackTrace();
 		}
 		carregarDespesas();
-		session.put("mensagem", getMensagem());
-		session.put("resultado", getResultado());
 		if(numeroProcesso != null){
 			pesquisarProcessosAux();
 		}
@@ -185,11 +179,6 @@ public class LancarDespesasAction extends GenericAction{
 		try {
 			if(numeroProcesso != null){
 				pesquisarProcessosAux();
-				limparMensagem();
-				if(processos.size() <=0){
-					setMensagem("Nenhum processo encontrado!");
-					setResultado("info");
-				}
 			} else {
 				setMensagem("Informe o número do processo!");
 				setResultado("erro");
@@ -200,8 +189,6 @@ public class LancarDespesasAction extends GenericAction{
 			e.printStackTrace();
 		}
 		carregarDespesas();
-		session.put("mensagem", getMensagem());
-		session.put("resultado", getResultado());
 		return PaginaEnum.LANCAR_DESPESA.getDescricao();
 	}
 	
@@ -214,13 +201,23 @@ public class LancarDespesasAction extends GenericAction{
 	private void pesquisarProcessosAux(){
 		Processo processo = DespesaBO.consultarProcesso(numeroProcesso);
 		if(processo != null){
-			processos = new ArrayList<Processo>();
-			processos.add(processo);
-			despesas = new ArrayList<Despesa>();
-			despesas = DespesaBO.consultarDespesasPorProcesso(numeroProcesso);
-			valorTotalDespesas = DespesaBO.somarDespesaPorProcesso(numeroProcesso);
-			session.put("numeroProcesso", numeroProcesso);
-			session.put("despesas", despesas);
+			if(processo.getResultado() == null  || processo.getResultado().intValue() == 0){
+				processos = new ArrayList<Processo>();
+				processos.add(processo);
+				despesas = new ArrayList<Despesa>();
+				despesas = DespesaBO.consultarDespesasPorProcesso(numeroProcesso);
+				valorTotalDespesas = DespesaBO.somarDespesaPorProcesso(numeroProcesso);
+				session.put("numeroProcesso", numeroProcesso);
+				session.put("despesas", despesas);
+				setMensagem(null);
+				setResultado(null);
+			} else {
+				setMensagem("Processo já está encerrado, portanto despesas não podem ser lançadas.");
+				setResultado("info");
+			}
+		} else {
+			setMensagem("Nenhum processo encontrado!");
+			setResultado("info");
 		}
 	}
 	
@@ -284,12 +281,11 @@ public class LancarDespesasAction extends GenericAction{
 			setMensagem("Informe o tipo de despesa!");
 			setResultado("erro");
 			return false;
+		} else if(despesa.getValorDespesa() == null){
+			setMensagem("Informe o valor da despesa!");
+			setResultado("erro");
+			return false;
 		}
-//		} else if(despesa.getValorDespesa() == null){
-//			setMensagem("Informe o valor da despesa!");
-//			setResultado("erro");
-//			return false;
-//		}
 		return true;
 	}
 	
