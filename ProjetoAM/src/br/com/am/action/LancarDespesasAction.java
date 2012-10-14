@@ -209,8 +209,6 @@ public class LancarDespesasAction extends GenericAction{
 				valorTotalDespesas = DespesaBO.somarDespesaPorProcesso(numeroProcesso);
 				session.put("numeroProcesso", numeroProcesso);
 				session.put("despesas", despesas);
-				setMensagem(null);
-				setResultado(null);
 			} else {
 				setMensagem("Processo já está encerrado, portanto despesas não podem ser lançadas.");
 				setResultado("info");
@@ -262,7 +260,6 @@ public class LancarDespesasAction extends GenericAction{
 		jSonTipoDespesa = "";
 		jSonValorDespesa = null;
 		jSonObservacaoDespesa = null;
-		limparSessao("mensagem", "resultado");
 	}
 	
 	/**
@@ -281,8 +278,8 @@ public class LancarDespesasAction extends GenericAction{
 			setMensagem("Informe o tipo de despesa!");
 			setResultado("erro");
 			return false;
-		} else if(despesa.getValorDespesa() == null){
-			setMensagem("Informe o valor da despesa!");
+		} else if(despesa.getValorDespesa() <= 0){
+			setMensagem("Informe um valor correto para despesa!");
 			setResultado("erro");
 			return false;
 		}
