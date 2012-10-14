@@ -24,8 +24,9 @@ function construirTabelaAdvogadoProcesso(list){
 function adicionarAdvogado(){
 	var registro = jQuery("#select_Advogado").val();
 	var data = jQuery("#textfield_DataInclusao").val();
+	var dataAberturaProcesso = jQuery("#textfield_DataAbertura").val();
 	jQuery.getJSON('adicionarAdvogado', {'advogadoProcesso.advogado.codigoPessoa': registro, 
-		'advogadoProcesso.dataInicioStr': data}, function(json) {
+		'advogadoProcesso.dataInicioStr': data, "processo.dataAberturaStr": dataAberturaProcesso}, function(json) {
 		var list = json.advogadosVinculados;
 		var table = jQuery("#table_AdvogadosVinculados > tbody:first");
 		table.html("");
