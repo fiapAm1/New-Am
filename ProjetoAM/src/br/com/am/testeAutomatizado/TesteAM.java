@@ -30,6 +30,8 @@ public class TesteAM {
 		sm.stopServer();
 	}
 
+	
+	// Testes automatizados
 	@Test
 	public void test() throws Exception {
 		
@@ -39,12 +41,25 @@ public class TesteAM {
 		ListarProcesso alterar = new ListarProcesso(selenium);
 		//RegistrarPagamento registro = new RegistrarPagamento(selenium);
 		LancarDespesa lancar = new LancarDespesa(selenium);
+		RelatorioHonorario pesquisarH = new RelatorioHonorario(selenium);
+		RelatorioAudiencia pesquisarA = new RelatorioAudiencia(selenium);
 		
+		// Abrir página
 		openHome.openHomePage(url);
+		// Realizar cadastro
 		cadastrar.cadastrar();
+		// Alterar processo
 		alterar.alterarProcesso("1");
 		//registro.registrar("1");
+		// Lançar despesa
 		lancar.lancamento("1");
+		//Pesquisa Honorário
+		pesquisarH.pesquisarH("1");
+		
+		//Pesquisa Honorário
+		pesquisarA.pesquisarA("1");
+				
+		
 	}
 
 	
