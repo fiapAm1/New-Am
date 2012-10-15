@@ -7,12 +7,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<sj:head/>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+<script>
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		jQuery.getJSON('carregarHome', function(json) {
+			jQuery("#span_CausaTributaria").html(json.contagemTributaria);
+			jQuery("#span_CausaTrabalhista").html(json.contagemTrabalhista);
+			jQuery("#span_CausaComercial").html(json.contagemComercial);	 
+		});
+	});
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>HOME - ADVOCACIA</title>
+<title>HOME - ADVOCACIA AZEVEDO</title>
 </head>
 <body>
-	<s:form id="form_Home" method="get" action="carregarHome" theme="simple" >
+	<s:form id="form_Home" method="post" action="carregarHome" theme="simple">
 		<jsp:include page="../util/includes/menu.jsp" flush="true"/>
 		<div class="content">
 			<div class="dashboard-section dashboard-section-processos">
@@ -47,16 +57,16 @@
 			<div class="dashboard-section dashboard-section-causa">
 				<h3>Resumo de causas</h3>
 				<div class="score-causas">
-					<a class="score-causas-item causa-tributaria" href="#" title="Tributária">
-						<span class="score-number">319</span>
+					<a class="score-causas-item causa-tributaria" href="listarProcesso?codigoCausa=1" title="Tributária">
+						<span id="span_CausaTributaria" class="score-number"><s:property value="contagemTributaria"/></span>
 						<span class="score-label">Tributária</span>
 					</a>
-					<a class="score-causas-item causa-trabalhista" href="#" title="Trabalhista">
-						<span class="score-number">435</span>
+					<a class="score-causas-item causa-trabalhista" href="listarProcesso?codigoCausa=2" title="Trabalhista">
+						<span id="span_CausaTrabalhista" class="score-number"><s:property value="contagemTrabalhista"/></span>
 						<span class="score-label">Trabalhista</span>
 					</a>
-					<a class="score-causas-item causa-comercial" href="#" title="Comercial">
-						<span class="score-number">218</span>
+					<a class="score-causas-item causa-comercial" href="listarProcesso?codigoCausa=3" title="Comercial">
+						<span id="span_CausaComercial" class="score-number"><s:property value="contagemComercial"/></span>
 						<span class="score-label">Comercial</span>
 					</a>
 				</div>
