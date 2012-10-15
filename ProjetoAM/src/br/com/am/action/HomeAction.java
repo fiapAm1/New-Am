@@ -114,17 +114,18 @@ public class HomeAction extends GenericAction{
 	}
 
 	/**
-	 * @return the contagemPorProcesso
+	 * @return the contagemPorProcessoStatus
 	 */
-	public Map<String, Integer> getContagemPorProcesso() {
-		return contagemPorProcesso;
+	public Map<String, Integer> getContagemPorProcessoStatus() {
+		return contagemPorProcessoStatus;
 	}
 
 	/**
-	 * @param contagemPorProcesso the contagemPorProcesso to set
+	 * @param contagemPorProcessoStatus the contagemPorProcessoStatus to set
 	 */
-	public void setContagemPorProcesso(Map<String, Integer> contagemPorProcesso) {
-		this.contagemPorProcesso = contagemPorProcesso;
+	public void setContagemPorProcessoStatus(
+			Map<String, Integer> contagemPorProcessoStatus) {
+		this.contagemPorProcessoStatus = contagemPorProcessoStatus;
 	}
 
 	/**

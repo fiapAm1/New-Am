@@ -1,10 +1,10 @@
 package br.com.am.teste;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import br.com.am.bo.TituloBO;
-import br.com.am.model.Titulo;
-import br.com.am.model.TituloPago;
+import br.com.am.action.enuns.ResultadoEnum;
+import br.com.am.bo.ProcessoBO;
 
 public class Teste {
 
@@ -13,16 +13,21 @@ public class Teste {
 	 */
 	public static void main(String[] args) {
 		
-		List<TituloPago> t = TituloBO.consultarTitulosPagosPorProcesso(1);
+		Map<String, Integer> contagemPorProcessoStatus = new HashMap<String, Integer>();
 		
-		for (TituloPago titulo : t) {
-			
-			System.out.println(titulo.getTitulo().getNumeroTitulo());
-			System.out.println(titulo.getDataPagamento());
-			System.out.println(titulo.getValorPago());
-			System.out.println();
-			
-		}
+		int contagemProcessoAndamento;
+		int contagemProcessoPerdido;
+		int contagemProcessoGanho;
+		
+		contagemPorProcessoStatus.putAll(ProcessoBO.contagemProcessosPorResultado());
+		
+		contagemProcessoAndamento = contagemPorProcessoStatus.get(ResultadoEnum.ANDAMENTO.getDescricao()).intValue();
+		contagemProcessoGanho = contagemPorProcessoStatus.get(ResultadoEnum.GANHA.getDescricao()).intValue();
+		contagemProcessoPerdido = contagemPorProcessoStatus.get(ResultadoEnum.PERDIDA.getDescricao()).intValue();
+		
+		System.out.println(contagemProcessoAndamento);
+		System.out.println(contagemProcessoGanho);
+		System.out.println(contagemProcessoPerdido);
 		
 	}
 

@@ -12,7 +12,7 @@
 	jQuery.noConflict();
 	jQuery(document).ready(function(){
 		jQuery.getJSON('carregarHome', function(json) {
-			jQuery("#span_CausaTributaria").html(json.contagemTributaria);
+			jQuery("#span_CausaTributaria").html(json.contagemProcessoGanho);
 			jQuery("#span_CausaTrabalhista").html(json.contagemTrabalhista);
 			jQuery("#span_CausaComercial").html(json.contagemComercial);	 
 		});
