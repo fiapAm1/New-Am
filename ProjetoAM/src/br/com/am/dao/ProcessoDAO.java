@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.com.am.bo.ProcessoBO;
 import br.com.am.dao.connections.ConnectionFactory;
@@ -446,5 +448,42 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 		} finally {
 			ConnectionFactory.close(conn, psmt);
 		}
+	}
+
+	@Override
+	public Map<String, Integer> ContagemProcessosPorCausa() {
+		
+		//Conexão
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		//Comunicação
+		String sql = "SELECT COUNT(*) AS CONTAGEM, DS_CAUSA " +
+					 "FROM AM_PROCESSO p " +
+				     "LEFT JOIN AM_TIPO_CAUSA tc ON TC.CD_CAUSA = P.CD_CAUSA " +
+				     "GROUP BY DS_CAUSA " +
+				     "ORDER BY 1 DESC ";
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Map<String, Integer> contagemPorCausa = new HashMap<String, Integer>();
+		
+		try{
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String causa = rs.getString("DS_CAUSA");
+				Integer contagem = rs.getInt("CONTAGEM");
+				
+				contagemPorCausa.put(causa, contagem);	
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, ps);
+		}
+		return contagemPorCausa;
 	}
 }

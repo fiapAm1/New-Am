@@ -1,6 +1,7 @@
 package br.com.am.bo;
 
 import java.util.List;
+import java.util.Map;
 
 import br.com.am.dao.factory.DAOFactory;
 import br.com.am.dao.interfaces.AdvogadoDAOInterface;
@@ -99,6 +100,17 @@ public class ProcessoBO extends GenericBO{
 	public static List<AdvogadoProcesso> carregarAdvogadosVinculados(Integer numeroProcesso){
 		AdvogadoDAOInterface dao = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getAdvogadoDAO();
 		return dao.carregarAdvogadosVinculados(numeroProcesso);
+	}
+	
+	/**
+	 * Método que executa a contagem dos processos por tipo de causa.
+	 * @author JDGR²
+	 * @since 06/10/2012
+	 * @return Map<String, Integer>
+	 */
+	public static Map<String, Integer> contagemProcessosPorCausa(){
+		ProcessoDAOInterface dao = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getProcessoDAO();
+		return dao.ContagemProcessosPorCausa();
 	}
 	
 	/**

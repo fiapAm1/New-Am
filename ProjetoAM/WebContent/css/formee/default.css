@@ -12,9 +12,14 @@ caption, th, td { text-align: left; font-weight: normal;}
 blockquote:before, blockquote:after,
 q:before, q:after {content: "";}
 blockquote, q {quotes: "" "";}
+/* fixing firefox bug */
+html:after, div:after, ol:after, li:after, form:after, ul:after, dl:after {content:".";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
+
 
 html, body {
 	background: #f5f5f5;
+	font: normal normal 10px/1.2em arial;
+	color:#777;
 }
 
 /* containers */
@@ -52,6 +57,78 @@ h3 {
 	margin: 0 0 .8em;
 	letter-spacing: -.02em;
 }
+
+/* dashboard */
+.dashboard-section {
+	float:left;
+	width: 45%;
+	height: 100%;
+}
+.dashboard-section-processos {margin-right: 10%;}
+.dashboard-section h3 {text-align:center;}
+
+.score-causas {
+	text-align:center;
+	padding-top:30px;
+}
+.score-causas-item {
+	position:relative;
+	top:0;
+	margin:0 2% 5%;
+	width: 29%;
+	display: inline-block;
+	border:1px solid #e7e7e7;
+	border-radius:4px;
+	text-decoration:none;
+	overflow: hidden;
+	box-shadow: 1px 2px 3px 0 rgba(0,0,0,.06);
+  -webkit-transition: all 0.3s ease-out; 
+     -moz-transition: all 0.3s ease-out; 
+       -o-transition: all 0.3s ease-out; 
+          transition: all 0.3s ease-out; 
+	
+}
+.score-causas-item:hover, .score-causas-item:focus {
+	top:-10px;
+}
+.score-number {
+	display: block;
+	padding: 20px 10px;
+	margin-bottom:24px;
+	font-size:70px;
+	text-align: center;
+	line-height:1em;
+	font-weight: bolder;
+	color:#fff;
+	text-decoration:none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	border-radius: 4px 4px 0 0;
+  -webkit-transition: all 0.3s ease-out; 
+     -moz-transition: all 0.3s ease-out; 
+       -o-transition: all 0.3s ease-out; 
+          transition: all 0.3s ease-out; 
+}
+.score-causas-item:hover .score-number, .score-causas-item:focus .score-number {
+	background: rgba(0,0,0,.2);
+}
+.score-label {
+	position: absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	display: block;
+	text-align:center;
+	padding:5px;
+	background:#333;
+	color:#e7e7e7;
+	font-size:14px;
+	text-decoration:none;
+	border-radius: 0 0 4px 4px;
+}
+.causa-tributaria {margin-left:0;background:#2790B0;}
+.causa-trabalhista {background:#A95E6F;}
+.causa-comercial {margin-right:0;background:#94BA65;}
+
 
 /* Página do Calendário */
 div.container { width: 1000px; margin: 10px auto; }

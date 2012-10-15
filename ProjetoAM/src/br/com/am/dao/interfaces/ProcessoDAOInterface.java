@@ -1,6 +1,7 @@
 package br.com.am.dao.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import br.com.am.model.Processo;
 
@@ -9,6 +10,10 @@ import br.com.am.model.Processo;
  * @author Rodrigo Joubert<br>
  * Turma:  1TDSR<br>
  * Ano:    2012<br>	
+ */
+/**
+ * @author Rodrigo
+ *
  */
 public interface ProcessoDAOInterface {
 	
@@ -57,5 +62,12 @@ public interface ProcessoDAOInterface {
 	 * @param processo
 	 */
 	public void alterarProcesso(Processo processo);
+	
+
+	/**
+	 * Exibe a contagem de processos por tipo de causa
+	 * @return Map<String, Integer>
+	 */
+	public Map<String, Integer> ContagemProcessosPorCausa();
 
 }

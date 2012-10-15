@@ -91,7 +91,7 @@
 					<div class="grid-12-12">
 						<h3>Resultado da causa</h3>
 						<div class="grid-12-12">
-							<s:radio id="radio_ResultadoCausa" list="#{'1':'Ganha','0':'Perdida'}" value="%{processo.resultadoCausa}" disabled="true"/>
+							<s:radio id="radio_ResultadoCausa" list="#{'2':'Ganha','1':'Perdida'}" value="%{processo.resultadoCausa}" disabled="true"/>
 						</div>	
 					</div>
 				</div>
@@ -102,7 +102,6 @@
 				
 			</div>
 			<div class="box box-advogado">
-				<h3>Inclusão de advogados</h3>	
 				<div class="grid-12-12">
 					<table class="lawyer-table">
 						<h3>Advogados Vinculados ao Processo</h3>
