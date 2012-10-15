@@ -91,7 +91,7 @@
 					<div class="grid-12-12">
 						<h3>Resultado da causa</h3>
 						<div class="grid-12-12">
-							<s:radio id="radio_ResultadoCausa" list="#{'2':'Ganha','1':'Perdida'}" value="%{processo.resultadoCausa}" disabled="true"/>
+							<s:radio id="radio_ResultadoCausa" list="#{'2':'Ganha','1':'Perdida'}" value="%{processo.resultado}" disabled="true"/>
 						</div>	
 					</div>
 				</div>

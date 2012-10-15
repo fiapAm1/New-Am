@@ -11,7 +11,11 @@
 <title>Alterar Processos</title>
 </head>
 <body>
-	<s:form id="form_AlterarProcesso" cssClass="formee" action="alterarProcesso" method="post" theme="simple">
+	<s:form id="form_AlterarProcesso"
+			cssClass="formee"
+			action="alterarProcesso"
+			method="post"
+			theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<div class="content">
 			<h2>Alterar Processo</h2>
@@ -62,16 +66,16 @@
 						<h3>Prazos</h3>
 						<div class="grid-6-12">
 							<s:label value="Data de Abertura:" for="textfield_DataAbertura"/>
-							<s:textfield id="textfield_DataAbertura"											 
-										 maxlength="10"
-										 name="processo.dataAberturaStr"
-										 disabled="true"
+							<s:textfield id="textfield_DataAbertura" 
+										 maxlength="10" 
+										 name="processo.dataAberturaStr" 
+										 disabled="true" 
 										 value="%{processo.dataAberturaStr}"/>
 						</div>
 						<div class="grid-6-12">
 							<s:label value="Data de Fechamento:" for="textfield_DataFechamento"/>
-							<s:textfield id="textfield_DataFechamento"
-										 maxlength="10"
+							<s:textfield id="textfield_DataFechamento" 
+										 maxlength="10" 
 										 name="processo.dataFechamentoStr"
 										 value="%{processo.dataFechamentoStr}"/>
 						</div>
@@ -100,28 +104,27 @@
 					</div>
 				</div>
 				<div class="box box-causa">
-					<div class="grid-11-12">
-							<h3>Resultado da causa</h3
-							>
-							<div class="grid-12-12">
-								<s:radio id="radio_ResultadoCausa"
-										 name="processo.resultado"
-										 listKey="key"
-										 listValue="value"
-										 list="#{2:'Ganha',1:'Perdida'}"
-										 value="%{processo.resultado}"/>
-							</div>	
-					</div>
-				</div>
+					<div class="grid-12-12">
+						<h3>Resultado da causa</h3>
+						<div class="grid-12-12">
+							<s:radio id="radio_ResultadoCausa"
+									 name="processo.resultado"
+									 listKey="key"
+									 listValue="value"
+									 list="#{2:'Ganha',1:'Perda'}"
+									 value="%{processo.resultado}"/>
+						</div>		 
+					</div>			 
+				</div>	
 				<div class="grid-12-12">
 					<s:label value="Observação:" for="textarea_Observacao"/>
 					<s:textarea id="textarea_Observacao" name="processo.observacao" value="%{processo.observacao}"/>
 				</div>	
-			</div>	
+			</div>
 			<div class="box box-advogado">
 				<h3>Inclusão de advogados</h3>
 				<div class="grid-12-12">
-					<s:label value="Advogado:" for="select_Advogado"/>
+					<s:label value="Selecione um Advogado:" for="select_Advogado"/>
 					<s:select id="select_Advogado"
 					  		  headerKey="0"
 					  		  headerValue="Selecione"
@@ -129,24 +132,27 @@
 							  listKey="codigoPessoa"
 							  listValue="nomePessoa"
 							  name="advogadoProcesso.advogado.codigoPessoa"/>
-				</div>				  
+				</div>
 				<div class="grid-12-12 clear">
-					<s:label value="Data de Inclusão:" for="textfield_DataInclusao"/>
-					<s:textfield cssClass="formee-small" id="textfield_DataInclusao" maxlength="10" name="advogadoProcesso.dataInicioStr"/>
+					<s:label value="Data de Inclusão:"
+							 for="textfield_DataInclusao"/>
+					<s:textfield id="textfield_DataInclusao"
+								 maxlength="10"
+								 cssClass="formee-small"
+								 name="advogadoProcesso.dataInicioStr"/>
 					<input id="button_Adicionar"
 						   class="formee-button left"
 						   onclick="javascript: adicionarAdvogado();"
 						   value="Vincular Advogado"
-						   align="left"
 						   type="button"/>
-				</div>
+				</div>	
 				<div class="grid-12-12">
-					<table  id="table_AdvogadosVinculados" class="lawyer-table">
+					<table id="table_AdvogadosVinculados" class="lawyer-table">
 						<h3>Advogados Vinculados ao Processo</h3>
 						<thead>
 							<tr>
 								<th align="center" width="50%" class="par"> Nome</th>
-								<th align="center" width="30%" class="par"> Data Inclusão</th>
+								<th align="center" width="30%" class="par">	Data Inclusão</th>
 								<th align="center" width="20%" class="impar"> Remover</th>
 							</tr>
 						</thead>
@@ -172,11 +178,11 @@
 						</tbody>
 					</table>
 				</div>
-			</div>	
+			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Confirmar" value="Confirmar"/>
 			</div>
-		</div> 			
+		</div>
 	</s:form>
 </body>
 </html>

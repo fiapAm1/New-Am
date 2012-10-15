@@ -9,8 +9,7 @@
 <title>Cadastro de Processos</title>
 </head>
 <body>
-	<s:form id="form_CadastrarProcesso"	cssClass="formee" action="cadastrarProcesso" method="post" theme="simple">
-	
+	<s:form id="form_CadastrarProcesso"	cssClass="formee" action="cadastrarProcesso" method="post" theme="simple">	
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<div class="content">
 			<h2>Cadastro de Processos</h2>
