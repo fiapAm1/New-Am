@@ -152,12 +152,6 @@
 						</tbody>
 					</table>
 				</div>
-<<<<<<< HEAD
-=======
-			</div>
-			<div class="grid-12-12" style="text-align: right;">
-				<s:submit id="submit_Confirmar" value="Confirmar"/>
->>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Confirmar" value="Confirmar"/>
