@@ -13,7 +13,7 @@ public class CadastrarProcesso {
 	public void cadastrar () {
 	selenium.click("link=Cadastrar Processo");
 	selenium.waitForPageToLoad("30000");
-	selenium.type("id=textarea_Descricao", "Teste Automatizado");
+	selenium.type("id=textarea_Descricao", "Teste Automatizado 3");
 	selenium.select("id=select_Cliente", "label=GOOGLE");
 	selenium.select("id=select_TipoCausa", "label=COMERCIAL");
 	selenium.select("id=select_Forum", "label=FORUMSAÚDE");
