@@ -114,6 +114,17 @@ public class ProcessoBO extends GenericBO{
 	}
 	
 	/**
+	 * Método que executa a contagem dos processos por resultado.
+	 * @author JDGR²
+	 * @since 06/10/2012
+	 * @return Map<String, Integer>
+	 */
+	public static Map<String, Integer> contagemProcessosPorResultado(){
+		ProcessoDAOInterface dao = DAOFactory.getDAOFactory(DAOFactory.ORACLE).getProcessoDAO();
+		return dao.ContagemProcessosPorResultado();
+	}
+	
+	/**
 	 * Método que cadastra advogados vinculados a um processo.
 	 * @author JDGR²
 	 * @since 06/10/2012

@@ -482,8 +482,53 @@ public class ProcessoDAO implements ProcessoDAOInterface{
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
-			ConnectionFactory.close(conn, ps);
+			ConnectionFactory.close(conn, ps, rs);
 		}
 		return contagemPorCausa;
+	}
+
+	@Override
+	public Map<String, Integer> ContagemProcessosPorResultado()  {
+		
+		//Conexão
+		Connection conn = ConnectionFactory.getConnectionOracle();
+		
+		//Comunicação
+		String sql = "SELECT COUNT(*) AS CONTAGEM, CD_RESULTADO " +
+					 "FROM AM_PROCESSO p " +
+				     "GROUP BY CD_RESULTADO ";
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Map<String, Integer> contagemPorResultado = new HashMap<String, Integer>();
+		
+		try{
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int resultado = rs.getInt("CD_RESULTADO");
+				String resultadoStr = "";
+				
+				if(resultado == 0)
+					resultadoStr = "ANDAMENTO";
+				else if(resultado == 1)
+					resultadoStr = "PERDIDA";
+				else if(resultado == 2)
+					resultadoStr = "GANHA";
+					
+				Integer contagem = rs.getInt("CONTAGEM");
+				
+				contagemPorResultado.put(resultadoStr, contagem);	
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn, ps, rs);
+		}
+		return contagemPorResultado;
 	}
 }

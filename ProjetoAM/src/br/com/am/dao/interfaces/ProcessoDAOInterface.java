@@ -70,5 +70,11 @@ public interface ProcessoDAOInterface {
 	 * @return Map<String, Integer>
 	 */
 	public Map<String, Integer> ContagemProcessosPorCausa();
+	
+	/**
+	 * Exibe a contagem de processos por resultado
+	 * @return Map<String, Integer>
+	 */
+	public Map<String, Integer> ContagemProcessosPorResultado();
 
 }
