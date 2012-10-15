@@ -24,7 +24,8 @@ public class Forum extends Pessoa implements Serializable{
 
 	/**
 	 * @param codigoForum
-	 * @param forum
+	 * @param nomeForum
+	 * @param descricaoForum
 	 */
 	public Forum(int codigoForum, String nomeForum, String descricaoForum) {
 		super(codigoForum, nomeForum);

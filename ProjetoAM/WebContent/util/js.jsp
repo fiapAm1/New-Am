@@ -5,4 +5,5 @@
 <script type="text/javascript" src="../js/superfish/hoverIntent.js"></script>
 <script type="text/javascript" src="../js/superfish/superfish.js"></script>
 <script type="text/javascript" src="../js/util/loadCalendar.js"></script>
+<script type="text/javascript" src="../js/util/habilitarCampos.js"></script>
 <script type="text/javascript" src="../js/json/acoesDinamicas.js"></script>

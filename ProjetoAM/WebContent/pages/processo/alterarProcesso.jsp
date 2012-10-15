@@ -11,11 +11,7 @@
 <title>Alterar Processos</title>
 </head>
 <body>
-	<s:form id="form_AlterarProcesso"
-			cssClass="formee"
-			action="alterarProcesso"
-			method="post"
-			theme="simple">
+	<s:form id="form_AlterarProcesso" cssClass="formee" action="alterarProcesso" method="post" theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<div class="content">
 			<h2>Alterar Processo</h2>

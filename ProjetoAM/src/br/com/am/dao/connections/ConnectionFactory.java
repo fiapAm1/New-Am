@@ -23,8 +23,9 @@ public class ConnectionFactory {
 			//INSTALAÇÃO DO DRIVER
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
+
 			//CONEXÃO
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:amfiap", "AM", "am");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "AM", "am");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

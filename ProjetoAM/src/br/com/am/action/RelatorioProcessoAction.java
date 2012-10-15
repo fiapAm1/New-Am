@@ -65,8 +65,18 @@ public class RelatorioProcessoAction extends GenericAction{
 	})
 	public String pesquisarHonorarios(){
 		carregarTarefas();
-		carregarHonorarios();
-		somarHonorarios();
+		if(codigoProcesso == null || codigoProcesso <= 0){
+			setMensagem("Informe um número do processo maior que 0!");
+			setResultado("erro");
+		} else if(codigoTarefa == null|| codigoTarefa.intValue() <= 0){
+			setMensagem("Selecione uma tarefa!");
+			setResultado("erro");
+		} else if((codigoProcesso != null && codigoProcesso > 0) && (codigoTarefa != null && codigoTarefa > 0)) {
+			carregarHonorarios();
+			somarHonorarios();
+			setMensagem(null);
+			setResultado(null);
+		}
 		return PaginaEnum.EMITIR_RELATORIO_HONORARIO.getDescricao();
 	}
 	
@@ -81,7 +91,14 @@ public class RelatorioProcessoAction extends GenericAction{
 			@Result(location="/erro.jsp", name="erro")
 	})
 	public String pesquisarAudiencias(){
-		carregarAudicencias();
+		if(codigoProcesso == null || codigoProcesso <= 0){
+			setMensagem("Informe um número do processo maior que 0!");
+			setResultado("erro");
+		} else {
+			carregarAudicencias();
+			setMensagem(null);
+			setResultado(null);
+		} 
 		return PaginaEnum.EMITIR_RELATORIO_AUDIENCIA.getDescricao();
 	}
 	

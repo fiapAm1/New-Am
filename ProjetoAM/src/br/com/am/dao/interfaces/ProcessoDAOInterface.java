@@ -32,21 +32,22 @@ public interface ProcessoDAOInterface {
 	
 	/**
 	 * Busca uma lista de processos através do nome do cliente ou tipo de causa
-	 * @param numeroProcesso
+	 * @param nomeCliente
+	 * @param codigoCausa
 	 * @return List<Processo>
 	 */
 	public List<Processo> consultarProcessos(String nomeCliente, int codigoCausa);
 	
 	/**
 	 * Busca uma lista de processos através do nome do cliente
-	 * @param numeroProcesso
+	 * @param nomeCliente
 	 * @return List<Processo>
 	 */
 	public List<Processo> consultarProcessos(String nomeCliente);
 	
 	/**
 	 * Busca uma lista de processos através do tipo de causa
-	 * @param numeroProcesso
+	 * @param codigoCausa
 	 * @return Processo
 	 */
 	public List<Processo> consultarProcessos(int codigoCausa);	

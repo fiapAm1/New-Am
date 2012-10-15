@@ -9,7 +9,7 @@
 <title>Cadastro de Processos</title>
 </head>
 <body>
-	<s:form id="form_CadastrarProcesso"	cssClass="formee" action="cadastrarProcesso" method="post" theme="simple">	
+	<s:form id="form_CadastrarProcesso"	cssClass="formee" action="cadastrarProcesso" method="post" theme="simple">
 		<jsp:include page="../../util/includes/menu.jsp" />
 		<div class="content">
 			<h2>Cadastro de Processos</h2>
@@ -152,6 +152,12 @@
 						</tbody>
 					</table>
 				</div>
+<<<<<<< HEAD
+=======
+			</div>
+			<div class="grid-12-12" style="text-align: right;">
+				<s:submit id="submit_Confirmar" value="Confirmar"/>
+>>>>>>> branch 'master' of https://github.com/fiapAm1/New-Am.git
 			</div>
 			<div class="grid-12-12" style="text-align: right;">
 				<s:submit id="submit_Confirmar" value="Confirmar"/>
