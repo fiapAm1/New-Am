@@ -48,7 +48,7 @@
 				<h3>Resumo de causas</h3>
 				<div class="score-causas">
 					<a class="score-causas-item causa-tributaria" href="#" title="Tributária">
-						<span class="score-number"><s:label value="%{contagemTributaria}"/></span>
+						<span class="score-number">319</span>
 						<span class="score-label">Tributária</span>
 					</a>
 					<a class="score-causas-item causa-trabalhista" href="#" title="Trabalhista">
